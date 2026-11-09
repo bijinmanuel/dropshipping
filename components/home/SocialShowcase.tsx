@@ -46,12 +46,12 @@ const SOCIAL_POSTS = [
 
 export function SocialShowcase() {
   return (
-    <section className="py-16 sm:py-24 bg-background border-b border-brand-border/60">
+    <section className="py-20 sm:py-28 bg-background border-b border-brand-border/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-brand-border/60 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-4 border-b border-black/[0.06] gap-4">
           <div>
-            <span className="text-xs uppercase font-semibold tracking-widest text-brand-forest flex items-center gap-1.5">
-              <Instagram className="w-4 h-4 text-brand-forest" />
+            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-gold flex items-center gap-1.5">
+              <Instagram className="w-3.5 h-3.5 text-brand-gold" />
               <span>In Situ &bull; #VerdenLiving</span>
             </span>
             <h2 className="text-section-title font-serif text-brand-charcoal mt-1">
@@ -62,32 +62,32 @@ export function SocialShowcase() {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold text-brand-forest hover:text-brand-forest-hover flex items-center gap-1 group"
+            className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-charcoal hover:text-black flex items-center gap-1 group"
           >
             <span>Follow @verden.studio</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
           {SOCIAL_POSTS.map((post, idx) => (
             <Link
               key={idx}
               href={`/product/${post.slug}`}
-              className="group relative aspect-square rounded-card overflow-hidden bg-background-subtle border border-brand-border/60"
+              className="group relative aspect-square rounded-card-lg overflow-hidden bg-background-subtle border border-black/[0.07] shadow-xs"
             >
               <Image
                 src={post.image}
                 alt={post.productTitle}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-brand-charcoal/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-3 text-white">
-                <span className="text-[10px] text-white/80 font-mono">{post.handle}</span>
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-3.5 text-white">
+                <span className="text-[10px] text-white/70 font-mono tracking-wider">{post.handle}</span>
                 <div>
-                  <p className="text-[11px] font-semibold line-clamp-1">{post.productTitle}</p>
-                  <span className="text-[9px] uppercase font-bold text-brand-gold tracking-wider flex items-center gap-0.5 mt-0.5">
-                    Shop Object &rarr;
+                  <p className="font-serif text-xs font-medium line-clamp-1">{post.productTitle}</p>
+                  <span className="text-[9px] uppercase font-bold text-brand-gold tracking-[0.16em] flex items-center gap-0.5 mt-0.5">
+                    Acquire Object &rarr;
                   </span>
                 </div>
               </div>
@@ -98,4 +98,3 @@ export function SocialShowcase() {
     </section>
   );
 }
-

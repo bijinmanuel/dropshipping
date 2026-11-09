@@ -1,20 +1,18 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Compass, ShieldCheck, Truck, Sparkles, Building2 } from 'lucide-react';
+import { Sparkles, Building2, ShieldCheck } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#FAF9F5]">
       {/* Hero Section */}
-      <section className="bg-white border-b border-brand-border/60 py-16 sm:py-24">
+      <section className="border-b border-brand-border py-20 sm:py-28 bg-white/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-xs uppercase font-semibold tracking-widest text-brand-forest">
+          <span className="text-[11px] uppercase font-semibold tracking-[0.25em] text-brand-gold">
             The VÉRDEN Manifesto
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl text-brand-charcoal mt-2 leading-tight">
+          <h1 className="font-serif text-4xl sm:text-6xl text-brand-charcoal mt-3 leading-tight font-normal">
             The architecture of considered living.
           </h1>
           <p className="mt-6 text-sm sm:text-base text-brand-muted max-w-2xl mx-auto leading-relaxed">
@@ -24,9 +22,9 @@ export default function AboutPage() {
       </section>
 
       {/* Narrative Section with Editorial Visual */}
-      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 relative aspect-product w-full rounded-2xl overflow-hidden shadow-float border border-brand-border">
+      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-6 relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-2xl border border-brand-border">
             <Image
               src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1200&auto=format&fit=crop"
               alt="Artisan ceramicist hand shaping a stoneware bowl"
@@ -36,14 +34,14 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-6 space-y-6 text-sm text-brand-charcoal/80 leading-relaxed">
-            <span className="text-xs uppercase font-semibold tracking-widest text-brand-forest">
+            <span className="text-[11px] uppercase font-semibold tracking-[0.25em] text-brand-gold">
               Our Sourcing Philosophy
             </span>
-            <h2 className="font-serif text-3xl text-brand-charcoal">
+            <h2 className="font-serif text-3xl sm:text-4xl text-brand-charcoal font-normal">
               Why decentralized direct-from-source fulfillment matters.
             </h2>
             <p>
-              Traditional retail creates mountains of sitting inventory, huge distributor margins, and unnecessary freight loops. Objects sit in dusty distribution centers for months before reaching your home.
+              Traditional luxury retail creates mountains of sitting inventory, huge distributor margins, and unnecessary freight loops. Objects sit in dusty distribution centers for months before reaching your home.
             </p>
             <p>
               At VÉRDEN, we built a modern direct dropshipping logistics architecture. When you acquire an Arcos Lamp or a Kyoto Stoneware Set, our autonomous EDI orders route directly to the master atelier in Verona or Kyoto.
@@ -52,14 +50,14 @@ export default function AboutPage() {
               Each piece undergoes our certified 7-point photographic inspection, is secured in biodegradable molded unbleached pulp, and takes flight via carbon-neutral express air cargo directly to your home.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-brand-border/60 text-xs">
+            <div className="grid grid-cols-2 gap-6 pt-6 border-t border-brand-border text-xs">
               <div>
-                <span className="text-2xl font-serif font-bold text-brand-forest block">0%</span>
-                <span className="text-brand-muted">Intermediary retail distributor markups</span>
+                <span className="text-3xl font-serif font-normal text-brand-charcoal block">0%</span>
+                <span className="text-brand-muted mt-1 block">Intermediary retail distributor markups</span>
               </div>
               <div>
-                <span className="text-2xl font-serif font-bold text-brand-forest block">100%</span>
-                <span className="text-brand-muted">Carbon-offset priority air freight</span>
+                <span className="text-3xl font-serif font-normal text-brand-charcoal block">100%</span>
+                <span className="text-brand-muted mt-1 block">Carbon-offset priority air freight</span>
               </div>
             </div>
           </div>
@@ -67,41 +65,41 @@ export default function AboutPage() {
       </section>
 
       {/* Sustainable Craft Pillars */}
-      <section className="bg-brand-charcoal text-white py-20 border-t border-brand-border/20">
+      <section className="bg-[#141514] text-white py-24 border-t border-brand-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs uppercase font-semibold tracking-widest text-brand-gold">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-[11px] uppercase font-semibold tracking-[0.25em] text-brand-gold">
               Core Principles
             </span>
-            <h2 className="font-serif text-3xl text-white mt-1">
+            <h2 className="font-serif text-3xl sm:text-5xl text-white mt-2 font-normal">
               Honest materials. Timeless forms.
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs text-white/70">
-            <div className="bg-white/5 p-6 rounded-card border border-white/10 space-y-3">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 space-y-4 backdrop-blur-sm">
               <Sparkles className="w-6 h-6 text-brand-gold" />
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider font-mono">
                 Raw Geological Honesty
               </h3>
               <p className="leading-relaxed">
-                We celebrate natural stone fissures, grain variations in walnut, and mineral speckles in reactive kiln glazes. No synthetic faux textures or cheap plastic veneers.
+                We celebrate natural Roman travertine fissures, grain variations in solid walnut, and mineral speckles in reactive kiln glazes. No synthetic faux textures or cheap plastic veneers.
               </p>
             </div>
 
-            <div className="bg-white/5 p-6 rounded-card border border-white/10 space-y-3">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 space-y-4 backdrop-blur-sm">
               <Building2 className="w-6 h-6 text-brand-gold" />
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider font-mono">
                 Fair Atelier Partnerships
               </h3>
               <p className="leading-relaxed">
-                Our craftsmen receive up to 300% higher compensation per finished object than conventional wholesale procurement contracts permit.
+                Our craft partners receive up to 300% higher compensation per finished object than conventional wholesale procurement contracts permit.
               </p>
             </div>
 
-            <div className="bg-white/5 p-6 rounded-card border border-white/10 space-y-3">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 space-y-4 backdrop-blur-sm">
               <ShieldCheck className="w-6 h-6 text-brand-gold" />
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider font-mono">
                 The 30-Day Living Trial
               </h3>
               <p className="leading-relaxed">
@@ -114,4 +112,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

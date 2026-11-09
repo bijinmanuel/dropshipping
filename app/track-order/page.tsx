@@ -63,7 +63,7 @@ const DEMO_ORDER: Order = {
   dropshipLogistics: {
     supplierOrderDispatched: true,
     dispatchTimestamp: '2026-11-07T08:00:00Z',
-    originWarehouse: 'Frankfurt Direct Logistics Center (Italy Sourcing)',
+    originWarehouse: 'Frankfurt Direct Logistics Center (Verona Sourcing)',
     destinationCountry: 'United States',
   },
   trackingEvents: [
@@ -156,23 +156,23 @@ function TrackOrderContent() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-10 sm:py-16">
+    <div className="min-h-screen bg-[#FAF9F5] py-12 sm:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="text-center max-w-xl mx-auto mb-10">
-          <span className="text-xs uppercase font-semibold tracking-widest text-brand-forest">
+        <div className="text-center max-w-xl mx-auto mb-12">
+          <span className="text-[11px] uppercase font-medium tracking-[0.25em] text-brand-gold">
             Real-Time Logistics Telemetry
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl text-brand-charcoal mt-1">
+          <h1 className="font-serif text-3xl sm:text-5xl text-brand-charcoal mt-2 font-normal">
             Track Your Delivery
           </h1>
-          <p className="text-xs sm:text-sm text-brand-muted mt-2 leading-relaxed">
-            Monitor every milestone from artisan packaging in Italy or Japan to your front door.
+          <p className="text-xs sm:text-sm text-brand-muted mt-3 leading-relaxed">
+            Monitor every milestone from artisan uncrating in Italy or Japan to your front room.
           </p>
         </div>
 
         {/* Search Input Box */}
-        <div className="bg-white rounded-card border border-brand-border p-6 shadow-subtle mb-10">
+        <div className="bg-white rounded-2xl border border-brand-border p-6 sm:p-8 shadow-subtle mb-10">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -181,35 +181,35 @@ function TrackOrderContent() {
             className="flex flex-col sm:flex-row gap-3"
           >
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-brand-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-brand-gold absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchCode}
                 onChange={(e) => setSearchCode(e.target.value)}
-                placeholder="Enter Order Code (e.g. VRD-94827104) or Tracking #"
-                className="w-full text-xs pl-10 pr-4 py-3 rounded-btn border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-forest uppercase"
+                placeholder="Enter Order Code (e.g. VRD-94827104) or Waybill #"
+                className="w-full text-xs pl-11 pr-4 py-3.5 rounded-pill border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-charcoal uppercase font-mono tracking-wider"
               />
             </div>
             <button
               type="submit"
-              className="px-6 py-3 rounded-btn bg-brand-forest hover:bg-brand-forest-hover text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-subtle flex items-center justify-center gap-2"
+              className="px-7 py-3.5 rounded-pill bg-[#141514] hover:bg-black text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center justify-center gap-2"
             >
-              <Truck className="w-4 h-4" />
+              <Truck className="w-4 h-4 text-brand-gold" />
               <span>Track Delivery</span>
             </button>
           </form>
 
           {/* Quick Demo Pre-fill */}
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-brand-muted">
-            <span>Quick test:</span>
+          <div className="mt-3.5 flex items-center gap-2 text-[11px] text-brand-muted pl-1">
+            <span>Quick reference:</span>
             <button
               onClick={() => {
                 setSearchCode('VRD-94827104');
                 handleSearch('VRD-94827104');
               }}
-              className="text-brand-forest font-semibold hover:underline"
+              className="text-brand-charcoal font-mono font-semibold hover:text-brand-gold underline underline-offset-2 transition-colors"
             >
-              VRD-94827104 (In Transit Demo)
+              VRD-94827104 (In Transit Air Cargo)
             </button>
           </div>
         </div>
@@ -218,35 +218,35 @@ function TrackOrderContent() {
         {currentOrder ? (
           <div className="space-y-8 animate-fadeIn">
             {/* Summary Header Card */}
-            <div className="bg-white rounded-card border border-brand-border p-6 shadow-subtle">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-brand-border gap-3">
+            <div className="bg-white rounded-2xl border border-brand-border p-6 sm:p-8 shadow-subtle">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-brand-border gap-4">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-brand-forest tracking-wider">
+                  <span className="text-[10px] uppercase font-bold text-brand-gold tracking-[0.2em] font-mono">
                     Order Ref: {currentOrder.id}
                   </span>
-                  <h3 className="font-serif text-xl text-brand-charcoal mt-0.5">
+                  <h3 className="font-serif text-2xl text-brand-charcoal mt-1">
                     Estimated Delivery: Tomorrow by 2:00 PM
                   </h3>
-                  <p className="text-xs text-brand-muted mt-0.5">
-                    Carrier: {currentOrder.trackingCarrier} &bull; Waybill: <strong className="font-mono text-brand-charcoal">{currentOrder.trackingNumber}</strong>
+                  <p className="text-xs text-brand-muted mt-1">
+                    Carrier: {currentOrder.trackingCarrier} &bull; Waybill: <strong className="font-mono text-brand-charcoal font-semibold">{currentOrder.trackingNumber}</strong>
                   </p>
                 </div>
-                <span className="px-3 py-1 rounded-pill bg-brand-forest-light text-brand-forest text-xs font-bold uppercase tracking-wider self-start sm:self-center">
+                <span className="px-3.5 py-1.5 rounded-pill bg-[#141514] text-brand-gold border border-brand-gold/30 text-[10px] font-bold uppercase tracking-wider self-start sm:self-center">
                   In Transit
                 </span>
               </div>
 
               {/* Origin to Destination */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs">
-                <div>
-                  <span className="text-brand-muted block font-medium">Origin Atelier Hub:</span>
-                  <p className="text-brand-charcoal font-semibold mt-0.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-5 text-xs">
+                <div className="p-3.5 rounded-xl bg-[#FAF9F5] border border-brand-border/60">
+                  <span className="text-brand-muted text-[11px] block font-medium uppercase tracking-wider">Origin Atelier Hub:</span>
+                  <p className="text-brand-charcoal font-medium mt-1">
                     {currentOrder.dropshipLogistics.originWarehouse}
                   </p>
                 </div>
-                <div>
-                  <span className="text-brand-muted block font-medium">Destination Address:</span>
-                  <p className="text-brand-charcoal font-semibold mt-0.5">
+                <div className="p-3.5 rounded-xl bg-[#FAF9F5] border border-brand-border/60">
+                  <span className="text-brand-muted text-[11px] block font-medium uppercase tracking-wider">Destination Address:</span>
+                  <p className="text-brand-charcoal font-medium mt-1">
                     {currentOrder.customer.addressLine1}, {currentOrder.customer.city}, {currentOrder.customer.country}
                   </p>
                 </div>
@@ -254,18 +254,18 @@ function TrackOrderContent() {
             </div>
 
             {/* Step-by-Step Logistics Timeline */}
-            <div className="bg-white rounded-card border border-brand-border p-6 sm:p-8 shadow-subtle">
-              <h3 className="font-serif text-lg text-brand-charcoal pb-4 border-b border-brand-border">
-                Live Shipment Milestones
+            <div className="bg-white rounded-2xl border border-brand-border p-6 sm:p-8 shadow-subtle">
+              <h3 className="font-serif text-xl text-brand-charcoal pb-4 border-b border-brand-border">
+                Live Shipment Telemetry
               </h3>
 
-              <div className="mt-6 space-y-6 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-brand-border">
+              <div className="mt-8 space-y-7 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-brand-border">
                 {currentOrder.trackingEvents.map((event, idx) => (
-                  <div key={idx} className="relative flex items-start gap-4 z-10">
+                  <div key={idx} className="relative flex items-start gap-5 z-10">
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold transition-all ${
                         event.completed
-                          ? 'bg-brand-forest text-white shadow-sm'
+                          ? 'bg-[#141514] text-brand-gold border border-brand-gold/40 shadow-sm'
                           : 'bg-white border-2 border-brand-border text-brand-muted'
                       }`}
                     >
@@ -274,14 +274,14 @@ function TrackOrderContent() {
 
                     <div className="flex-1 pb-2">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                        <h4 className="text-xs font-semibold text-brand-charcoal">
+                        <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-charcoal font-mono">
                           {event.status}
                         </h4>
-                        <span className="text-[11px] text-brand-muted">{event.timestamp}</span>
+                        <span className="text-[11px] font-mono text-brand-muted">{event.timestamp}</span>
                       </div>
-                      <p className="text-xs text-brand-muted mt-0.5">{event.description}</p>
-                      <span className="text-[10px] text-brand-forest font-mono mt-1 block">
-                        Location: {event.location}
+                      <p className="text-xs text-brand-muted mt-1 leading-relaxed">{event.description}</p>
+                      <span className="text-[10px] text-brand-gold font-mono mt-1.5 block">
+                        Coordinates: {event.location}
                       </span>
                     </div>
                   </div>
@@ -291,11 +291,11 @@ function TrackOrderContent() {
           </div>
         ) : (
           hasSearched && (
-            <div className="bg-white rounded-card border border-brand-border p-12 text-center max-w-md mx-auto">
-              <AlertCircle className="w-12 h-12 text-brand-sale mx-auto mb-3" />
-              <h3 className="font-serif text-lg text-brand-charcoal">No shipment records found</h3>
-              <p className="text-xs text-brand-muted mt-1 leading-relaxed">
-                Please check the order number in your confirmation email or try the demo order reference VRD-94827104.
+            <div className="bg-white rounded-2xl border border-brand-border p-12 text-center max-w-md mx-auto shadow-subtle">
+              <AlertCircle className="w-10 h-10 text-brand-sale mx-auto mb-3" />
+              <h3 className="font-serif text-xl text-brand-charcoal">No shipment records found</h3>
+              <p className="text-xs text-brand-muted mt-1.5 leading-relaxed">
+                Please verify the order number in your confirmation email or try our sample reference VRD-94827104.
               </p>
             </div>
           )
@@ -307,9 +307,8 @@ function TrackOrderContent() {
 
 export default function TrackOrderPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background py-20 text-center text-xs text-brand-muted">Loading Tracking System...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#FAF9F5] py-20 text-center text-xs text-brand-muted">Loading Tracking Telemetry...</div>}>
       <TrackOrderContent />
     </Suspense>
   );
 }
-

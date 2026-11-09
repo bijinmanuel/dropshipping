@@ -121,21 +121,21 @@ export default function OrderHistoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background py-10 sm:py-16">
+    <div className="min-h-screen bg-[#FAF9F5] py-12 sm:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8 pb-4 border-b border-brand-border/60 flex items-baseline justify-between">
+        <div className="mb-10 pb-5 border-b border-brand-border flex items-baseline justify-between">
           <div>
-            <span className="text-xs uppercase font-semibold tracking-widest text-brand-forest">
+            <span className="text-[11px] uppercase font-semibold tracking-[0.25em] text-brand-gold">
               Account Archive
             </span>
-            <h1 className="font-serif text-3xl sm:text-4xl text-brand-charcoal mt-1">
-              Your Orders ({orders.length})
+            <h1 className="font-serif text-3xl sm:text-5xl text-brand-charcoal mt-2 font-normal">
+              Your Acquisitions ({orders.length})
             </h1>
           </div>
           <Link
             href="/account"
-            className="text-xs font-semibold text-brand-forest hover:underline"
+            className="text-xs font-semibold text-brand-charcoal hover:text-brand-gold underline underline-offset-2 transition-colors"
           >
             &larr; Back to Account
           </Link>
@@ -146,31 +146,31 @@ export default function OrderHistoryPage() {
           {orders.map((order) => (
             <div
               key={order.id}
-              className="bg-white rounded-card border border-brand-border p-6 shadow-subtle space-y-4"
+              className="bg-white rounded-2xl border border-brand-border p-6 sm:p-7 shadow-subtle space-y-5"
             >
               {/* Order Meta Bar */}
               <div className="flex flex-wrap items-center justify-between pb-4 border-b border-brand-border gap-3 text-xs">
-                <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <div className="flex flex-wrap items-center gap-5 sm:gap-8">
                   <div>
-                    <span className="text-brand-muted block font-medium">Order Number:</span>
-                    <strong className="font-mono text-brand-charcoal font-bold">{order.id}</strong>
+                    <span className="text-brand-muted block text-[10px] uppercase font-medium tracking-wider">Order Reference:</span>
+                    <strong className="font-mono text-brand-charcoal font-semibold text-sm">{order.id}</strong>
                   </div>
                   <div>
-                    <span className="text-brand-muted block font-medium">Date Placed:</span>
-                    <span className="text-brand-charcoal font-semibold">{formatDate(order.createdAt)}</span>
+                    <span className="text-brand-muted block text-[10px] uppercase font-medium tracking-wider">Date Placed:</span>
+                    <span className="text-brand-charcoal font-medium">{formatDate(order.createdAt)}</span>
                   </div>
                   <div>
-                    <span className="text-brand-muted block font-medium">Total:</span>
-                    <span className="font-bold text-brand-forest">{formatPrice(order.total)}</span>
+                    <span className="text-brand-muted block text-[10px] uppercase font-medium tracking-wider">Acquisition Total:</span>
+                    <span className="font-mono font-semibold text-brand-charcoal text-sm">{formatPrice(order.total)}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <span
-                    className={`px-2.5 py-1 rounded-pill text-[10px] font-bold uppercase tracking-wider ${
+                    className={`px-3 py-1 rounded-pill text-[10px] font-bold uppercase tracking-wider font-mono ${
                       order.fulfillmentStatus === 'delivered'
-                        ? 'bg-brand-forest-light text-brand-forest'
-                        : 'bg-brand-gold-light text-brand-charcoal'
+                        ? 'bg-[#141514] text-white border border-white/10'
+                        : 'bg-[#FAF9F5] text-brand-gold border border-brand-gold/40'
                     }`}
                   >
                     {order.fulfillmentStatus.replace('_', ' ')}
@@ -181,19 +181,19 @@ export default function OrderHistoryPage() {
               {/* Items in Order */}
               <div className="divide-y divide-brand-border/60">
                 {order.items.map((item, idx) => (
-                  <div key={idx} className="py-3 first:pt-0 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-12 h-14 rounded-btn overflow-hidden bg-background shrink-0 border border-brand-border/60">
+                  <div key={idx} className="py-3.5 first:pt-0 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3.5">
+                      <div className="relative w-12 h-15 rounded-lg overflow-hidden bg-background shrink-0 border border-brand-border/60">
                         <Image src={item.productImage} alt={item.productTitle} fill className="object-cover" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-semibold text-brand-charcoal">{item.productTitle}</h4>
+                        <h4 className="text-sm font-serif font-medium text-brand-charcoal">{item.productTitle}</h4>
                         <p className="text-[11px] text-brand-muted">
-                          {item.variantName} &bull; Qty: {item.quantity} &bull; SKU: {item.supplierSku}
+                          {item.variantName} &bull; Qty: {item.quantity} &bull; <span className="font-mono">SKU: {item.supplierSku}</span>
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-brand-charcoal">
+                    <span className="text-xs font-mono font-semibold text-brand-charcoal">
                       {formatPrice(item.price * item.quantity)}
                     </span>
                   </div>
@@ -201,18 +201,18 @@ export default function OrderHistoryPage() {
               </div>
 
               {/* Actions Footer */}
-              <div className="pt-3 border-t border-brand-border flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="pt-4 border-t border-brand-border flex flex-wrap items-center justify-between gap-3 text-xs">
                 <div className="text-[11px] text-brand-muted">
-                  Carrier: {order.trackingCarrier} &bull; Tracking: <strong className="font-mono text-brand-forest">{order.trackingNumber}</strong>
+                  Carrier: {order.trackingCarrier} &bull; Waybill: <strong className="font-mono text-brand-charcoal font-semibold">{order.trackingNumber}</strong>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/track-order?id=${order.id}`}
-                    className="px-4 py-2 rounded-btn bg-brand-forest hover:bg-brand-forest-hover text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm flex items-center gap-1.5"
+                    className="px-5 py-2.5 rounded-pill bg-[#141514] hover:bg-black text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-2xs flex items-center gap-1.5"
                   >
-                    <Truck className="w-3.5 h-3.5" />
-                    <span>Live Tracking</span>
+                    <Truck className="w-3.5 h-3.5 text-brand-gold" />
+                    <span>Live Telemetry</span>
                   </Link>
                 </div>
               </div>
@@ -223,4 +223,3 @@ export default function OrderHistoryPage() {
     </div>
   );
 }
-

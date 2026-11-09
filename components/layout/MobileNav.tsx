@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { X, ChevronDown, ChevronRight, User, Heart, ShoppingBag, ShieldCheck, HelpCircle, PackageCheck } from 'lucide-react';
+import { X, ChevronDown, ChevronRight, User, Heart, ShoppingBag, ShieldCheck, HelpCircle, PackageCheck, Search } from 'lucide-react';
 import { CATEGORIES } from '@/data/products';
 import { useWishlist } from '@/context/WishlistContext';
 import { useCart } from '@/context/CartContext';
@@ -26,27 +26,27 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
     <div className="fixed inset-0 z-50 lg:hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-brand-charcoal/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-[#141514]/75 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
 
-      <nav 
+      <nav
         aria-label="Mobile navigation"
-        className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#FFFFFF] shadow-2xl flex flex-col z-50 border-r border-brand-border animate-fadeIn"
+        className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#FAF9F5] shadow-2xl flex flex-col z-50 border-r border-brand-border animate-fadeIn"
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between p-5 border-b border-brand-border bg-background">
+        <div className="flex items-center justify-between p-5 border-b border-brand-border bg-white/70 backdrop-blur-sm">
           <Link href="/" onClick={onClose} className="flex flex-col">
-            <span className="font-serif text-xl tracking-[0.2em] font-semibold text-brand-forest">
+            <span className="font-serif text-xl tracking-[0.28em] font-semibold text-brand-charcoal">
               VÉRDEN
             </span>
-            <span className="text-[9px] tracking-[0.25em] text-brand-muted uppercase">
-              Objects for Living
+            <span className="text-[9px] tracking-[0.25em] text-brand-gold uppercase font-medium">
+              Studio &bull; Objects for Living
             </span>
           </Link>
           <button
             onClick={onClose}
-            className="p-1.5 text-brand-muted hover:text-brand-charcoal rounded-full"
+            className="p-1.5 text-brand-muted hover:text-brand-charcoal rounded-full hover:bg-black/5 transition-colors"
             aria-label="Close navigation"
           >
             <X className="w-5 h-5" />
@@ -54,16 +54,19 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
         </div>
 
         {/* Quick Search Button */}
-        <div className="p-4 border-b border-brand-border">
+        <div className="p-4 border-b border-brand-border bg-white/40">
           <button
             onClick={() => {
               onClose();
               onOpenSearch();
             }}
-            className="w-full flex items-center justify-between px-3 py-2.5 rounded-btn bg-background-subtle border border-brand-border text-xs text-brand-muted"
+            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-pill bg-white border border-brand-border text-xs text-brand-muted hover:border-brand-charcoal transition-colors"
           >
-            <span>Search lamps, tea, leather...</span>
-            <span className="text-[10px] bg-white border border-brand-border px-1.5 py-0.5 rounded text-brand-charcoal">
+            <div className="flex items-center gap-2">
+              <Search className="w-3.5 h-3.5 text-brand-gold" />
+              <span>Search catalog objects...</span>
+            </div>
+            <span className="text-[10px] bg-background-subtle border border-brand-border px-1.5 py-0.5 rounded font-mono text-brand-charcoal">
               ⌘K
             </span>
           </button>
@@ -74,43 +77,43 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
           <Link
             href="/"
             onClick={onClose}
-            className="block px-3 py-2.5 text-sm font-semibold text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-white rounded-pill transition-colors"
           >
-            Home
+            Home Sanctuary
           </Link>
 
           <Link
             href="/shop"
             onClick={onClose}
-            className="block px-3 py-2.5 text-sm font-semibold text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-white rounded-pill transition-colors"
           >
-            Shop All Catalog
+            Curated Catalog
           </Link>
 
           {/* Categories Accordion */}
           <div>
             <button
               onClick={() => setCategoriesExpanded(!categoriesExpanded)}
-              className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-semibold text-brand-charcoal hover:bg-background rounded-btn"
+              className="w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-white rounded-pill transition-colors"
             >
-              <span>Categories</span>
+              <span>Departments</span>
               <ChevronDown
-                className={`w-4 h-4 text-brand-muted transition-transform duration-200 ${
-                  categoriesExpanded ? 'rotate-180' : ''
+                className={`w-3.5 h-3.5 text-brand-muted transition-transform duration-200 ${
+                  categoriesExpanded ? 'rotate-180 text-brand-gold' : ''
                 }`}
               />
             </button>
             {categoriesExpanded && (
-              <div className="pl-4 pr-1 py-1 space-y-1 border-l-2 border-brand-forest/20 ml-3 mt-1">
+              <div className="pl-4 pr-1 py-1 space-y-1 border-l border-brand-gold/40 ml-3 mt-1">
                 {CATEGORIES.map((cat) => (
                   <Link
                     key={cat.id}
                     href={cat.slug === 'all' ? '/shop' : `/shop?category=${cat.slug}`}
                     onClick={onClose}
-                    className="flex items-center justify-between px-3 py-2 text-xs font-medium text-brand-muted hover:text-brand-forest hover:bg-background rounded-btn"
+                    className="flex items-center justify-between px-3 py-2 text-xs font-medium text-brand-muted hover:text-brand-charcoal hover:bg-white rounded-pill transition-colors"
                   >
                     <span>{cat.name}</span>
-                    <span className="text-[10px] text-brand-muted/70">{cat.itemCount}</span>
+                    <span className="text-[10px] font-mono text-brand-gold">{cat.itemCount}</span>
                   </Link>
                 ))}
               </div>
@@ -120,7 +123,7 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
           <Link
             href="/shop?filter=new"
             onClick={onClose}
-            className="block px-3 py-2.5 text-sm font-semibold text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-white rounded-pill transition-colors"
           >
             New Arrivals
           </Link>
@@ -128,68 +131,68 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
           <Link
             href="/shop?filter=best-sellers"
             onClick={onClose}
-            className="block px-3 py-2.5 text-sm font-semibold text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-charcoal hover:bg-white rounded-pill transition-colors"
           >
             Best Sellers
           </Link>
 
-          <div className="pt-2 pb-1 border-t border-brand-border/60 my-2">
-            <span className="px-3 text-[10px] uppercase font-bold tracking-wider text-brand-muted">
-              Dropship Logistics & Store Operations
+          <div className="pt-3 pb-1 border-t border-brand-border/60 my-2">
+            <span className="px-3 text-[10px] uppercase font-bold tracking-[0.2em] text-brand-gold">
+              Direct Sourcing &amp; Operations
             </span>
           </div>
 
           <Link
             href="/dropship-hub"
             onClick={onClose}
-            className="flex items-center justify-between px-3 py-2.5 text-xs font-semibold text-brand-forest bg-brand-forest-light rounded-btn"
+            className="flex items-center justify-between px-3.5 py-2.5 text-xs font-semibold text-white bg-[#141514] hover:bg-black rounded-pill shadow-subtle transition-all"
           >
             <span className="flex items-center gap-2">
-              <PackageCheck className="w-4 h-4 text-brand-forest" />
-              Dropship Logistics Portal
+              <PackageCheck className="w-4 h-4 text-brand-gold" />
+              <span>Supplier Hub</span>
             </span>
-            <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-brand-forest text-white font-bold">
-              B2B / Hub
+            <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-pill bg-brand-gold/20 text-brand-gold font-bold">
+              B2B / SLA
             </span>
           </Link>
 
           <Link
             href="/track-order"
             onClick={onClose}
-            className="block px-3 py-2 text-xs font-medium text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2 text-xs font-medium text-brand-charcoal hover:text-brand-gold transition-colors"
           >
-            Track My Order
+            Track Order Telemetry
           </Link>
 
           <Link
             href="/about"
             onClick={onClose}
-            className="block px-3 py-2 text-xs font-medium text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2 text-xs font-medium text-brand-charcoal hover:text-brand-gold transition-colors"
           >
-            About VÉRDEN Manifesto
+            The VÉRDEN Manifesto
           </Link>
 
           <Link
             href="/contact"
             onClick={onClose}
-            className="block px-3 py-2 text-xs font-medium text-brand-charcoal hover:bg-background rounded-btn"
+            className="block px-3 py-2 text-xs font-medium text-brand-charcoal hover:text-brand-gold transition-colors"
           >
-            Client Concierge & Contact
+            Client Concierge Advisory
           </Link>
         </div>
 
         {/* Drawer Footer Account & Wishlist */}
-        <div className="p-4 border-t border-brand-border bg-background/50 space-y-2">
+        <div className="p-4 border-t border-brand-border bg-white/70 backdrop-blur-sm space-y-2">
           <Link
             href="/wishlist"
             onClick={onClose}
-            className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-brand-charcoal hover:bg-white rounded-btn transition-colors"
+            className="flex items-center justify-between px-3.5 py-2.5 text-xs font-semibold text-brand-charcoal hover:bg-white rounded-pill border border-brand-border/60 transition-colors"
           >
             <span className="flex items-center gap-2">
-              <Heart className="w-4 h-4 text-brand-muted" />
-              Saved Wishlist
+              <Heart className="w-4 h-4 text-brand-gold" />
+              <span>Saved Archive</span>
             </span>
-            <span className="text-xs bg-brand-forest text-white rounded-pill px-2 py-0.5">
+            <span className="text-xs bg-[#141514] text-white rounded-pill px-2 py-0.5 font-mono">
               {wishlistCount}
             </span>
           </Link>
@@ -197,11 +200,11 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
           <Link
             href="/account"
             onClick={onClose}
-            className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-brand-charcoal hover:bg-white rounded-btn transition-colors"
+            className="flex items-center justify-between px-3.5 py-2.5 text-xs font-semibold text-brand-charcoal hover:bg-white rounded-pill border border-brand-border/60 transition-colors"
           >
             <span className="flex items-center gap-2">
-              <User className="w-4 h-4 text-brand-muted" />
-              {isAuthenticated ? user?.name : 'Sign In / Account'}
+              <User className="w-4 h-4 text-brand-gold" />
+              <span>{isAuthenticated ? user?.name : 'Privé Sign In'}</span>
             </span>
             <ChevronRight className="w-3.5 h-3.5 text-brand-muted" />
           </Link>
@@ -210,4 +213,3 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
     </div>
   );
 }
-

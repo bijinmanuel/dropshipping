@@ -1,15 +1,13 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Compass, Search } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[70vh] bg-background flex flex-col items-center justify-center px-4 py-16 text-center">
-      <div className="max-w-md mx-auto space-y-4">
-        <span className="font-serif text-6xl text-brand-forest font-light">404</span>
-        <h1 className="font-serif text-3xl text-brand-charcoal">
+    <div className="min-h-[75vh] bg-[#FAF9F5] flex flex-col items-center justify-center px-4 py-20 text-center">
+      <div className="max-w-md mx-auto space-y-5">
+        <span className="font-serif text-7xl text-brand-gold font-light block">404</span>
+        <h1 className="font-serif text-3xl sm:text-4xl text-brand-charcoal font-normal">
           Object Not Located
         </h1>
         <p className="text-xs sm:text-sm text-brand-muted leading-relaxed">
@@ -19,15 +17,15 @@ export default function NotFound() {
         <div className="pt-6 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/"
-            className="px-6 py-3 rounded-btn bg-brand-forest hover:bg-brand-forest-hover text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-subtle flex items-center gap-2"
+            className="px-7 py-3.5 rounded-pill bg-[#141514] hover:bg-black text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center gap-2"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 text-brand-gold" />
             <span>Return to Sanctuary</span>
           </Link>
 
           <Link
             href="/shop"
-            className="px-6 py-3 rounded-btn border border-brand-border bg-white text-brand-charcoal hover:border-brand-forest text-xs font-semibold uppercase tracking-wider transition-colors"
+            className="px-7 py-3.5 rounded-pill border border-brand-border bg-white text-brand-charcoal hover:border-brand-charcoal text-xs font-semibold uppercase tracking-wider transition-all"
           >
             Explore Catalog
           </Link>
@@ -36,4 +34,3 @@ export default function NotFound() {
     </div>
   );
 }
-

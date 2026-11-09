@@ -54,36 +54,36 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-start bg-brand-charcoal/60 backdrop-blur-md animate-fadeIn">
-      <div 
+    <div className="fixed inset-0 z-50 flex flex-col justify-start bg-[#141514]/75 backdrop-blur-md animate-fadeIn">
+      <div
         role="dialog"
         aria-modal="true"
         aria-label="Search objects"
-        className="w-full bg-[#FFFFFF] border-b border-brand-border shadow-dropdown pt-6 pb-8 px-4 sm:px-8 max-h-[85vh] overflow-y-auto"
+        className="w-full bg-[#FAF9F5] border-b border-brand-border shadow-2xl pt-6 pb-10 px-4 sm:px-8 max-h-[88vh] overflow-y-auto"
       >
         <div className="max-w-4xl mx-auto">
           {/* Top Search Input */}
           <div className="flex items-center gap-3 pb-4 border-b border-brand-border">
-            <Search className="w-5 h-5 text-brand-muted shrink-0" />
+            <Search className="w-5 h-5 text-brand-gold shrink-0" />
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search objects, travertine, leather, ceramics, walnut..."
-              className="w-full text-base sm:text-xl font-medium text-brand-charcoal placeholder:text-brand-muted/70 bg-transparent outline-none focus:ring-0"
+              className="w-full text-base sm:text-xl font-serif text-brand-charcoal placeholder:text-brand-muted/70 bg-transparent outline-none focus:ring-0"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="text-brand-muted hover:text-brand-charcoal text-xs uppercase tracking-wider font-medium px-2 py-1"
+                className="text-brand-muted hover:text-brand-charcoal text-[11px] uppercase tracking-wider font-medium px-2 py-1"
               >
                 Clear
               </button>
             )}
             <button
               onClick={onClose}
-              className="p-1.5 text-brand-muted hover:text-brand-charcoal rounded-full hover:bg-background-subtle transition-colors ml-2"
+              className="p-1.5 text-brand-muted hover:text-brand-charcoal rounded-full hover:bg-black/5 transition-colors ml-2"
               aria-label="Close search"
             >
               <X className="w-5 h-5" />
@@ -93,16 +93,16 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {/* Quick Popular Tags */}
           {!query && (
             <div className="mt-6">
-              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-muted mb-3">
-                <TrendingUp className="w-3.5 h-3.5 text-brand-forest" />
-                <span>Trending Searches</span>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold mb-3">
+                <TrendingUp className="w-3.5 h-3.5" />
+                <span>Trending Curations</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {POPULAR_SEARCHES.map((tag) => (
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}
-                    className="text-xs font-medium px-3 py-1.5 rounded-pill bg-background border border-brand-border text-brand-charcoal hover:border-brand-forest hover:bg-brand-forest-light transition-all"
+                    className="text-xs font-medium px-3.5 py-1.5 rounded-pill bg-white border border-brand-border text-brand-charcoal hover:border-brand-charcoal hover:bg-[#141514] hover:text-white transition-all shadow-2xs"
                   >
                     {tag}
                   </button>
@@ -110,8 +110,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
               </div>
 
               {/* Curated Recommendations */}
-              <div className="mt-8">
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand-muted mb-4">
+              <div className="mt-8 pt-6 border-t border-brand-border/60">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-muted mb-4">
                   Curated Highlights
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -120,9 +120,9 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       key={product.id}
                       href={`/product/${product.slug}`}
                       onClick={onClose}
-                      className="group flex flex-col gap-2 p-2 rounded-card hover:bg-background-subtle transition-colors"
+                      className="group flex flex-col gap-2 p-2 rounded-xl bg-white border border-brand-border/60 hover:border-brand-charcoal transition-all"
                     >
-                      <div className="relative aspect-product w-full overflow-hidden rounded-btn bg-background-subtle">
+                      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-background-subtle">
                         <Image
                           src={product.images[0]}
                           alt={product.title}
@@ -130,10 +130,10 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-                      <p className="text-xs font-medium text-brand-charcoal line-clamp-1 group-hover:text-brand-forest">
+                      <p className="text-xs font-serif font-medium text-brand-charcoal line-clamp-1 group-hover:text-brand-gold transition-colors">
                         {product.title}
                       </p>
-                      <p className="text-xs font-semibold text-brand-forest">
+                      <p className="text-xs font-mono font-semibold text-brand-charcoal">
                         {formatPrice(product.price)}
                       </p>
                     </Link>
@@ -147,23 +147,24 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {query && (
             <div className="mt-6">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand-muted">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
                   Results for &ldquo;{query}&rdquo; ({results.length})
                 </p>
                 {results.length > 0 && (
                   <Link
                     href={`/shop?search=${encodeURIComponent(query)}`}
                     onClick={onClose}
-                    className="text-xs font-semibold text-brand-forest hover:underline flex items-center gap-1"
+                    className="text-xs font-semibold text-brand-charcoal hover:text-brand-gold hover:underline flex items-center gap-1 transition-colors"
                   >
-                    View all in shop <ArrowRight className="w-3.5 h-3.5" />
+                    <span>View all in shop</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 )}
               </div>
 
               {results.length === 0 ? (
-                <div className="py-12 text-center">
-                  <p className="text-base text-brand-charcoal font-medium">No objects match your query</p>
+                <div className="py-12 text-center bg-white rounded-xl border border-brand-border/60 p-8">
+                  <p className="text-base font-serif text-brand-charcoal">No objects match your query</p>
                   <p className="text-xs text-brand-muted mt-1">
                     Try searching for &quot;lamp&quot;, &quot;tea&quot;, &quot;speaker&quot;, or &quot;leather&quot;.
                   </p>
@@ -175,34 +176,34 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       key={product.id}
                       href={`/product/${product.slug}`}
                       onClick={onClose}
-                      className="flex items-center gap-3 p-2.5 rounded-card border border-brand-border/60 hover:border-brand-forest hover:bg-background-subtle transition-all group"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-white border border-brand-border/70 hover:border-brand-charcoal hover:shadow-subtle transition-all group"
                     >
-                      <div className="relative w-16 h-20 rounded-btn overflow-hidden bg-background-subtle shrink-0">
+                      <div className="relative w-16 h-20 rounded-lg overflow-hidden bg-background-subtle shrink-0">
                         <Image
                           src={product.images[0]}
                           alt={product.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <span className="text-[10px] uppercase font-semibold text-brand-muted tracking-wider">
+                        <span className="text-[9px] uppercase font-semibold text-brand-gold tracking-[0.2em]">
                           {product.categoryLabel}
                         </span>
-                        <h4 className="text-sm font-semibold text-brand-charcoal truncate group-hover:text-brand-forest">
+                        <h4 className="text-sm font-serif font-medium text-brand-charcoal truncate group-hover:text-brand-gold transition-colors">
                           {product.title}
                         </h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs font-bold text-brand-forest">
+                          <span className="text-xs font-mono font-semibold text-brand-charcoal">
                             {formatPrice(product.price)}
                           </span>
                           {product.originalPrice && (
-                            <span className="text-xs text-brand-muted line-through">
+                            <span className="text-[11px] font-mono text-brand-muted line-through">
                               {formatPrice(product.originalPrice)}
                             </span>
                           )}
-                          <span className="text-[10px] text-brand-success bg-brand-forest-light px-1.5 py-0.5 rounded font-medium ml-auto">
-                            In Stock
+                          <span className="text-[9px] text-brand-charcoal bg-[#FAF9F5] border border-brand-border px-1.5 py-0.5 rounded-pill font-mono ml-auto">
+                            Direct Sourced
                           </span>
                         </div>
                       </div>
@@ -218,4 +219,3 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     </div>
   );
 }
-

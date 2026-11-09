@@ -53,18 +53,18 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="pointer-events-auto bg-[#FFFFFF] text-brand-charcoal border border-brand-border rounded-card p-4 shadow-float flex items-start gap-3 transition-all transform translate-y-0 opacity-100 animate-fadeIn"
+            className="pointer-events-auto bg-[#141514] text-[#FAF9F5] border border-white/10 rounded-xl p-4 shadow-2xl flex items-start gap-3 transition-all transform translate-y-0 opacity-100 animate-fadeIn"
           >
             <div className="flex-shrink-0 mt-0.5">
-              {toast.type === 'success' && <CheckCircle2 className="w-5 h-5 text-brand-success" />}
-              {toast.type === 'error' && <AlertCircle className="w-5 h-5 text-brand-error" />}
-              {toast.type === 'info' && <Info className="w-5 h-5 text-brand-forest" />}
-              {toast.type === 'sale' && <CheckCircle2 className="w-5 h-5 text-brand-sale" />}
+              {toast.type === 'success' && <CheckCircle2 className="w-4 h-4 text-brand-gold" />}
+              {toast.type === 'error' && <AlertCircle className="w-4 h-4 text-brand-sale" />}
+              {toast.type === 'info' && <Info className="w-4 h-4 text-brand-gold" />}
+              {toast.type === 'sale' && <CheckCircle2 className="w-4 h-4 text-brand-gold" />}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold tracking-tight text-brand-charcoal">{toast.title}</p>
+              <p className="text-xs font-semibold tracking-wide uppercase text-white font-serif">{toast.title}</p>
               {toast.message && (
-                <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">{toast.message}</p>
+                <p className="text-xs text-white/70 mt-0.5 leading-relaxed">{toast.message}</p>
               )}
               {toast.action && (
                 <button
@@ -72,7 +72,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                     toast.action?.onClick();
                     removeToast(toast.id);
                   }}
-                  className="mt-2 text-xs font-semibold text-brand-forest hover:text-brand-forest-hover underline underline-offset-2"
+                  className="mt-2 text-xs font-semibold text-brand-gold hover:text-white underline underline-offset-2 transition-colors"
                 >
                   {toast.action.label}
                 </button>
@@ -80,10 +80,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             </div>
             <button
               onClick={() => removeToast(toast.id)}
-              className="text-brand-muted hover:text-brand-charcoal transition-colors p-1"
+              className="text-white/40 hover:text-white transition-colors p-1"
               aria-label="Close notification"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3.5 h-3.5" />
             </button>
           </div>
         ))}
@@ -99,4 +99,3 @@ export function useToast() {
   }
   return context;
 }
-

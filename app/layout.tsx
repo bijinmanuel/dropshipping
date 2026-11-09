@@ -7,8 +7,8 @@ import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'VÉRDEN Studio | Objects for Living | Curated Architectural Goods',
-  description: 'An editorial retail sanctuary of architectural lighting, Japanese stoneware, Tuscan full-grain leather, and acoustic objects. Direct-from-artisan dropshipping with 30-day trial.',
-  keywords: ['luxury e-commerce', 'minimalist home decor', 'travertine lamps', 'stoneware tea sets', 'dropshipping', 'Japandi', 'D2C retail'],
+  description: 'A modern luxury design sanctuary of sculptural travertine lighting, wood-fired Japanese stoneware, Tuscan full-grain leather, and acoustic objects. Direct-from-artisan dropshipping with 30-day living trial.',
+  keywords: ['luxury design', 'minimalist home decor', 'travertine lamps', 'stoneware tea sets', 'dropshipping', 'Japandi', 'D2C retail', 'Atelier Living'],
   authors: [{ name: 'VÉRDEN Studio' }],
   openGraph: {
     title: 'VÉRDEN Studio | Objects for Living',
@@ -42,10 +42,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

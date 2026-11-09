@@ -6,17 +6,17 @@ import { ChevronLeft, ChevronRight, Sparkles, ShieldCheck, Truck } from 'lucide-
 const MESSAGES = [
   {
     icon: Truck,
-    text: 'Complimentary Express Delivery on orders over $150',
+    text: 'Complimentary Insured Air Express on curations over $150',
     highlight: 'Code: FREESHIP',
   },
   {
     icon: Sparkles,
-    text: 'Exclusive 15% off your initial curation',
-    highlight: 'Use code VERDEN15',
+    text: 'Inaugural collector curation &bull; 15% privilege',
+    highlight: 'Code: VERDEN15',
   },
   {
     icon: ShieldCheck,
-    text: 'Direct-from-artisan dropshipping with 30-day trial',
+    text: 'Direct atelier dispatch &bull; 30-Day Living Home Trial',
     highlight: 'Learn More',
   },
 ];
@@ -37,12 +37,12 @@ export function AnnouncementBar() {
   return (
     <aside 
       aria-label="Promotional announcements"
-      className="bg-brand-forest text-[#FFFFFF] text-xs font-medium tracking-wide py-2 px-4 transition-colors relative z-40"
+      className="bg-[#111211] text-white/90 text-[11px] font-medium tracking-[0.06em] py-2 px-4 border-b border-white/[0.08] relative z-40"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <button
           onClick={() => setCurrentIndex((prev) => (prev - 1 + MESSAGES.length) % MESSAGES.length)}
-          className="text-white/60 hover:text-white transition-colors p-1"
+          className="text-white/40 hover:text-white transition-colors p-1"
           aria-label="Previous announcement"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
@@ -51,10 +51,10 @@ export function AnnouncementBar() {
         <div className="flex items-center gap-2 text-center overflow-hidden h-5">
           <div className="flex items-center gap-2 animate-fadeIn key={currentIndex}">
             <Icon className="w-3.5 h-3.5 text-brand-gold shrink-0" />
-            <span className="text-white/90 text-[11px] sm:text-xs">
+            <span className="text-white/85 text-[11px]">
               {current.text}
             </span>
-            <span className="hidden sm:inline-block text-brand-gold font-semibold text-[11px] sm:text-xs ml-1 border-b border-brand-gold/40">
+            <span className="hidden sm:inline-block text-brand-gold font-semibold text-[11px] ml-1 border-b border-brand-gold/40 tracking-wider">
               {current.highlight}
             </span>
           </div>
@@ -62,7 +62,7 @@ export function AnnouncementBar() {
 
         <button
           onClick={() => setCurrentIndex((prev) => (prev + 1) % MESSAGES.length)}
-          className="text-white/60 hover:text-white transition-colors p-1"
+          className="text-white/40 hover:text-white transition-colors p-1"
           aria-label="Next announcement"
         >
           <ChevronRight className="w-3.5 h-3.5" />
@@ -71,4 +71,3 @@ export function AnnouncementBar() {
     </aside>
   );
 }
-

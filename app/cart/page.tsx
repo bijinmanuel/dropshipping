@@ -58,12 +58,12 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-10 sm:py-16">
+    <div className="min-h-screen bg-background py-12 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Title */}
-        <div className="mb-8 pb-4 border-b border-brand-border/60 flex items-baseline justify-between">
+        <div className="mb-10 pb-4 border-b border-black/[0.06] flex items-baseline justify-between">
           <div>
-            <span className="text-xs uppercase font-semibold tracking-widest text-brand-forest">
+            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-gold">
               Your Selection
             </span>
             <h1 className="font-serif text-3xl sm:text-4xl text-brand-charcoal mt-1">
@@ -72,7 +72,7 @@ export default function CartPage() {
           </div>
           <Link
             href="/shop"
-            className="text-xs font-semibold text-brand-forest hover:underline"
+            className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-charcoal hover:text-black"
           >
             &larr; Continue Curating
           </Link>
@@ -80,68 +80,68 @@ export default function CartPage() {
 
         {items.length === 0 ? (
           /* Empty Cart State */
-          <div className="bg-white rounded-card border border-brand-border p-12 text-center max-w-xl mx-auto my-8">
-            <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center mx-auto mb-4">
-              <ShoppingBag className="w-8 h-8 text-brand-muted" />
+          <div className="bg-white rounded-card-lg border border-black/[0.08] p-16 text-center max-w-xl mx-auto my-12 shadow-subtle">
+            <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center mx-auto mb-4 border border-black/[0.06]">
+              <ShoppingBag className="w-7 h-7 text-brand-gold" />
             </div>
             <h2 className="font-serif text-2xl text-brand-charcoal mb-2">
               Your bag is currently empty
             </h2>
-            <p className="text-xs text-brand-muted max-w-sm mx-auto mb-6 leading-relaxed">
-              Looks like you haven&apos;t added any architectural objects to your bag yet. Discover our best sellers and curated collections.
+            <p className="text-xs text-brand-muted max-w-sm mx-auto mb-8 leading-relaxed font-normal">
+              Discover our permanent collection of architectural lighting, ceramics, and living essentials.
             </p>
             <div className="flex justify-center gap-3">
               <Link
                 href="/shop"
-                className="px-6 py-3 rounded-btn bg-brand-forest hover:bg-brand-forest-hover text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-subtle"
+                className="px-7 py-3.5 rounded-btn bg-black text-white text-xs font-bold uppercase tracking-[0.16em] hover:bg-black/90 transition-colors shadow-sm"
               >
                 Explore Collection
               </Link>
               <Link
                 href="/wishlist"
-                className="px-6 py-3 rounded-btn border border-brand-border text-brand-charcoal text-xs font-semibold uppercase tracking-wider hover:bg-background transition-colors"
+                className="px-7 py-3.5 rounded-btn border border-black/[0.12] text-brand-charcoal text-xs font-bold uppercase tracking-[0.16em] hover:border-black transition-colors"
               >
-                View Saved Wishlist
+                Saved Archive
               </Link>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            {/* Left Column: Cart Items List (8 cols) */}
+            {/* Left Column: Cart Items (8 cols) */}
             <div className="lg:col-span-8 space-y-4">
-              {/* Free Shipping Notification Bar */}
-              <div className="bg-brand-forest-light border border-brand-forest/20 rounded-card p-4">
-                <div className="flex items-center justify-between text-xs font-medium text-brand-forest mb-2">
+              {/* Free Shipping Notification */}
+              <div className="bg-white border border-black/[0.08] rounded-card-lg p-5 shadow-xs">
+                <div className="flex items-center justify-between text-xs font-medium text-brand-charcoal mb-2.5">
                   <div className="flex items-center gap-2">
-                    <Truck className="w-4 h-4 text-brand-forest" />
+                    <Truck className="w-4 h-4 text-brand-gold" />
                     {freeShippingRemaining > 0 ? (
-                      <span>Add <strong className="font-bold">{formatPrice(freeShippingRemaining)}</strong> more to unlock Free Air Express Courier Delivery</span>
+                      <span>Add <strong className="font-bold font-mono">{formatPrice(freeShippingRemaining)}</strong> for Complimentary Air Express Delivery</span>
                     ) : (
                       <span className="font-bold text-brand-success flex items-center gap-1">
-                        <CheckCircle2 className="w-4 h-4" /> You&apos;ve unlocked Complimentary Air Express Courier Delivery!
+                        <CheckCircle2 className="w-4 h-4" /> Complimentary Insured Express Delivery Unlocked!
                       </span>
                     )}
                   </div>
-                  <span className="font-bold text-xs">{freeShippingProgress}%</span>
+                  <span className="font-bold text-xs font-mono">{freeShippingProgress}%</span>
                 </div>
-                <div className="w-full h-2 bg-brand-border rounded-full overflow-hidden">
+                <div className="w-full h-1.5 bg-background rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-brand-forest transition-all duration-500 rounded-full"
+                    className="h-full bg-brand-gold transition-all duration-500 rounded-full"
                     style={{ width: `${freeShippingProgress}%` }}
                   />
                 </div>
               </div>
 
-              {/* Items Card Container */}
-              <div className="bg-white rounded-card border border-brand-border divide-y divide-brand-border">
+              {/* Items Card */}
+              <div className="bg-white rounded-card-lg border border-black/[0.08] divide-y divide-black/[0.06] shadow-subtle overflow-hidden">
                 {items.map((item) => {
                   const unitPrice = item.product.price + (item.selectedVariant.priceModifier || 0);
                   const lineTotal = unitPrice * item.quantity;
 
                   return (
-                    <div key={item.id} className="p-5 sm:p-6 flex flex-col sm:flex-row gap-5">
-                      {/* 4:5 Aspect Ratio Thumbnail */}
-                      <div className="relative aspect-product w-24 sm:w-28 rounded-btn overflow-hidden bg-background shrink-0 border border-brand-border/60">
+                    <div key={item.id} className="p-6 flex flex-col sm:flex-row gap-6">
+                      {/* Thumbnail */}
+                      <div className="relative aspect-product w-24 sm:w-28 rounded-card overflow-hidden bg-background shrink-0 border border-black/[0.08]">
                         <Image
                           src={
                             item.product.images[item.selectedVariant.imageIndex || 0] ||
@@ -153,22 +153,22 @@ export default function CartPage() {
                         />
                       </div>
 
-                      {/* Item Details */}
+                      {/* Details */}
                       <div className="flex-1 min-w-0 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between gap-4">
                             <div>
-                              <span className="text-[10px] uppercase font-bold tracking-wider text-brand-forest">
+                              <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-brand-gold">
                                 {item.product.categoryLabel}
                               </span>
                               <Link
                                 href={`/product/${item.product.slug}`}
-                                className="block font-serif text-base sm:text-lg text-brand-charcoal hover:text-brand-forest transition-colors mt-0.5"
+                                className="block font-serif text-lg text-brand-charcoal hover:text-black transition-colors mt-0.5"
                               >
                                 {item.product.title}
                               </Link>
                             </div>
-                            <span className="font-bold text-base text-brand-forest">
+                            <span className="font-bold text-base text-black font-mono">
                               {formatPrice(lineTotal)}
                             </span>
                           </div>
@@ -179,32 +179,32 @@ export default function CartPage() {
                               {item.selectedVariant.name}
                             </span>
                             <span>&bull;</span>
-                            <span>Unit: {formatPrice(unitPrice)}</span>
+                            <span className="font-mono">Unit: {formatPrice(unitPrice)}</span>
                           </div>
 
-                          <p className="text-[11px] text-brand-muted mt-1">
-                            Dispatched directly from atelier in {item.product.details.origin}.
+                          <p className="text-[11px] text-brand-muted mt-1 font-normal">
+                            Direct dispatch from atelier in {item.product.details.origin}.
                           </p>
                         </div>
 
-                        {/* Controls: Stepper, Wishlist, Remove */}
-                        <div className="flex items-center justify-between pt-4 mt-4 border-t border-brand-border/50">
+                        {/* Controls */}
+                        <div className="flex items-center justify-between pt-4 mt-4 border-t border-black/[0.06]">
                           <div className="flex items-center gap-4">
-                            {/* Quantity Stepper */}
-                            <div className="flex items-center border border-brand-border rounded-btn bg-background-subtle">
+                            {/* Stepper */}
+                            <div className="flex items-center border border-black/[0.1] rounded-btn bg-white">
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                className="px-3 py-1.5 text-brand-charcoal hover:bg-white rounded-l-btn text-xs font-bold transition-colors"
+                                className="px-3 py-1.5 text-brand-charcoal hover:bg-background rounded-l-btn text-xs font-bold transition-colors"
                                 aria-label="Decrease quantity"
                               >
                                 <Minus className="w-3 h-3" />
                               </button>
-                              <span className="w-8 text-center text-xs font-semibold text-brand-charcoal">
+                              <span className="w-8 text-center text-xs font-bold text-black font-mono">
                                 {item.quantity}
                               </span>
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                className="px-3 py-1.5 text-brand-charcoal hover:bg-white rounded-r-btn text-xs font-bold transition-colors"
+                                className="px-3 py-1.5 text-brand-charcoal hover:bg-background rounded-r-btn text-xs font-bold transition-colors"
                                 aria-label="Increase quantity"
                               >
                                 <Plus className="w-3 h-3" />
@@ -214,7 +214,7 @@ export default function CartPage() {
                             {/* Move to Wishlist */}
                             <button
                               onClick={() => moveToWishlist(item.id)}
-                              className="text-xs text-brand-muted hover:text-brand-charcoal transition-colors flex items-center gap-1 font-medium"
+                              className="text-xs text-brand-muted hover:text-black transition-colors flex items-center gap-1 font-medium"
                             >
                               <Heart className="w-3.5 h-3.5" />
                               <span>Move to Wishlist</span>
@@ -224,7 +224,7 @@ export default function CartPage() {
                           {/* Delete Item */}
                           <button
                             onClick={() => removeFromCart(item.id)}
-                            className="text-xs text-brand-muted hover:text-brand-error transition-colors flex items-center gap-1"
+                            className="text-xs text-brand-muted hover:text-brand-sale transition-colors flex items-center gap-1"
                             title="Remove object"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -238,24 +238,24 @@ export default function CartPage() {
               </div>
             </div>
 
-            {/* Right Column: Order Summary & Coupon (4 cols) */}
+            {/* Right Column: Order Summary (4 cols) */}
             <div className="lg:col-span-4 space-y-5">
-              <div className="bg-white rounded-card border border-brand-border p-6 shadow-subtle space-y-5 sticky top-28">
-                <h3 className="font-serif text-xl text-brand-charcoal pb-3 border-b border-brand-border">
+              <div className="bg-white rounded-card-lg border border-black/[0.08] p-6 sm:p-7 shadow-subtle space-y-6 sticky top-28">
+                <h3 className="font-serif text-xl text-brand-charcoal pb-4 border-b border-black/[0.06]">
                   Order Summary
                 </h3>
 
-                {/* Promo Code Applicator */}
+                {/* Promo Applicator */}
                 <div>
                   {appliedCoupon ? (
-                    <div className="flex items-center justify-between text-xs bg-brand-forest-light text-brand-forest p-3 rounded-btn border border-brand-forest/20">
+                    <div className="flex items-center justify-between text-xs bg-background p-3 rounded-btn border border-black/[0.08]">
                       <div>
-                        <span className="font-bold block">Coupon &ldquo;{appliedCoupon.code}&rdquo;</span>
+                        <span className="font-bold block text-black">Code &ldquo;{appliedCoupon.code}&rdquo;</span>
                         <span className="text-[11px] text-brand-muted">{appliedCoupon.description}</span>
                       </div>
                       <button
                         onClick={removeCoupon}
-                        className="text-xs font-semibold text-brand-error hover:underline"
+                        className="text-xs font-bold text-brand-sale hover:underline"
                       >
                         Remove
                       </button>
@@ -269,26 +269,26 @@ export default function CartPage() {
                           setCouponInput(e.target.value);
                           setCouponError('');
                         }}
-                        placeholder="Promo code (VERDEN15)"
-                        className="flex-1 text-xs px-3 py-2.5 rounded-btn border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-forest"
+                        placeholder="Privilege Code (VERDEN15)"
+                        className="flex-1 text-xs px-3.5 py-2.5 rounded-btn border border-black/[0.1] text-brand-charcoal focus:outline-none focus:border-black"
                       />
                       <button
                         type="submit"
-                        className="px-4 py-2.5 rounded-btn bg-brand-charcoal text-white text-xs font-semibold hover:bg-brand-forest transition-colors"
+                        className="px-4 py-2.5 rounded-btn bg-black text-white text-xs font-bold uppercase tracking-wider hover:bg-black/90 transition-colors"
                       >
                         Apply
                       </button>
                     </form>
                   )}
                   {couponError && (
-                    <p className="text-[11px] text-brand-error mt-1">{couponError}</p>
+                    <p className="text-[11px] text-brand-sale mt-1.5">{couponError}</p>
                   )}
                 </div>
 
-                {/* Delivery Options Selector */}
+                {/* Delivery Options */}
                 <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-muted mb-2">
-                    Delivery Method
+                  <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gold mb-2.5">
+                    Delivery Speed
                   </h4>
                   <div className="space-y-2">
                     {SHIPPING_METHODS.map((method) => {
@@ -298,10 +298,10 @@ export default function CartPage() {
                       return (
                         <label
                           key={method.id}
-                          className={`flex items-start gap-2.5 p-2.5 rounded-btn border cursor-pointer transition-all text-xs ${
+                          className={`flex items-start gap-2.5 p-3 rounded-btn border cursor-pointer transition-all text-xs ${
                             selectedShipping.id === method.id
-                              ? 'border-brand-forest bg-brand-forest-light/60'
-                              : 'border-brand-border hover:bg-background'
+                              ? 'border-black bg-white shadow-xs ring-1 ring-black'
+                              : 'border-black/[0.08] hover:bg-background'
                           }`}
                         >
                           <input
@@ -309,12 +309,12 @@ export default function CartPage() {
                             name="shippingMethod"
                             checked={selectedShipping.id === method.id}
                             onChange={() => setShippingMethod(method)}
-                            className="mt-0.5 accent-brand-forest"
+                            className="mt-0.5 accent-black"
                           />
                           <div className="flex-1 min-w-0">
                             <div className="flex justify-between font-semibold text-brand-charcoal">
                               <span>{method.name}</span>
-                              <span className="text-brand-forest">
+                              <span className="font-mono font-bold text-black">
                                 {price === 0 ? 'FREE' : formatPrice(price)}
                               </span>
                             </div>
@@ -328,16 +328,16 @@ export default function CartPage() {
                   </div>
                 </div>
 
-                {/* Price Calculation Rows */}
-                <div className="space-y-2.5 pt-4 border-t border-brand-border text-xs text-brand-muted">
+                {/* Totals */}
+                <div className="space-y-2.5 pt-4 border-t border-black/[0.06] text-xs text-brand-muted">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span className="font-semibold text-brand-charcoal">{formatPrice(subtotal)}</span>
+                    <span className="font-bold text-black font-mono">{formatPrice(subtotal)}</span>
                   </div>
                   {discountAmount > 0 && (
                     <div className="flex justify-between text-brand-sale">
-                      <span>Discount ({appliedCoupon?.code})</span>
-                      <span className="font-semibold">-{formatPrice(discountAmount)}</span>
+                      <span>Privilege Discount ({appliedCoupon?.code})</span>
+                      <span className="font-bold font-mono">-{formatPrice(discountAmount)}</span>
                     </div>
                   )}
                   <div className="flex justify-between">
@@ -346,32 +346,29 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>Estimated Sales Tax (8%)</span>
-                    <span>{formatPrice(taxAmount)}</span>
+                    <span className="font-mono">{formatPrice(taxAmount)}</span>
                   </div>
 
-                  <div className="flex justify-between text-base font-bold text-brand-charcoal pt-3 border-t border-brand-border">
-                    <span>Estimated Total</span>
-                    <span className="text-brand-forest">{formatPrice(finalTotal)}</span>
+                  <div className="flex justify-between text-base font-bold text-black pt-3 border-t border-black/[0.06]">
+                    <span className="font-serif">Estimated Total</span>
+                    <span className="font-mono text-black">{formatPrice(finalTotal)}</span>
                   </div>
                 </div>
 
                 {/* Checkout CTA */}
                 <Link
                   href="/checkout"
-                  className="w-full py-4 rounded-btn bg-brand-forest hover:bg-brand-forest-hover text-white text-xs font-semibold uppercase tracking-widest transition-all shadow-float flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-btn bg-black hover:bg-black/90 text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-float flex items-center justify-center gap-2"
                 >
-                  <Lock className="w-4 h-4 text-brand-gold" />
+                  <Lock className="w-3.5 h-3.5 text-brand-gold" />
                   <span>Proceed to Checkout</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
 
-                {/* Trust Guarantees */}
-                <div className="pt-2 text-center text-[11px] text-brand-muted space-y-1">
-                  <p className="flex items-center justify-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-brand-forest" />
-                    <span>256-bit Encrypted Checkout &bull; 30-Day Guarantee</span>
-                  </p>
-                </div>
+                <p className="text-[11px] text-center text-brand-muted pt-1 flex items-center justify-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-brand-gold" />
+                  <span>256-bit Encrypted Checkout &bull; 30-Day Living Guarantee</span>
+                </p>
               </div>
             </div>
           </div>
@@ -380,4 +377,3 @@ export default function CartPage() {
     </div>
   );
 }
-

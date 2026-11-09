@@ -48,15 +48,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-12 sm:py-20 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white rounded-card border border-brand-border p-8 shadow-subtle animate-fadeIn">
+    <div className="min-h-screen bg-[#FAF9F5] py-16 sm:py-24 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full bg-white rounded-2xl border border-brand-border p-8 sm:p-10 shadow-subtle animate-fadeIn">
         {/* Brand Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <span className="font-serif text-3xl font-semibold tracking-[0.25em] text-brand-forest">
+            <span className="font-serif text-3xl font-normal tracking-[0.28em] text-brand-charcoal">
               VÉRDEN
             </span>
-            <span className="block text-[9px] tracking-[0.3em] uppercase text-brand-muted mt-0.5">
+            <span className="block text-[9px] tracking-[0.28em] uppercase text-brand-gold mt-1 font-medium">
               Privé Client Sanctuary
             </span>
           </Link>
@@ -68,7 +68,7 @@ export default function LoginPage() {
             onClick={() => setIsRegister(false)}
             className={`flex-1 pb-3 text-xs font-semibold uppercase tracking-wider transition-all border-b-2 -mb-px ${
               !isRegister
-                ? 'border-brand-forest text-brand-forest'
+                ? 'border-brand-charcoal text-brand-charcoal font-bold'
                 : 'border-transparent text-brand-muted hover:text-brand-charcoal'
             }`}
           >
@@ -78,7 +78,7 @@ export default function LoginPage() {
             onClick={() => setIsRegister(true)}
             className={`flex-1 pb-3 text-xs font-semibold uppercase tracking-wider transition-all border-b-2 -mb-px ${
               isRegister
-                ? 'border-brand-forest text-brand-forest'
+                ? 'border-brand-charcoal text-brand-charcoal font-bold'
                 : 'border-transparent text-brand-muted hover:text-brand-charcoal'
             }`}
           >
@@ -87,23 +87,23 @@ export default function LoginPage() {
         </div>
 
         {/* Quick Demo Login Fillers */}
-        <div className="mb-6 p-3 bg-brand-forest-light border border-brand-forest/20 rounded-btn">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-forest mb-2">
+        <div className="mb-6 p-3.5 bg-[#FAF9F5] border border-brand-border/70 rounded-xl">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-charcoal mb-2 font-mono">
             <Sparkles className="w-3.5 h-3.5 text-brand-gold" />
-            <span>Instant Demo Access</span>
+            <span className="uppercase text-[10px] tracking-wider text-brand-gold">Instant Demo Access</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={handleDemoCustomer}
-              className="py-1.5 px-2 bg-white text-brand-charcoal text-[11px] font-semibold rounded hover:bg-brand-forest hover:text-white transition-colors border border-brand-border"
+              className="py-2 px-2.5 bg-white text-brand-charcoal text-[11px] font-semibold rounded-pill hover:border-brand-charcoal transition-all border border-brand-border shadow-2xs"
             >
-              👤 Demo Customer
+              👤 Collector
             </button>
             <button
               type="button"
               onClick={handleDemoAdmin}
-              className="py-1.5 px-2 bg-brand-forest text-white text-[11px] font-semibold rounded hover:bg-brand-forest-hover transition-colors"
+              className="py-2 px-2.5 bg-[#141514] text-white text-[11px] font-semibold rounded-pill hover:bg-black transition-all shadow-2xs"
             >
               ⚡ Store Admin
             </button>
@@ -114,39 +114,39 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           {isRegister && (
             <div>
-              <label className="block font-semibold text-brand-charcoal mb-1">Full Name</label>
+              <label className="block font-medium text-brand-charcoal mb-1.5 uppercase tracking-wider text-[11px]">Full Name</label>
               <div className="relative">
-                <User className="w-4 h-4 text-brand-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                <User className="w-4 h-4 text-brand-gold absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Camille de Laurent"
-                  className="w-full pl-9 pr-3 py-2.5 rounded-btn border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-forest"
+                  className="w-full pl-10 pr-4 py-3 rounded-pill border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-charcoal"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block font-semibold text-brand-charcoal mb-1">Email Address</label>
+            <label className="block font-medium text-brand-charcoal mb-1.5 uppercase tracking-wider text-[11px]">Email Address</label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-brand-muted absolute left-3 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-brand-gold absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="collector@verden-design.com"
-                className="w-full pl-9 pr-3 py-2.5 rounded-btn border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-forest"
+                className="w-full pl-10 pr-4 py-3 rounded-pill border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-charcoal"
               />
             </div>
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1">
-              <label className="block font-semibold text-brand-charcoal">Password</label>
+            <div className="flex justify-between items-center mb-1.5">
+              <label className="block font-medium text-brand-charcoal uppercase tracking-wider text-[11px]">Password</label>
               {!isRegister && (
                 <button
                   type="button"
@@ -157,21 +157,21 @@ export default function LoginPage() {
                       message: 'Password reset link dispatched to your email.',
                     })
                   }
-                  className="text-[11px] text-brand-forest hover:underline"
+                  className="text-[11px] text-brand-gold hover:underline font-mono"
                 >
                   Forgot?
                 </button>
               )}
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 text-brand-muted absolute left-3 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-brand-gold absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-9 pr-3 py-2.5 rounded-btn border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-forest"
+                className="w-full pl-10 pr-4 py-3 rounded-pill border border-brand-border text-brand-charcoal focus:outline-none focus:border-brand-charcoal font-mono"
               />
             </div>
           </div>
@@ -179,16 +179,16 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 rounded-btn bg-brand-forest hover:bg-brand-forest-hover text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-subtle flex items-center justify-center gap-2 mt-2"
+            className="w-full py-3.5 rounded-pill bg-[#141514] hover:bg-black text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center justify-center gap-2 mt-3"
           >
             <span>{isLoading ? 'Authenticating...' : isRegister ? 'Create Privé Account' : 'Sign In'}</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-brand-gold" />
           </button>
         </form>
 
-        <div className="mt-6 pt-4 border-t border-brand-border text-center text-[11px] text-brand-muted">
+        <div className="mt-6 pt-5 border-t border-brand-border text-center text-[11px] text-brand-muted">
           <span>Looking to checkout as guest? </span>
-          <Link href="/checkout" className="text-brand-forest font-semibold hover:underline">
+          <Link href="/checkout" className="text-brand-charcoal font-semibold hover:text-brand-gold underline underline-offset-2 transition-colors">
             Proceed to Guest Checkout
           </Link>
         </div>
@@ -196,4 +196,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
