@@ -54,3 +54,4 @@ export const SHIPPING_METHODS: ShippingMethod[] = [
     carrier: 'Specialty Logistics Freight Direct',
   },
 ];
+

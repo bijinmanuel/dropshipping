@@ -74,3 +74,4 @@ export const REVIEWS: Review[] = [
     variantPurchased: 'Warm White Stone',
   },
 ];
+

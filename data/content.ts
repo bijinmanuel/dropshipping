@@ -36,3 +36,4 @@ export const FAQS: FAQItem[] = [
     category: 'orders',
   },
 ];
+

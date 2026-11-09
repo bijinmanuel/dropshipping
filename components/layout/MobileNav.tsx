@@ -210,3 +210,4 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
     </div>
   );
 }
+

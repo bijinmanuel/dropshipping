@@ -218,3 +218,4 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     </div>
   );
 }
+

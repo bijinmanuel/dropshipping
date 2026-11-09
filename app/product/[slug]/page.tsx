@@ -767,3 +767,4 @@ function ProductView({ product }: { product: Product }) {
     </div>
   );
 }
+

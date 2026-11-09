@@ -748,3 +748,4 @@ export const CATEGORIES = [
     itemCount: 1,
   },
 ];
+
