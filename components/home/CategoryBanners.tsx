@@ -10,32 +10,32 @@ export function CategoryBanners() {
   const displayCategories = CATEGORIES.filter((c) => c.slug !== 'all');
 
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
+    <section className="py-14 sm:py-18 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Section Header */}
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-gray-100">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-950">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-gray-950 tracking-tight">
             Shop by Categories
           </h2>
           <Link
             href="/shop"
-            className="text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#FF5722] flex items-center gap-1 group transition-colors"
+            className="text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#FF4D30] flex items-center gap-1 group transition-colors"
           >
             <span>View All Categories</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
         {/* 6 Category Cards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
           {displayCategories.map((cat) => (
             <Link
               key={cat.id}
               href={`/shop?category=${cat.slug}`}
-              className="group flex flex-col rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all p-3"
+              className="group flex flex-col rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 p-2.5 sm:p-3"
             >
-              {/* Photo Frame */}
-              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#F3F4F6] flex items-center justify-center">
+              {/* Photo Frame with Clean Rounded Corners */}
+              <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-[#F6F6F8] flex items-center justify-center">
                 <Image
                   src={cat.image}
                   alt={cat.name}
@@ -46,11 +46,11 @@ export function CategoryBanners() {
               </div>
 
               {/* Title & Link */}
-              <div className="pt-3 pb-1 text-center sm:text-left">
-                <h3 className="text-sm font-bold text-gray-900 group-hover:text-[#FF5722] transition-colors">
+              <div className="pt-2.5 pb-0.5 text-center sm:text-left">
+                <h3 className="text-sm font-bold text-gray-900 group-hover:text-[#FF4D30] transition-colors">
                   {cat.name}
                 </h3>
-                <span className="text-xs text-gray-400 group-hover:text-[#FF5722] flex items-center justify-center sm:justify-start gap-1 mt-0.5 transition-colors font-medium">
+                <span className="text-xs text-gray-400 group-hover:text-[#FF4D30] flex items-center justify-center sm:justify-start gap-1 mt-0.5 transition-colors font-medium">
                   <span>Shop Now</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>

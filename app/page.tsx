@@ -48,16 +48,16 @@ export default function HomePage() {
       <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8 pb-3 border-b border-gray-100">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-950">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-gray-950 tracking-tight">
               New Arrivals
             </h2>
             <div className="flex items-center gap-3">
               <Link
                 href="/shop?filter=new"
-                className="text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#FF5722] flex items-center gap-1 group transition-colors"
+                className="text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#FF4D30] flex items-center gap-1 group transition-colors"
               >
                 <span>View All New Arrivals</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </Link>
               {/* Carousel navigation arrow pills */}
               <div className="hidden sm:flex items-center gap-1.5 ml-2">

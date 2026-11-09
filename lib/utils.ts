@@ -1,8 +1,16 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+export function cn(...inputs: (string | boolean | undefined | null | Record<string, boolean>)[]) {
+  return inputs
+    .flatMap((input) => {
+      if (!input) return [];
+      if (typeof input === 'string') return [input];
+      if (typeof input === 'object') {
+        return Object.entries(input)
+          .filter(([, value]) => Boolean(value))
+          .map(([key]) => key);
+      }
+      return [];
+    })
+    .join(' ');
 }
 
 export function formatPrice(price: number, currency: string = 'USD'): string {
@@ -28,8 +36,7 @@ export function formatDate(dateString: string): string {
 }
 
 export function generateTrackingNumber(): string {
-  const prefix = 'VRD';
+  const prefix = 'NVT';
   const randomNum = Math.floor(10000000 + Math.random() * 90000000);
   return `${prefix}-${randomNum}`;
 }
-

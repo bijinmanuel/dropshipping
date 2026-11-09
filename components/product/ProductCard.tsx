@@ -16,7 +16,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(product.variants[0]);
+  const [selectedVariant] = useState<ProductVariant>(product.variants[0]);
   const [isHovered, setIsHovered] = useState(false);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -51,32 +51,32 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   return (
     <>
       <div
-        className="group relative flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden"
+        className="group relative flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 p-3 sm:p-3.5 flex-1 justify-between overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Product Image Stage */}
-        <div className="relative aspect-square w-full bg-[#F8F9FA] overflow-hidden flex items-center justify-center p-4">
+        {/* Top Product Image Stage */}
+        <div className="relative aspect-square w-full bg-[#F6F6F8] rounded-xl overflow-hidden flex items-center justify-center p-3 mb-3">
           <Link href={`/product/${product.slug}`} className="block w-full h-full relative">
             <Image
               src={activeImage}
               alt={product.title}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 18vw"
               priority={priority}
-              className="object-contain p-2 group-hover:scale-106 transition-transform duration-500 ease-out"
+              className="object-contain p-2 group-hover:scale-108 transition-transform duration-500 ease-out"
             />
           </Link>
 
           {/* Badges in Top Left */}
-          <div className="absolute top-3 left-3 flex flex-col gap-1 z-10 pointer-events-none">
+          <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10 pointer-events-none">
             {product.badge === 'NEW' && (
               <span className="bg-black text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
                 New
               </span>
             )}
             {product.badge === 'SALE' && discountPercent > 0 && (
-              <span className="bg-[#FF5722] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+              <span className="bg-[#FF4D30] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
                 -{discountPercent}%
               </span>
             )}
@@ -90,7 +90,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           {/* Wishlist Heart Top Right */}
           <button
             onClick={handleWishlistToggle}
-            className={`absolute top-3 right-3 z-10 w-7 h-7 rounded-full flex items-center justify-center transition-colors shadow-xs ${
+            className={`absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full flex items-center justify-center transition-colors shadow-xs ${
               isFavorited
                 ? 'bg-red-50 text-red-500'
                 : 'bg-white/90 text-gray-400 hover:text-red-500 hover:bg-white'
@@ -101,18 +101,18 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           </button>
         </div>
 
-        {/* Product Details */}
-        <div className="p-3.5 sm:p-4 flex flex-col flex-1 justify-between">
+        {/* Product Information */}
+        <div className="flex flex-col flex-1 justify-between">
           <div>
-            <Link href={`/product/${product.slug}`} className="block group-hover:text-[#FF5722] transition-colors">
-              <h3 className="text-sm font-semibold text-gray-900 truncate">
+            <Link href={`/product/${product.slug}`} className="block group-hover:text-[#FF4D30] transition-colors">
+              <h3 className="text-sm font-bold text-gray-950 truncate leading-snug">
                 {product.title}
               </h3>
             </Link>
 
-            {/* Price Row */}
+            {/* Price Line */}
             <div className="flex items-baseline gap-1.5 mt-1">
-              <span className="text-sm font-bold text-gray-900">
+              <span className="text-sm font-extrabold text-gray-950">
                 {formatPrice(activePrice)}
               </span>
               {product.originalPrice && product.originalPrice > activePrice && (
@@ -122,7 +122,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
               )}
             </div>
 
-            {/* Rating Stars + Review Count */}
+            {/* Stars & Reviews */}
             <div className="flex items-center gap-1.5 mt-1.5">
               <div className="flex items-center text-amber-400">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -136,18 +136,18 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                   />
                 ))}
               </div>
-              <span className="text-[11px] text-gray-400">
+              <span className="text-[11px] text-gray-400 font-medium">
                 ({product.reviewCount})
               </span>
             </div>
           </div>
 
-          {/* Bottom Row: Quick Add Button */}
+          {/* Quick Add Button in Bottom Right */}
           <div className="flex items-center justify-end mt-2 pt-2 border-t border-gray-50">
             <button
               onClick={handleQuickAdd}
               disabled={isAdding}
-              className="w-8 h-8 rounded-full bg-black text-white hover:bg-[#FF5722] transition-colors flex items-center justify-center shadow-xs"
+              className="w-8 h-8 rounded-full bg-black text-white hover:bg-[#FF4D30] transition-colors flex items-center justify-center shadow-xs shrink-0"
               title="Add to Cart"
               aria-label="Add to Cart"
             >
