@@ -1,159 +1,98 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PRODUCTS } from '@/data/products';
 import { HeroSection } from '@/components/home/HeroSection';
 import { CategoryBanners } from '@/components/home/CategoryBanners';
-import { EditorialFeature } from '@/components/home/EditorialFeature';
+import { BestSellersSpotlight } from '@/components/home/BestSellersSpotlight';
+import { DoublePromoBanners } from '@/components/home/DoublePromoBanners';
 import { ValueProps } from '@/components/home/ValueProps';
-import { TestimonialsSection } from '@/components/home/TestimonialsSection';
-import { SocialShowcase } from '@/components/home/SocialShowcase';
 import { ProductCard } from '@/components/product/ProductCard';
 
 export default function HomePage() {
-  const bestSellers = PRODUCTS.filter((p) => p.tags.includes('Best Seller') || p.badge === 'BESTSELLER');
-  const newArrivals = PRODUCTS.filter((p) => p.tags.includes('New Arrival') || p.badge === 'NEW');
-  const trending = PRODUCTS.filter((p) => p.tags.includes('Trending'));
+  // 6 specific products for New Arrivals matching the reference image:
+  // 1. Essential Hoodie ($59.99, New)
+  // 2. Air Max 270 ($129.99, Sale)
+  // 3. Wireless Headphone ($39.99, New)
+  // 4. Smart Watch Series 9 ($199.99, Sale)
+  // 5. Stainless Steel Bottle ($24.99, New)
+  // 6. Aviator Sunglasses ($89.99, Sale)
+  const newArrivalsList = [
+    PRODUCTS.find((p) => p.slug === 'essential-hoodie'),
+    PRODUCTS.find((p) => p.slug === 'air-max-270'),
+    PRODUCTS.find((p) => p.slug === 'wireless-headphone'),
+    PRODUCTS.find((p) => p.slug === 'smart-watch-series-9'),
+    PRODUCTS.find((p) => p.slug === 'stainless-steel-bottle'),
+    PRODUCTS.find((p) => p.slug === 'aviator-sunglasses'),
+  ].filter(Boolean) as typeof PRODUCTS;
+
+  // 3 specific products for Best Sellers Spotlight:
+  // 1. Classic Hoodie ($59.99)
+  // 2. Air Max 270 ($129.99)
+  // 3. Sony WH-1000XM5 ($349.99)
+  const bestSellersList = [
+    PRODUCTS.find((p) => p.slug === 'classic-hoodie') || PRODUCTS[0],
+    PRODUCTS.find((p) => p.slug === 'air-max-270') || PRODUCTS[1],
+    PRODUCTS.find((p) => p.slug === 'sony-wh-1000xm5') || PRODUCTS[2],
+  ].filter(Boolean) as typeof PRODUCTS;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAF9F5]">
-      {/* 1. Hero Section */}
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* 1. Hero Section & 4-Column Trust Row */}
       <HeroSection />
 
-      {/* 2. Featured Categories */}
+      {/* 2. Shop by Categories (Fashion, Electronics, Beauty, Fitness, Home Decor, Accessories) */}
       <CategoryBanners />
 
-      {/* 3. The Permanent Collection (Best Sellers) */}
-      <section className="py-16 sm:py-24 bg-[#FAF9F5] border-b border-[#EAE6DF]">
+      {/* 3. New Arrivals 6-Column Grid / Carousel */}
+      <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-[#EAE6DF] gap-4">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-serif text-[#21201D] font-normal">
-                The Permanent Collection
-              </h2>
-              <p className="text-xs sm:text-sm text-[#706B62] mt-1">
-                Enduring architectural objects cast in travertine, hand-blown glass, and solid timber.
-              </p>
+          <div className="flex items-center justify-between mb-8 pb-3 border-b border-gray-100">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-950">
+              New Arrivals
+            </h2>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/shop?filter=new"
+                className="text-xs sm:text-sm font-semibold text-gray-500 hover:text-[#FF5722] flex items-center gap-1 group transition-colors"
+              >
+                <span>View All New Arrivals</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              {/* Carousel navigation arrow pills */}
+              <div className="hidden sm:flex items-center gap-1.5 ml-2">
+                <button
+                  aria-label="Previous items"
+                  className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-black hover:border-black transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  aria-label="Next items"
+                  className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-black hover:border-black transition-colors"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            <Link
-              href="/shop?filter=best-sellers"
-              className="text-xs font-medium text-[#21201D] hover:text-[#A97B3C] flex items-center gap-1.5 group transition-colors self-start sm:self-auto"
-            >
-              <span>View collection</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {bestSellers.slice(0, 4).map((product) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            {newArrivalsList.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Editorial Feature Story (Harmonized warm espresso & travertine) */}
-      <EditorialFeature />
+      {/* 4. Best Sellers 3-Card Spotlight Section */}
+      <BestSellersSpotlight products={bestSellersList} />
 
-      {/* 5. Recent Atelier Additions (New Arrivals) */}
-      <section className="py-16 sm:py-24 bg-white border-b border-[#EAE6DF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-[#EAE6DF] gap-4">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-serif text-[#21201D] font-normal">
-                Recent Atelier Additions
-              </h2>
-              <p className="text-xs sm:text-sm text-[#706B62] mt-1">
-                Freshly fired ceramics from Kyoto and cast bronze accents from Florence.
-              </p>
-            </div>
-            <Link
-              href="/shop?filter=new"
-              className="text-xs font-medium text-[#21201D] hover:text-[#A97B3C] flex items-center gap-1.5 group transition-colors self-start sm:self-auto"
-            >
-              <span>View all releases</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+      {/* 5. Split Double Promotional Banners (Flash Sale 70% + Summer 2026) */}
+      <DoublePromoBanners />
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {newArrivals.slice(0, 4).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Promotional Seasonal Callout Pavilion */}
-      <section className="py-16 sm:py-24 bg-[#FAF9F5] border-b border-[#EAE6DF] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto rounded-2xl bg-white border border-[#E2DDD2] p-8 sm:p-14 text-center flex flex-col items-center shadow-sm">
-          <span className="text-xs text-[#8C642A] font-medium mb-3">
-            Atelier direct logistics
-          </span>
-
-          <h2 className="font-serif text-2xl sm:text-4xl font-normal tracking-tight max-w-xl text-[#21201D] leading-snug">
-            Complimentary insured express delivery on curations over $150
-          </h2>
-
-          <p className="text-xs sm:text-sm text-[#706B62] max-w-lg mt-3 leading-relaxed">
-            Every object is photographic certified in its origin workshop, enclosed in custom molded unbleached pulp, and flown carbon-neutral directly to your door.
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-            <Link
-              href="/shop"
-              className="px-6 py-3 rounded-full bg-[#21201D] hover:bg-[#2F2E2A] text-white text-xs font-medium uppercase tracking-[0.14em] transition-all flex items-center gap-2 group"
-            >
-              <span>Explore collection</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#A97B3C] group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/track-order"
-              className="px-6 py-3 rounded-full border border-[#D9D3C7] hover:border-[#21201D] text-[#21201D] text-xs font-medium uppercase tracking-[0.14em] transition-colors bg-[#FAF9F5]"
-            >
-              Track a shipment
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Trending Objects Section */}
-      <section className="py-16 sm:py-24 bg-[#FAF9F5] border-b border-[#EAE6DF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-[#EAE6DF] gap-4">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-serif text-[#21201D] font-normal">
-                Objects of Current Focus
-              </h2>
-              <p className="text-xs sm:text-sm text-[#706B62] mt-1">
-                Pieces frequently specified by architects and residential designers this month.
-              </p>
-            </div>
-            <Link
-              href="/shop"
-              className="text-xs font-medium text-[#21201D] hover:text-[#A97B3C] flex items-center gap-1.5 group transition-colors self-start sm:self-auto"
-            >
-              <span>View catalog</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {trending.slice(0, 4).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. The VÉRDEN Standard (Value Props) */}
+      {/* 6. Bottom Trust & Reliability Strip */}
       <ValueProps />
-
-      {/* 9. Verified Client Inquiries & Testimonials */}
-      <TestimonialsSection />
-
-      {/* 10. Social Showcase */}
-      <SocialShowcase />
     </div>
   );
 }

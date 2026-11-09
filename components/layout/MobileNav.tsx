@@ -32,16 +32,13 @@ export function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavProps) {
 
       <nav
         aria-label="Mobile navigation"
-        className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#FAF9F5] shadow-2xl flex flex-col z-50 border-r border-brand-border animate-fadeIn"
+        className="fixed inset-y-0 left-0 max-w-xs w-full bg-white shadow-2xl flex flex-col z-50 border-r border-gray-100 animate-fadeIn"
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between p-5 border-b border-brand-border bg-white/70 backdrop-blur-sm">
-          <Link href="/" onClick={onClose} className="flex flex-col">
-            <span className="font-serif text-xl tracking-[0.28em] font-semibold text-brand-charcoal">
-              VÉRDEN
-            </span>
-            <span className="text-[9px] tracking-[0.25em] text-brand-gold uppercase font-medium">
-              Studio &bull; Objects for Living
+        <div className="flex items-center justify-between p-5 border-b border-gray-100 bg-white">
+          <Link href="/" onClick={onClose} className="flex items-center gap-1">
+            <span className="font-sans text-xl font-extrabold tracking-tight text-gray-950">
+              Nova<span className="text-[#FF5722]">Trend</span>
             </span>
           </Link>
           <button

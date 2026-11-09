@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, ShieldCheck, Truck, RefreshCw, HelpCircle, Mail, Globe } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Truck, RefreshCw, Headphones, Mail } from 'lucide-react';
 import { useToast } from '@/context/ToastContext';
 
 export function Footer() {
@@ -24,98 +24,44 @@ export function Footer() {
     setIsSubscribed(true);
     showToast({
       type: 'success',
-      title: 'Welcome to the Privé Journal',
-      message: 'Your 15% privilege code VERDEN15 has been dispatched.',
+      title: 'Welcome to NovaTrend',
+      message: 'Your 15% discount code NOVA15 has been dispatched.',
     });
     setEmail('');
   };
 
   return (
-    <footer className="bg-[#1E1D1A] text-[#FAF9F5] pt-20 pb-12 border-t border-[#2E2C28]">
-      {/* Trust Badges Strip */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 mb-14 border-b border-[#2E2C28]">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
-          <div className="flex items-start gap-3.5">
-            <Truck className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-            <div>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white">
-                Inspected Direct Shipping
-              </h4>
-              <p className="text-[11px] text-white/50 mt-1.5 leading-relaxed font-normal">
-                Dispatched straight from master ateliers in Kyoto, Verona, and Florence. 100% carbon neutral.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3.5">
-            <RefreshCw className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-            <div>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white">
-                30-Day Living Trial
-              </h4>
-              <p className="text-[11px] text-white/50 mt-1.5 leading-relaxed font-normal">
-                Experience objects in your home&apos;s natural light. Complimentary return courier collection.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3.5">
-            <ShieldCheck className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-            <div>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white">
-                7-Point Inspection
-              </h4>
-              <p className="text-[11px] text-white/50 mt-1.5 leading-relaxed font-normal">
-                Laser finish analysis, CE/UL electrical certification, and shockproof drop-tested packaging.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3.5">
-            <HelpCircle className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-            <div>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white">
-                Private Concierge
-              </h4>
-              <p className="text-[11px] text-white/50 mt-1.5 leading-relaxed font-normal">
-                Personalized interior design consultation and real-time cargo telemetry available 7 days a week.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer Navigation Columns */}
+    <footer className="bg-[#0F1115] text-white pt-16 pb-12 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-14 border-b border-white/[0.08]">
-          {/* Brand Manifesto & Newsletter */}
-          <div className="lg:col-span-2 space-y-5">
+        
+        {/* Main Footer Navigation Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-gray-800">
+          
+          {/* Brand & Newsletter */}
+          <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block">
-              <span className="font-serif text-2xl font-normal tracking-[0.28em] text-white uppercase">
-                VÉRDEN
-              </span>
-              <span className="block text-[8px] tracking-[0.35em] uppercase text-brand-gold mt-0.5 font-medium">
-                Objects for Living
+              <span className="font-sans text-2xl font-extrabold tracking-tight text-white">
+                Nova<span className="text-[#FF5722]">Trend</span>
               </span>
             </Link>
 
-            <p className="text-xs text-white/60 max-w-sm leading-relaxed">
-              We curate enduring architectural objects designed to outlive ephemeral trends. By connecting collectors directly with multi-generational European and Asian workshops, we eliminate sitting wholesale inventory markups.
+            <p className="text-xs sm:text-sm text-gray-400 max-w-sm leading-relaxed">
+              Curating trending modern products for everyday lifestyle. Direct-to-consumer value with verified fast global logistics.
             </p>
 
-            {/* Newsletter Subscription */}
+            {/* Newsletter */}
             <div className="pt-2">
-              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white mb-1.5">
-                The Privé Journal
+              <p className="text-xs font-bold uppercase tracking-wider text-white mb-1.5">
+                Subscribe & Save 15%
               </p>
-              <p className="text-[11px] text-white/50 mb-3">
-                Receive private batch announcements and $20 towards your inaugural curation.
+              <p className="text-xs text-gray-400 mb-3">
+                Get notified on exclusive seasonal drops and member flash sales.
               </p>
 
               {isSubscribed ? (
-                <div className="flex items-center gap-2 text-xs text-brand-gold font-medium bg-white/5 p-3 rounded-btn border border-brand-gold/30">
-                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
-                  <span>Welcome. Privilege Code VERDEN15 is activated.</span>
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-medium bg-emerald-950/40 p-3 rounded-xl border border-emerald-800/40">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>Welcome! Use code NOVA15 at checkout for 15% off.</span>
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md">
@@ -123,69 +69,79 @@ export function Footer() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email address..."
-                    className="flex-1 text-xs px-3.5 py-2.5 rounded-btn bg-white/[0.05] border border-white/[0.12] text-white placeholder:text-white/35 focus:outline-none focus:border-brand-gold"
+                    placeholder="Enter your email..."
+                    className="flex-1 text-xs px-3.5 py-2.5 rounded-full bg-white/10 border border-white/15 text-white placeholder:text-gray-400 focus:outline-none focus:border-[#FF5722]"
                   />
                   <button
                     type="submit"
-                    className="px-5 py-2.5 rounded-pill bg-[#FAF9F5] hover:bg-white text-[#21201D] text-[11px] font-bold tracking-[0.14em] uppercase transition-all shrink-0 flex items-center gap-1.5 shadow-sm"
+                    className="px-5 py-2.5 rounded-full bg-[#FF5722] hover:bg-[#E64A19] text-white text-xs font-bold tracking-wide transition-colors shrink-0 flex items-center gap-1.5"
                   >
-                    <span>Join</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#B88E4C]" />
+                    <span>Subscribe</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </form>
               )}
             </div>
           </div>
 
-          {/* Column 2: Departments */}
+          {/* Column 2: Categories */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-gold mb-4">
-              Curations
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Categories
             </h4>
-            <ul className="space-y-3 text-xs text-white/65">
+            <ul className="space-y-2.5 text-xs text-gray-400">
               <li>
-                <Link href="/shop?category=lighting" className="hover:text-white transition-colors">
-                  Architectural Lighting
+                <Link href="/shop?category=fashion" className="hover:text-white transition-colors">
+                  Fashion & Streetwear
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=ceramics" className="hover:text-white transition-colors">
-                  Kyoto Stoneware &amp; Tea
+                <Link href="/shop?category=electronics" className="hover:text-white transition-colors">
+                  Audio & Wearables
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=audio-tech" className="hover:text-white transition-colors">
-                  Acoustic Audio Objects
+                <Link href="/shop?category=fitness" className="hover:text-white transition-colors">
+                  Fitness & Performance
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=leather-carry" className="hover:text-white transition-colors">
-                  Tuscan Leather Carry
+                <Link href="/shop?category=beauty" className="hover:text-white transition-colors">
+                  Clean Beauty & Skincare
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=furniture" className="hover:text-white transition-colors">
-                  Solid Timber Seating
+                <Link href="/shop?category=home-decor" className="hover:text-white transition-colors">
+                  Modern Home Decor
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=wellness" className="hover:text-white transition-colors">
-                  Aromatic Stone Nebulizers
+                <Link href="/shop?category=accessories" className="hover:text-white transition-colors">
+                  Eyewear & Accessories
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Client Care */}
+          {/* Column 3: Quick Links */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-gold mb-4">
-              Client Care
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Customer Care
             </h4>
-            <ul className="space-y-3 text-xs text-white/65">
+            <ul className="space-y-2.5 text-xs text-gray-400">
               <li>
                 <Link href="/track-order" className="hover:text-white transition-colors">
-                  Track Live Delivery
+                  Track Your Order
+                </Link>
+              </li>
+              <li>
+                <Link href="/policies/shipping" className="hover:text-white transition-colors">
+                  Shipping & Delivery
+                </Link>
+              </li>
+              <li>
+                <Link href="/policies/returns" className="hover:text-white transition-colors">
+                  Returns & Exchanges
                 </Link>
               </li>
               <li>
@@ -194,78 +150,56 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/policies/shipping" className="hover:text-white transition-colors">
-                  Worldwide Shipping Guide
-                </Link>
-              </li>
-              <li>
-                <Link href="/policies/returns" className="hover:text-white transition-colors">
-                  30-Day Living Trial Policy
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  Speak with Concierge
+                  Contact Support
                 </Link>
               </li>
               <li>
-                <Link href="/account" className="hover:text-white transition-colors">
-                  Collector Dashboard
+                <Link href="/dropship-hub" className="hover:text-[#FF5722] text-[#FF5722] font-semibold transition-colors">
+                  B2B Dropship Hub
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Sourcing & Operations */}
+          {/* Column 4: Policies */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-gold mb-4">
-              Operations
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Legal & Privacy
             </h4>
-            <ul className="space-y-3 text-xs text-white/65">
-              <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  Our Supply Manifesto
-                </Link>
-              </li>
-              <li>
-                <Link href="/dropship-hub" className="text-white font-semibold hover:text-brand-gold transition-colors flex items-center gap-1">
-                  <span>Dropship Supplier Hub</span>
-                  <span className="text-[9px] bg-brand-gold text-black px-1.5 py-0.2 rounded font-bold">EDI</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/policies/terms" className="hover:text-white transition-colors">
-                  Terms of Agreement
-                </Link>
-              </li>
+            <ul className="space-y-2.5 text-xs text-gray-400">
               <li>
                 <Link href="/policies/privacy" className="hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <div className="pt-2 text-[11px] text-white/40">
-                  <span className="block text-white/80 font-medium">Concierge Desk:</span>
-                  <span>concierge@verden-design.com</span>
-                  <span className="block mt-0.5">+1 (800) 837-3367</span>
-                </div>
+                <Link href="/policies/terms" className="hover:text-white transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-white transition-colors">
+                  About Our Brand
+                </Link>
               </li>
             </ul>
           </div>
+
         </div>
 
         {/* Bottom Bar: Copyright & Payment Badges */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/45">
-          <p>&copy; {new Date().getFullYear()} VÉRDEN Studio Inc. All rights reserved. Direct Atelier Retailer.</p>
-
-          <div className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-white/60">
-            <span className="px-2 py-1 rounded bg-white/[0.06] border border-white/[0.08]">VISA</span>
-            <span className="px-2 py-1 rounded bg-white/[0.06] border border-white/[0.08]">MASTERCARD</span>
-            <span className="px-2 py-1 rounded bg-white/[0.06] border border-white/[0.08]">AMEX</span>
-            <span className="px-2 py-1 rounded bg-white/[0.06] border border-white/[0.08]">APPLE PAY</span>
-            <span className="px-2 py-1 rounded bg-white/[0.06] border border-white/[0.08]">KLARNA</span>
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+          <p>&copy; {new Date().getFullYear()} NovaTrend Inc. All rights reserved.</p>
+          <div className="flex items-center gap-3">
+            <span className="px-2 py-1 rounded bg-white/10 text-[10px] font-mono text-gray-300">VISA</span>
+            <span className="px-2 py-1 rounded bg-white/10 text-[10px] font-mono text-gray-300">MASTERCARD</span>
+            <span className="px-2 py-1 rounded bg-white/10 text-[10px] font-mono text-gray-300">AMEX</span>
+            <span className="px-2 py-1 rounded bg-white/10 text-[10px] font-mono text-gray-300">APPLE PAY</span>
+            <span className="px-2 py-1 rounded bg-white/10 text-[10px] font-mono text-gray-300">STRIPE</span>
           </div>
         </div>
+
       </div>
     </footer>
   );

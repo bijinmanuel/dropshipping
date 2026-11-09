@@ -284,7 +284,7 @@ export function CartDrawer() {
                 <Link
                   href="/checkout"
                   onClick={closeCart}
-                  className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-btn bg-black text-white text-xs font-bold uppercase tracking-wider hover:bg-black/90 transition-colors shadow-float text-center"
+                  className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-full bg-[#FF5722] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#E64A19] transition-colors shadow-sm text-center"
                 >
                   <span>Checkout</span>
                   <ArrowRight className="w-3.5 h-3.5" />

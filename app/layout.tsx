@@ -6,15 +6,15 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'VÉRDEN Studio | Objects for Living | Curated Architectural Goods',
-  description: 'A modern luxury design sanctuary of sculptural travertine lighting, wood-fired Japanese stoneware, Tuscan full-grain leather, and acoustic objects. Direct-from-artisan dropshipping with 30-day living trial.',
-  keywords: ['luxury design', 'minimalist home decor', 'travertine lamps', 'stoneware tea sets', 'dropshipping', 'Japandi', 'D2C retail', 'Atelier Living'],
-  authors: [{ name: 'VÉRDEN Studio' }],
+  title: 'NovaTrend | Discover Products You’ll Love | Trending Lifestyle Store',
+  description: 'Shop the latest trending products curated for modern lifestyles. High quality apparel, footwear, wireless audio, smart wearables, and home lifestyle essentials.',
+  keywords: ['trending products', 'lifestyle store', 'hoodies', 'sneakers', 'wireless headphones', 'smart watch', 'dropshipping', 'NovaTrend'],
+  authors: [{ name: 'NovaTrend' }],
   openGraph: {
-    title: 'VÉRDEN Studio | Objects for Living',
-    description: 'Curated architectural lighting, ceramics, and leather goods. Delivered directly from master ateliers.',
-    url: 'https://verden-design.com',
-    siteName: 'VÉRDEN Studio',
+    title: 'NovaTrend | Discover Products You’ll Love',
+    description: 'Shop the latest trending products curated for modern lifestyles.',
+    url: 'https://novatrend.com',
+    siteName: 'NovaTrend',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1200&auto=format&fit=crop',

@@ -52,7 +52,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
           role="dialog"
           aria-modal="true"
           aria-label={product.title}
-          className="relative transform overflow-hidden rounded-2xl bg-[#FAF9F5] text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl border border-brand-border animate-fadeIn"
+          className="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl border border-gray-100 animate-fadeIn"
         >
           {/* Close Button */}
           <button
@@ -205,17 +205,17 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                   <button
                     onClick={handleAddToCart}
                     disabled={isAdded}
-                    className="flex-1 py-3 px-5 rounded-pill bg-[#21201D] hover:bg-[#2D2C28] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center justify-center gap-2"
+                    className="flex-1 py-3 px-5 rounded-full bg-black hover:bg-[#FF5722] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2"
                   >
                     {isAdded ? (
                       <>
-                        <Check className="w-4 h-4 text-brand-gold" />
+                        <Check className="w-4 h-4 text-[#FF5722]" />
                         <span>Added to Bag</span>
                       </>
                     ) : (
                       <>
                         <ShoppingBag className="w-4 h-4" />
-                        <span>Add to Bag &bull; {formatPrice(activePrice * quantity)}</span>
+                        <span>Add to Cart &bull; {formatPrice(activePrice * quantity)}</span>
                       </>
                     )}
                   </button>

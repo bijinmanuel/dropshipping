@@ -1,72 +1,29 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Sparkles, ShieldCheck, Truck } from 'lucide-react';
-
-const MESSAGES = [
-  {
-    icon: Truck,
-    text: 'Complimentary insured priority air on orders over $150',
-    highlight: 'Code: FREESHIP',
-  },
-  {
-    icon: Sparkles,
-    text: 'Welcome invitation: 15% off your first curation',
-    highlight: 'Code: VERDEN15',
-  },
-  {
-    icon: ShieldCheck,
-    text: 'Direct atelier dispatch with a 30-day home living trial',
-    highlight: 'Learn More',
-  },
-];
+import React from 'react';
+import { Truck, Zap, Flame } from 'lucide-react';
 
 export function AnnouncementBar() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % MESSAGES.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const current = MESSAGES[currentIndex];
-  const Icon = current.icon;
-
   return (
     <aside 
       aria-label="Promotional announcements"
-      className="bg-[#21201D] text-[#FAF9F5] text-[11px] font-medium tracking-[0.04em] py-2 px-4 border-b border-[#2F2E2A] relative z-40"
+      className="bg-black text-white text-[11px] sm:text-xs py-2 px-4 border-b border-white/10 relative z-40"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <button
-          onClick={() => setCurrentIndex((prev) => (prev - 1 + MESSAGES.length) % MESSAGES.length)}
-          className="text-[#FAF9F5]/40 hover:text-white transition-colors p-1"
-          aria-label="Previous announcement"
-        >
-          <ChevronLeft className="w-3.5 h-3.5" />
-        </button>
-
-        <div className="flex items-center gap-2 text-center overflow-hidden h-5">
-          <div className="flex items-center gap-2 animate-fadeIn key={currentIndex}">
-            <Icon className="w-3.5 h-3.5 text-[#A97B3C] shrink-0" />
-            <span className="text-[#FAF9F5]/90 text-[11px]">
-              {current.text}
-            </span>
-            <span className="hidden sm:inline-block text-[#A97B3C] font-semibold text-[11px] ml-1 border-b border-[#A97B3C]/40">
-              {current.highlight}
-            </span>
-          </div>
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-4 font-medium">
+        <div className="flex items-center gap-1.5">
+          <Truck className="w-3.5 h-3.5 text-white/80" />
+          <span>Free Worldwide Shipping Over $50</span>
         </div>
 
-        <button
-          onClick={() => setCurrentIndex((prev) => (prev + 1) % MESSAGES.length)}
-          className="text-[#FAF9F5]/40 hover:text-white transition-colors p-1"
-          aria-label="Next announcement"
-        >
-          <ChevronRight className="w-3.5 h-3.5" />
-        </button>
+        <div className="hidden sm:flex items-center gap-1.5 text-[#FF5722]">
+          <Zap className="w-3.5 h-3.5 fill-current" />
+          <span className="text-white font-semibold">Summer Sale Up To 70% Off</span>
+        </div>
+
+        <div className="hidden md:flex items-center gap-1.5">
+          <Flame className="w-3.5 h-3.5 text-[#FF5722]" />
+          <span>Limited Time Flash Deals</span>
+        </div>
       </div>
     </aside>
   );

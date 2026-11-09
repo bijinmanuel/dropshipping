@@ -42,7 +42,19 @@ export interface Product {
   editorialStory?: string;
   price: number;
   originalPrice?: number;
-  category: 'lighting' | 'ceramics' | 'audio-tech' | 'leather-carry' | 'furniture' | 'wellness';
+  category:
+    | 'fashion'
+    | 'electronics'
+    | 'beauty'
+    | 'fitness'
+    | 'home-decor'
+    | 'accessories'
+    | 'lighting'
+    | 'ceramics'
+    | 'audio-tech'
+    | 'leather-carry'
+    | 'furniture'
+    | 'wellness';
   categoryLabel: string;
   tags: string[];
   rating: number;
