@@ -74,7 +74,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           {/* Badges */}
           <div className="absolute top-3.5 left-3.5 flex flex-col gap-1.5 z-10 pointer-events-none">
             {product.badge === 'BESTSELLER' && (
-              <span className="bg-[#141514] text-white text-[9px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-pill shadow-sm font-mono border border-white/10">
+              <span className="bg-[#21201D] text-white text-[9px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-pill shadow-sm font-mono border border-white/10">
                 Signature
               </span>
             )}
@@ -116,19 +116,19 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 e.stopPropagation();
                 setIsQuickViewOpen(true);
               }}
-              className="flex-1 py-2.5 px-3 rounded-pill bg-white/95 backdrop-blur-md text-brand-charcoal text-[11px] font-semibold uppercase tracking-wider hover:bg-[#141514] hover:text-white transition-all shadow-md flex items-center justify-center gap-1.5 border border-brand-border/60"
+              className="flex-1 py-2.5 px-3 rounded-pill bg-white/95 backdrop-blur-md text-[#21201D] text-[11px] font-semibold uppercase tracking-wider hover:bg-[#21201D] hover:text-white transition-all shadow-md flex items-center justify-center gap-1.5 border border-[#E2DDD2]"
             >
-              <Eye className="w-3.5 h-3.5 text-brand-gold" />
+              <Eye className="w-3.5 h-3.5 text-[#B88E4C]" />
               <span>Quick View</span>
             </button>
 
             <button
               onClick={handleQuickAdd}
               disabled={isAdding}
-              className="py-2.5 px-3.5 rounded-pill bg-[#141514] hover:bg-black text-white text-[11px] font-semibold transition-all shadow-md flex items-center justify-center border border-black/20"
+              className="py-2.5 px-3.5 rounded-pill bg-[#21201D] hover:bg-[#2D2C28] text-white text-[11px] font-semibold transition-all shadow-md flex items-center justify-center border border-[#21201D]/20"
               title="Quick Add to Bag"
             >
-              {isAdding ? <Check className="w-3.5 h-3.5 text-brand-gold" /> : <ShoppingBag className="w-3.5 h-3.5" />}
+              {isAdding ? <Check className="w-3.5 h-3.5 text-[#B88E4C]" /> : <ShoppingBag className="w-3.5 h-3.5" />}
             </button>
           </div>
         </div>
@@ -177,7 +177,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                   }}
                   className={`w-3.5 h-3.5 rounded-full border transition-all ${
                     selectedVariant.id === v.id
-                      ? 'border-[#141514] ring-2 ring-[#B88E4C] ring-offset-1 scale-110'
+                      ? 'border-[#21201D] ring-2 ring-[#B88E4C] ring-offset-1 scale-110'
                       : 'border-black/15 hover:scale-105'
                   }`}
                   style={{ backgroundColor: v.value }}
@@ -207,7 +207,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             <button
               onClick={handleQuickAdd}
               disabled={isAdding}
-              className="sm:hidden p-2 rounded-full bg-[#141514] text-white hover:bg-black transition-colors shadow-sm"
+              className="sm:hidden p-2 rounded-full bg-[#21201D] text-white hover:bg-[#2D2C28] transition-colors shadow-sm"
               aria-label="Add to bag"
             >
               {isAdding ? <Check className="w-3.5 h-3.5 text-brand-gold" /> : <ShoppingBag className="w-3.5 h-3.5" />}

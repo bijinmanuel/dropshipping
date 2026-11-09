@@ -31,9 +31,9 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#111211] text-white pt-20 pb-12 border-t border-white/[0.08]">
+    <footer className="bg-[#1E1D1A] text-[#FAF9F5] pt-20 pb-12 border-t border-[#2E2C28]">
       {/* Trust Badges Strip */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 mb-14 border-b border-white/[0.08]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 mb-14 border-b border-[#2E2C28]">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
           <div className="flex items-start gap-3.5">
             <Truck className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
@@ -128,10 +128,10 @@ export function Footer() {
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2.5 rounded-btn bg-white hover:bg-white/90 text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-all shrink-0 flex items-center gap-1.5 shadow-sm"
+                    className="px-5 py-2.5 rounded-pill bg-[#FAF9F5] hover:bg-white text-[#21201D] text-[11px] font-bold tracking-[0.14em] uppercase transition-all shrink-0 flex items-center gap-1.5 shadow-sm"
                   >
                     <span>Join</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#B88E4C]" />
                   </button>
                 </form>
               )}

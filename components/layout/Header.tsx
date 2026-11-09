@@ -11,10 +11,9 @@ import {
   Menu,
   ChevronDown,
   Sparkles,
-  Flame,
   Package,
   LogOut,
-  Settings,
+  ExternalLink,
 } from 'lucide-react';
 import { CATEGORIES } from '@/data/products';
 import { useCart } from '@/context/CartContext';
@@ -29,7 +28,7 @@ export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
-  const [isCategoryHovered, setIsCategoryHovered] = useState(false);
+  const [isDepartmentsOpen, setIsDepartmentsOpen] = useState(false);
 
   const { itemCount, openCart } = useCart();
   const { wishlistCount } = useWishlist();
@@ -60,92 +59,86 @@ export function Header() {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#FAF9F5]/90 backdrop-blur-xl shadow-subtle border-b border-black/[0.06] py-3.5'
-            : 'bg-background border-b border-brand-border/60 py-4 sm:py-5'
+            ? 'bg-[#FAF9F5]/92 backdrop-blur-xl shadow-subtle border-b border-[#E8E4DA] py-3.5'
+            : 'bg-[#FAF9F5] border-b border-[#EAE6DF] py-4 sm:py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4">
-            {/* Left: Mobile Trigger & Desktop Navigation */}
-            <div className="flex items-center gap-6">
+          {/* True 3-Zone Balanced Luxury Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
+            {/* Zone 1 (Left): Navigation Links */}
+            <div className="flex items-center gap-5">
+              {/* Mobile Hamburger Button */}
               <button
                 onClick={() => setIsMobileNavOpen(true)}
-                className="lg:hidden p-1.5 text-brand-charcoal hover:text-black transition-colors"
-                aria-label="Open mobile navigation menu"
+                className="lg:hidden p-2 text-[#21201D] hover:text-[#B88E4C] transition-colors rounded-full hover:bg-white"
+                aria-label="Open mobile menu"
               >
                 <Menu className="w-5 h-5" />
               </button>
 
-              <nav 
+              {/* Desktop Nav Items */}
+              <nav
                 aria-label="Primary desktop navigation"
-                className="hidden lg:flex items-center gap-7 text-[12px] uppercase font-semibold tracking-[0.1em] text-brand-charcoal/80"
+                className="hidden lg:flex items-center gap-6 xl:gap-8 text-[11px] uppercase font-medium tracking-[0.18em] text-[#4F4D47]"
               >
                 <Link
-                  href="/"
-                  className={`transition-colors hover:text-black hover:tracking-[0.12em] ${
-                    pathname === '/' ? 'text-black font-bold border-b border-black pb-0.5' : ''
-                  }`}
-                >
-                  Home
-                </Link>
-
-                <Link
                   href="/shop"
-                  className={`transition-colors hover:text-black hover:tracking-[0.12em] ${
-                    pathname === '/shop' ? 'text-black font-bold border-b border-black pb-0.5' : ''
+                  className={`transition-colors hover:text-[#21201D] hover:text-black pb-0.5 ${
+                    pathname === '/shop' ? 'text-[#21201D] font-bold border-b border-[#21201D]' : ''
                   }`}
                 >
-                  Collection
+                  Catalog
                 </Link>
 
-                {/* Categories Dropdown */}
+                {/* Departments Dropdown */}
                 <div
                   className="relative"
-                  onMouseEnter={() => setIsCategoryHovered(true)}
-                  onMouseLeave={() => setIsCategoryHovered(false)}
+                  onMouseEnter={() => setIsDepartmentsOpen(true)}
+                  onMouseLeave={() => setIsDepartmentsOpen(false)}
                 >
-                  <button className="flex items-center gap-1 transition-colors hover:text-black py-2">
+                  <button className="flex items-center gap-1 transition-colors hover:text-[#21201D] py-2">
                     <span>Departments</span>
                     <ChevronDown
-                      className={`w-3 h-3 text-brand-muted transition-transform duration-200 ${
-                        isCategoryHovered ? 'rotate-180 text-black' : ''
+                      className={`w-3 h-3 text-[#969186] transition-transform duration-200 ${
+                        isDepartmentsOpen ? 'rotate-180 text-[#21201D]' : ''
                       }`}
                     />
                   </button>
 
-                  {/* Mega Menu Dropdown */}
-                  {isCategoryHovered && (
-                    <div className="absolute top-full -left-6 w-[420px] bg-white border border-black/[0.08] rounded-card-lg shadow-dropdown p-4 animate-fadeIn">
-                      <div className="text-[10px] uppercase font-bold tracking-[0.15em] text-brand-gold px-3 pb-2 border-b border-black/[0.06] mb-2">
-                        Atelier Departments
+                  {/* Departments Dropdown Popover */}
+                  {isDepartmentsOpen && (
+                    <div className="absolute top-full -left-4 w-[380px] bg-white border border-[#E8E4DA] rounded-2xl shadow-dropdown p-4 animate-fadeIn z-50">
+                      <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B88E4C] px-3 pb-2 border-b border-[#EAE6DF] mb-2 font-mono">
+                        Artisan Departments
                       </div>
-                      <div className="grid grid-cols-1 gap-1">
+                      <div className="space-y-1">
                         {CATEGORIES.filter((c) => c.slug !== 'all').map((cat) => (
                           <Link
                             key={cat.id}
                             href={`/shop?category=${cat.slug}`}
-                            onClick={() => setIsCategoryHovered(false)}
-                            className="flex items-center justify-between p-2.5 rounded-btn hover:bg-background-subtle group transition-colors"
+                            onClick={() => setIsDepartmentsOpen(false)}
+                            className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FAF9F5] group transition-colors"
                           >
                             <div>
-                              <p className="text-xs font-semibold text-brand-charcoal group-hover:text-black">
+                              <p className="text-xs font-serif font-medium text-[#21201D] group-hover:text-[#B88E4C] transition-colors">
                                 {cat.name}
                               </p>
-                              <p className="text-[11px] text-brand-muted line-clamp-1">
+                              <p className="text-[11px] text-[#858177] line-clamp-1 font-normal">
                                 {cat.description}
                               </p>
                             </div>
-                            <span className="text-[10px] font-semibold text-brand-muted px-2 py-0.5 bg-background rounded-pill">
+                            <span className="text-[10px] font-mono text-[#858177] px-2 py-0.5 bg-[#F5F2EB] rounded-pill">
                               {cat.itemCount}
                             </span>
                           </Link>
                         ))}
                       </div>
-                      <div className="mt-3 pt-2.5 border-t border-black/[0.06]">
+                      <div className="mt-3 pt-2.5 border-t border-[#EAE6DF] text-center">
                         <Link
                           href="/shop"
-                          onClick={() => setIsCategoryHovered(false)}
-                          className="flex items-center justify-center gap-1.5 text-xs font-semibold text-brand-charcoal hover:text-brand-gold transition-colors py-1"
+                          onClick={() => setIsDepartmentsOpen(false)}
+                          className="text-[11px] font-medium text-[#21201D] hover:text-[#B88E4C] transition-colors"
                         >
                           Explore Full Catalog Archive &rarr;
                         </Link>
@@ -155,67 +148,66 @@ export function Header() {
                 </div>
 
                 <Link
-                  href="/shop?filter=new"
-                  className="transition-colors hover:text-black flex items-center gap-1"
+                  href="/shop?category=lighting"
+                  className="transition-colors hover:text-[#21201D]"
                 >
-                  <Sparkles className="w-3 h-3 text-brand-gold" />
-                  <span>New Arrivals</span>
+                  Lighting
                 </Link>
 
                 <Link
-                  href="/shop?filter=best-sellers"
-                  className="transition-colors hover:text-black flex items-center gap-1"
+                  href="/shop?category=ceramics"
+                  className="transition-colors hover:text-[#21201D]"
                 >
-                  <Flame className="w-3 h-3 text-brand-sale" />
-                  <span>Signatures</span>
+                  Ceramics
                 </Link>
 
                 <Link
-                  href="/dropship-hub"
-                  className="text-[11px] font-semibold text-brand-charcoal bg-white border border-black/[0.1] px-3 py-1 rounded-pill hover:bg-black hover:text-white transition-all flex items-center gap-1.5 shadow-xs"
-                  title="Internal Dropship Sourcing & Margins Hub"
+                  href="/about"
+                  className={`transition-colors hover:text-[#21201D] ${
+                    pathname === '/about' ? 'text-[#21201D] font-bold border-b border-[#21201D] pb-0.5' : ''
+                  }`}
                 >
-                  <Package className="w-3 h-3 text-brand-gold" />
-                  <span>Dropship Hub</span>
+                  Manifesto
                 </Link>
               </nav>
             </div>
 
-            {/* Center: Brand Identity Logo */}
-            <div className="flex-1 lg:flex-none text-center">
+            {/* Zone 2 (Center): Perfectly Centered Luxury Brand Mark */}
+            <div className="text-right lg:text-center order-last lg:order-none">
               <Link href="/" className="inline-flex flex-col items-center group">
-                <span className="font-serif text-2xl sm:text-3xl font-normal tracking-[0.28em] text-brand-charcoal group-hover:text-black transition-colors uppercase">
+                <span className="font-serif text-2xl sm:text-[30px] font-normal tracking-[0.32em] text-[#21201D] group-hover:text-[#B88E4C] transition-colors uppercase leading-none">
                   VÉRDEN
                 </span>
-                <span className="text-[7.5px] sm:text-[8px] font-sans tracking-[0.35em] uppercase text-brand-muted -mt-0.5 font-medium">
-                  Atelier &bull; Objects for Living
+                <span className="text-[7.5px] sm:text-[8px] font-sans tracking-[0.36em] uppercase text-[#8F8A7F] mt-1 font-medium">
+                  Studio &bull; Objects for Living
                 </span>
               </Link>
             </div>
 
-            {/* Right: Actions (Search, Wishlist, Bag, Account) */}
-            <div className="flex items-center gap-1.5 sm:gap-3">
-              {/* Intelligent Search Trigger */}
+            {/* Zone 3 (Right): Clean Luxury Actions */}
+            <div className="hidden lg:flex items-center justify-end gap-3 sm:gap-4">
+              {/* Search Trigger */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-2 p-2 text-brand-charcoal hover:text-black transition-colors rounded-full hover:bg-white"
-                aria-label="Open search dialog"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-pill border border-[#E2DDD2] bg-white/70 hover:border-[#21201D] hover:bg-white text-[#21201D] transition-all text-xs shadow-2xs group"
+                aria-label="Search catalog"
               >
-                <Search className="w-4 h-4 sm:w-[17px] sm:h-[17px]" />
-                <span className="hidden xl:inline-block text-[11px] text-brand-muted tracking-wider">
-                  Search <kbd className="text-[9px] bg-white border border-black/[0.08] px-1.5 py-0.5 rounded font-mono">⌘K</kbd>
-                </span>
+                <Search className="w-3.5 h-3.5 text-[#B88E4C]" />
+                <span className="text-[11px] text-[#7A756B] tracking-wider font-normal">Search</span>
+                <kbd className="text-[9px] bg-[#FAF9F5] border border-[#E2DDD2] px-1.5 py-0.5 rounded font-mono text-[#7A756B]">
+                  ⌘K
+                </kbd>
               </button>
 
               {/* Wishlist Icon */}
               <Link
                 href="/wishlist"
-                className="relative p-2 text-brand-charcoal hover:text-black transition-colors rounded-full hover:bg-white"
-                aria-label={`Wishlist with ${wishlistCount} saved objects`}
+                className="relative p-2.5 text-[#21201D] hover:text-[#B88E4C] transition-colors rounded-full hover:bg-white"
+                aria-label={`Wishlist (${wishlistCount})`}
               >
-                <Heart className="w-4 h-4 sm:w-[17px] sm:h-[17px]" />
+                <Heart className="w-[18px] h-[18px]" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-brand-charcoal text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-fadeIn border border-white">
+                  <span className="absolute top-1 right-1 bg-[#21201D] text-[#FAF9F5] text-[9px] font-mono font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">
                     {wishlistCount}
                   </span>
                 )}
@@ -224,98 +216,104 @@ export function Header() {
               {/* Shopping Bag Trigger */}
               <button
                 onClick={openCart}
-                className="relative p-2 text-brand-charcoal hover:text-black transition-colors rounded-full hover:bg-white"
-                aria-label={`Shopping bag with ${itemCount} items`}
+                className="relative p-2.5 text-[#21201D] hover:text-[#B88E4C] transition-colors rounded-full hover:bg-white"
+                aria-label={`Bag (${itemCount})`}
               >
-                <ShoppingBag className="w-4 h-4 sm:w-[17px] sm:h-[17px]" />
+                <ShoppingBag className="w-[18px] h-[18px]" />
                 {itemCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-brand-charcoal text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-fadeIn border border-white">
+                  <span className="absolute top-1 right-1 bg-[#21201D] text-[#FAF9F5] text-[9px] font-mono font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">
                     {itemCount}
                   </span>
                 )}
               </button>
 
-              {/* Account Dropdown */}
+              {/* User Account / Profile Dropdown */}
               <div className="relative">
                 <button
                   onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
-                  className="flex items-center gap-1.5 p-1.5 text-brand-charcoal hover:text-black transition-colors rounded-full hover:bg-white"
-                  aria-label="Account options"
+                  className="flex items-center gap-1.5 p-2 text-[#21201D] hover:text-[#B88E4C] transition-colors rounded-full hover:bg-white"
+                  aria-label="User account"
                 >
-                  <User className="w-4 h-4 sm:w-[17px] sm:h-[17px]" />
-                  <ChevronDown className="w-3 h-3 text-brand-muted hidden sm:block" />
+                  <User className="w-[18px] h-[18px]" />
+                  <ChevronDown className="w-3 h-3 text-[#969186]" />
                 </button>
 
                 {isAccountMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-black/[0.08] rounded-card-lg shadow-dropdown p-2 animate-fadeIn z-50">
-                    <div className="px-3 py-2 border-b border-black/[0.06]">
-                      <p className="text-xs font-semibold text-brand-charcoal truncate">
-                        {isAuthenticated ? user?.name : 'Guest Customer'}
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-[#E8E4DA] rounded-2xl shadow-dropdown p-2.5 animate-fadeIn z-50">
+                    <div className="px-3 py-2.5 border-b border-[#EAE6DF]">
+                      <p className="text-xs font-semibold text-[#21201D] truncate">
+                        {isAuthenticated ? user?.name : 'Privé Guest'}
                       </p>
-                      <p className="text-[10px] text-brand-muted truncate">
+                      <p className="text-[10px] text-[#858177] truncate font-mono mt-0.5">
                         {isAuthenticated ? user?.email : 'Sign in to access orders'}
                       </p>
                     </div>
 
-                    <div className="py-1">
-                      <Link
-                        href="/account"
-                        onClick={() => setIsAccountMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-brand-charcoal hover:bg-background rounded-btn"
-                      >
-                        <User className="w-3.5 h-3.5 text-brand-gold" />
-                        Account Dashboard
-                      </Link>
-
-                      <Link
-                        href="/account/orders"
-                        onClick={() => setIsAccountMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-brand-charcoal hover:bg-background rounded-btn"
-                      >
-                        <Package className="w-3.5 h-3.5 text-brand-gold" />
-                        My Orders &amp; Tracking
-                      </Link>
-
-                      <Link
-                        href="/dropship-hub"
-                        onClick={() => setIsAccountMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-brand-charcoal hover:bg-background rounded-btn"
-                      >
-                        <Settings className="w-3.5 h-3.5 text-brand-gold" />
-                        Dropship Sourcing Hub
-                      </Link>
-                    </div>
-
-                    <div className="pt-1 border-t border-black/[0.06]">
-                      <button
-                        onClick={() => {
-                          demoLogin(user?.role === 'admin' ? 'customer' : 'admin');
-                          setIsAccountMenuOpen(false);
-                        }}
-                        className="w-full text-left px-3 py-1.5 text-[11px] font-semibold text-brand-gold hover:bg-brand-gold-light rounded-btn"
-                      >
-                        ⚡ Switch Mode ({user?.role === 'admin' ? 'Customer' : 'Store Admin'})
-                      </button>
-
+                    <div className="py-1 text-xs">
                       {isAuthenticated ? (
-                        <button
-                          onClick={() => {
-                            logout();
-                            setIsAccountMenuOpen(false);
-                          }}
-                          className="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-brand-error hover:bg-background rounded-btn"
-                        >
-                          <LogOut className="w-3.5 h-3.5" />
-                          Sign Out
-                        </button>
+                        <>
+                          <Link
+                            href="/account"
+                            onClick={() => setIsAccountMenuOpen(false)}
+                            className="block px-3 py-2 rounded-xl text-[#21201D] hover:bg-[#FAF9F5] transition-colors font-medium"
+                          >
+                            My Collector Dashboard
+                          </Link>
+                          <Link
+                            href="/account/orders"
+                            onClick={() => setIsAccountMenuOpen(false)}
+                            className="block px-3 py-2 rounded-xl text-[#21201D] hover:bg-[#FAF9F5] transition-colors font-medium"
+                          >
+                            Order History &amp; Receipts
+                          </Link>
+                          <Link
+                            href="/track-order"
+                            onClick={() => setIsAccountMenuOpen(false)}
+                            className="block px-3 py-2 rounded-xl text-[#21201D] hover:bg-[#FAF9F5] transition-colors font-medium"
+                          >
+                            Live Cargo Telemetry
+                          </Link>
+                        </>
                       ) : (
                         <Link
                           href="/auth/login"
                           onClick={() => setIsAccountMenuOpen(false)}
-                          className="w-full block px-3 py-2 text-xs font-semibold text-black hover:bg-background rounded-btn"
+                          className="block px-3 py-2 rounded-xl text-[#21201D] hover:bg-[#FAF9F5] transition-colors font-semibold"
                         >
                           Sign In / Register
                         </Link>
+                      )}
+
+                      {/* Internal Dropship Hub Link in Dropdown */}
+                      <div className="pt-1.5 mt-1 border-t border-[#EAE6DF]">
+                        <Link
+                          href="/dropship-hub"
+                          onClick={() => setIsAccountMenuOpen(false)}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl text-[11px] font-semibold text-[#B88E4C] hover:bg-[#FAF9F5] transition-colors"
+                        >
+                          <span className="flex items-center gap-1.5">
+                            <Package className="w-3.5 h-3.5" />
+                            <span>Supplier Hub (B2B)</span>
+                          </span>
+                          <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-[#FAF9F5] border border-[#E8E4DA] font-mono">
+                            Admin
+                          </span>
+                        </Link>
+                      </div>
+
+                      {isAuthenticated && (
+                        <div className="pt-1 mt-1 border-t border-[#EAE6DF]">
+                          <button
+                            onClick={() => {
+                              logout();
+                              setIsAccountMenuOpen(false);
+                            }}
+                            className="w-full text-left px-3 py-2 text-xs text-[#B54134] hover:bg-red-50/50 rounded-xl transition-colors font-medium flex items-center gap-1.5"
+                          >
+                            <LogOut className="w-3.5 h-3.5" />
+                            <span>Sign Out</span>
+                          </button>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -326,13 +324,8 @@ export function Header() {
         </div>
       </header>
 
-      {/* Search Modal */}
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-      />
-
-      {/* Mobile Navigation Drawer */}
+      {/* Global Modals */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <MobileNav
         isOpen={isMobileNavOpen}
         onClose={() => setIsMobileNavOpen(false)}

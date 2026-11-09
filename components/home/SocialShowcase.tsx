@@ -82,7 +82,7 @@ export function SocialShowcase() {
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1F1E1B]/92 via-[#1F1E1B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
                 <span className="text-[10px] text-brand-gold font-mono tracking-wider">{post.handle}</span>
                 <div>
                   <p className="font-serif text-xs sm:text-sm font-medium line-clamp-1 leading-snug">{post.productTitle}</p>

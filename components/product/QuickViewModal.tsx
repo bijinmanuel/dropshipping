@@ -205,7 +205,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                   <button
                     onClick={handleAddToCart}
                     disabled={isAdded}
-                    className="flex-1 py-3 px-5 rounded-pill bg-[#141514] hover:bg-black text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center justify-center gap-2"
+                    className="flex-1 py-3 px-5 rounded-pill bg-[#21201D] hover:bg-[#2D2C28] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center justify-center gap-2"
                   >
                     {isAdded ? (
                       <>

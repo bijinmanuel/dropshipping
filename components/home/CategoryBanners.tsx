@@ -47,8 +47,8 @@ export function CategoryBanners() {
                   className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                 />
 
-                {/* Rich Cinematic Bottom-Up Scrim Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                {/* Rich Bottom-Up Scrim Gradient in Warm Mineral Umber */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1F1E1B]/90 via-[#1F1E1B]/35 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
 
                 {/* Floating Top-Right Arrow Pill */}
                 <span className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/90 backdrop-blur-md text-brand-charcoal flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-1 group-hover:translate-y-0 shadow-md">
