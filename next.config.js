@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
+  outputFileTracing: false,
   images: {
     remotePatterns: [
       {
@@ -16,10 +17,6 @@ const nextConfig = {
         hostname: 'cdn.shopify.com',
       },
     ],
-  },
-  experimental: {
-    cpus: 1,
-    workerThreads: false,
   },
 };
 

@@ -9,98 +9,66 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: {
-          DEFAULT: "#FAF9F5", // Contemporary Alabaster Ivory
-          pure: "#FFFFFF",    // Pure White
-          subtle: "#F2EFE9",  // Muted Warm Architectural Surface
-          card: "#FFFFFF",
-          dark: "#121312",    // Obsidian Noir
-        },
-        brand: {
-          // Primary Atelier Noir
-          primary: "#141514",
-          "primary-hover": "#262827",
-          forest: "#141514",       // Obsidian Noir (replaces forest green with high-end luxury black)
-          "forest-hover": "#282A29",
-          "forest-dark": "#0B0C0B",
-          "forest-light": "#EFECE4", // Warm stone tint
-          
-          // Neutral Text
-          charcoal: "#171817",     // Deepest Neutral Text
-          muted: "#6B6F68",        // Architectural Medium Grey
-          "muted-light": "#969A93",
-          
-          // Accents
-          gold: "#B88E4C",         // Tuscan Burnished Bronze Gold
-          "gold-hover": "#A27938",
-          "gold-light": "#F7F2E7",
-          accent: "#B88E4C",
-          "accent-light": "#F7F2E7",
-          
-          // UI States & Borders
-          border: "#E5E2D9",       // Fine Warm Hairline Border
-          "border-subtle": "rgba(23, 24, 23, 0.07)",
-          success: "#2D6A4F",      // Understated Muted Green
-          error: "#B54134",        // Terracotta Red
-          sale: "#B54134",
+        aura: {
+          bg: "#07080C",
+          surface: "#0D0F17",
+          card: "#121520",
+          "card-hover": "#171C2B",
+          border: "rgba(255, 255, 255, 0.08)",
+          "border-bright": "rgba(255, 255, 255, 0.2)",
+          primary: "#6366F1",
+          "primary-hover": "#4F46E5",
+          cyan: "#06B6D4",
+          coral: "#FF3366",
+          amber: "#F59E0B",
+          emerald: "#10B981",
+          muted: "#94A3B8",
+          dark: "#040508",
         },
       },
       fontFamily: {
         sans: [
           "'Plus Jakarta Sans'",
-          "'Manrope'",
+          "'Inter'",
           "-apple-system",
           "BlinkMacSystemFont",
           "'Segoe UI'",
           "Roboto",
           "sans-serif",
         ],
-        serif: [
-          "'Playfair Display'",
-          "'Cormorant Garamond'",
-          "Georgia",
-          "'Times New Roman'",
-          "serif",
-        ],
-      },
-      fontSize: {
-        "hero": ["clamp(2.75rem, 5.5vw, 5rem)", { lineHeight: "1.04", letterSpacing: "-0.035em" }],
-        "page-title": ["clamp(2.25rem, 3.8vw, 3.25rem)", { lineHeight: "1.1", letterSpacing: "-0.03em" }],
-        "section-title": ["clamp(1.75rem, 2.5vw, 2.5rem)", { lineHeight: "1.15", letterSpacing: "-0.025em" }],
-        "product-title": ["1.0625rem", { lineHeight: "1.3", letterSpacing: "-0.015em" }],
-      },
-      borderRadius: {
-        btn: "10px",
-        card: "14px",
-        "card-lg": "20px",
-        pill: "9999px",
+        mono: ["'JetBrains Mono'", "monospace"],
       },
       boxShadow: {
-        subtle: "0 2px 12px -2px rgba(20, 21, 20, 0.04), 0 1px 3px 0 rgba(20, 21, 20, 0.02)",
-        float: "0 20px 40px -15px rgba(20, 21, 20, 0.12), 0 8px 16px -6px rgba(20, 21, 20, 0.04)",
-        dropdown: "0 24px 48px -12px rgba(20, 21, 20, 0.14), 0 8px 16px -4px rgba(20, 21, 20, 0.06)",
-        glow: "0 0 20px -3px rgba(184, 142, 76, 0.25)",
+        glow: "0 0 35px -5px rgba(99, 102, 241, 0.35)",
+        "glow-cyan": "0 0 35px -5px rgba(6, 182, 212, 0.35)",
+        "glow-coral": "0 0 35px -5px rgba(255, 51, 102, 0.35)",
+        card: "0 20px 40px -15px rgba(0, 0, 0, 0.7)",
       },
-      aspectRatio: {
-        "product": "4 / 5",
+      animation: {
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        float: "float 6s ease-in-out infinite",
+        "float-delayed": "float 6s ease-in-out 3s infinite",
+        shimmer: "shimmer 2.5s linear infinite",
+        marquee: "marquee 25s linear infinite",
+        glow: "glow 3s ease-in-out infinite alternate",
       },
       keyframes: {
-        fadeIn: {
-          from: { opacity: "0", transform: "translateY(6px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        slideDown: {
-          from: { transform: "translateY(-100%)" },
-          to: { transform: "translateY(0)" },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
         },
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-      },
-      animation: {
-        fadeIn: "fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        slideDown: "slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        glow: {
+          "0%": { opacity: "0.4" },
+          "100%": { opacity: "0.8" },
+        },
       },
     },
   },

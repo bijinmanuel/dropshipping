@@ -56,7 +56,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-200 bg-white ${
+        className={`sticky top-0 z-40 w-full transition-all duration-200 bg-white/95 backdrop-blur-md ${
           isScrolled
             ? 'shadow-xs border-b border-gray-100 py-3'
             : 'border-b border-gray-100 py-3.5 sm:py-4'
@@ -77,8 +77,8 @@ export function Header() {
 
               {/* Logo: NovaTrend */}
               <Link href="/" className="flex items-center gap-1 group">
-                <span className="font-sans text-2xl sm:text-[26px] font-extrabold tracking-tight text-gray-950">
-                  Nova<span className="text-[#FF5722]">Trend</span>
+                <span className="font-heading text-2xl sm:text-[26px] font-black tracking-tight text-gray-950">
+                  Nova<span className="text-[#FF4D00]">Trend</span>
                 </span>
               </Link>
             </div>
@@ -96,7 +96,7 @@ export function Header() {
               >
                 <span>Home</span>
                 {pathname === '/' && (
-                  <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#FF5722] rounded-full" />
+                  <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#FF4D00] rounded-full" />
                 )}
               </Link>
 
@@ -108,7 +108,7 @@ export function Header() {
               >
                 <span>Shop</span>
                 {pathname === '/shop' && (
-                  <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#FF5722] rounded-full" />
+                  <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#FF4D00] rounded-full" />
                 )}
               </Link>
 
@@ -142,14 +142,14 @@ export function Header() {
                 </button>
 
                 {isCategoriesOpen && (
-                  <div className="absolute top-full -left-4 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl p-3 animate-fadeIn z-50">
+                  <div className="absolute top-full -left-4 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl p-3 z-50">
                     <div className="space-y-1">
                       {CATEGORIES.filter((c) => c.slug !== 'all').map((cat) => (
                         <Link
                           key={cat.id}
                           href={`/shop?category=${cat.slug}`}
                           onClick={() => setIsCategoriesOpen(false)}
-                          className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 text-xs font-semibold text-gray-700 hover:text-[#FF5722] transition-colors"
+                          className="flex items-center justify-between p-2 rounded-xl hover:bg-orange-50 text-xs font-semibold text-gray-700 hover:text-[#FF4D00] transition-colors"
                         >
                           <span>{cat.name}</span>
                           <span className="text-[10px] text-gray-400 font-mono">
@@ -193,7 +193,7 @@ export function Header() {
               {/* Search Trigger */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-full transition-colors"
+                className="p-2 text-gray-700 hover:text-black hover:bg-gray-100/70 rounded-full transition-colors"
                 aria-label="Search products"
               >
                 <Search className="w-5 h-5" />
@@ -202,12 +202,12 @@ export function Header() {
               {/* Wishlist Trigger */}
               <Link
                 href="/wishlist"
-                className="relative p-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-full transition-colors"
+                className="relative p-2 text-gray-700 hover:text-black hover:bg-gray-100/70 rounded-full transition-colors"
                 aria-label={`Wishlist (${wishlistCount})`}
               >
                 <Heart className="w-5 h-5" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-[#FF5722] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute top-1 right-1 bg-[#FF4D00] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                     {wishlistCount}
                   </span>
                 )}
@@ -217,7 +217,7 @@ export function Header() {
               <div className="relative">
                 <button
                   onClick={() => setIsAccountMenuOpen((prev) => !prev)}
-                  className="p-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-full transition-colors"
+                  className="p-2 text-gray-700 hover:text-black hover:bg-gray-100/70 rounded-full transition-colors"
                   aria-label="User account"
                 >
                   <User className="w-5 h-5" />
@@ -225,7 +225,7 @@ export function Header() {
 
                 {isAccountMenuOpen && (
                   <div
-                    className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl p-3 z-50 animate-fadeIn"
+                    className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl p-3 z-50"
                     onMouseLeave={() => setIsAccountMenuOpen(false)}
                   >
                     {isAuthenticated && user ? (
@@ -254,7 +254,7 @@ export function Header() {
                           <Link
                             href="/dropship-hub"
                             onClick={() => setIsAccountMenuOpen(false)}
-                            className="flex items-center justify-between p-2 rounded-xl hover:bg-orange-50 text-[#FF5722]"
+                            className="flex items-center justify-between p-2 rounded-xl hover:bg-orange-50 text-[#FF4D00]"
                           >
                             <span className="font-bold">Dropship Hub (B2B)</span>
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -276,7 +276,7 @@ export function Header() {
                         <Link
                           href="/auth/login"
                           onClick={() => setIsAccountMenuOpen(false)}
-                          className="block w-full py-2 text-center rounded-xl bg-black text-white text-xs font-semibold hover:bg-gray-800 transition-colors"
+                          className="block w-full py-2 text-center rounded-xl bg-black text-white text-xs font-bold hover:bg-[#FF4D00] transition-colors"
                         >
                           Sign In / Register
                         </Link>
@@ -293,7 +293,7 @@ export function Header() {
                           <Link
                             href="/dropship-hub"
                             onClick={() => setIsAccountMenuOpen(false)}
-                            className="block text-center text-[11px] font-bold text-[#FF5722] hover:underline"
+                            className="block text-center text-[11px] font-bold text-[#FF4D00] hover:underline"
                           >
                             Access Dropship Hub (B2B) &rarr;
                           </Link>
@@ -307,11 +307,11 @@ export function Header() {
               {/* Shopping Bag Trigger with Orange Counter Badge */}
               <button
                 onClick={openCart}
-                className="relative p-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-full transition-colors"
+                className="relative p-2 text-gray-700 hover:text-black hover:bg-gray-100/70 rounded-full transition-colors"
                 aria-label={`Shopping Cart (${itemCount} items)`}
               >
                 <ShoppingBag className="w-5 h-5" />
-                <span className="absolute top-0.5 right-0.5 bg-[#FF5722] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute top-0.5 right-0.5 bg-[#FF4D00] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                   {itemCount}
                 </span>
               </button>

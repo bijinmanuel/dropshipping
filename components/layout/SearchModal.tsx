@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, X, ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
+import { Search, X, ArrowRight, TrendingUp } from 'lucide-react';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types/product';
 import { formatPrice } from '@/lib/utils';
@@ -13,7 +13,14 @@ interface SearchModalProps {
   onClose: () => void;
 }
 
-const POPULAR_SEARCHES = ['Travertine Lamp', 'Stoneware Teapot', 'Tuscan Leather', 'Walnut Chair', 'Aroma Diffuser'];
+const POPULAR_SEARCHES = [
+  'Air Max 270',
+  'Essential Hoodie',
+  'Wireless Headphone',
+  'Smart Watch Series 9',
+  'Stainless Steel Bottle',
+  'Aviator Sunglasses',
+];
 
 export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('');
@@ -54,158 +61,108 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-start bg-[#141514]/75 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex flex-col justify-start bg-black/60 backdrop-blur-xs">
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Search objects"
-        className="w-full bg-[#FAF9F5] border-b border-brand-border shadow-2xl pt-6 pb-10 px-4 sm:px-8 max-h-[88vh] overflow-y-auto"
+        aria-label="Search products"
+        className="w-full bg-white border-b border-gray-200 shadow-2xl pt-6 pb-10 px-4 sm:px-8 max-h-[85vh] overflow-y-auto"
       >
         <div className="max-w-4xl mx-auto">
           {/* Top Search Input */}
-          <div className="flex items-center gap-3 pb-4 border-b border-brand-border">
-            <Search className="w-5 h-5 text-brand-gold shrink-0" />
+          <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
+            <Search className="w-5 h-5 text-[#FF4D00] shrink-0" />
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search objects, travertine, leather, ceramics, walnut..."
-              className="w-full text-base sm:text-xl font-serif text-brand-charcoal placeholder:text-brand-muted/70 bg-transparent outline-none focus:ring-0"
+              placeholder="Search sneakers, hoodies, headphones, watches, bottles..."
+              className="w-full text-base sm:text-lg font-bold text-gray-950 placeholder:text-gray-400 bg-transparent outline-none focus:ring-0 font-heading"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="text-brand-muted hover:text-brand-charcoal text-[11px] uppercase tracking-wider font-medium px-2 py-1"
+                className="text-gray-400 hover:text-black text-xs font-semibold px-2 py-1"
               >
                 Clear
               </button>
             )}
             <button
               onClick={onClose}
-              className="p-1.5 text-brand-muted hover:text-brand-charcoal rounded-full hover:bg-black/5 transition-colors ml-2"
+              className="p-1.5 text-gray-400 hover:text-black rounded-full hover:bg-gray-100 transition-colors ml-2"
               aria-label="Close search"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Quick Popular Tags */}
+          {/* Quick Popular Searches */}
           {!query && (
             <div className="mt-6">
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold mb-3">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#FF4D00] mb-3">
                 <TrendingUp className="w-3.5 h-3.5" />
-                <span>Trending Curations</span>
+                <span>Popular Trending Searches</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {POPULAR_SEARCHES.map((tag) => (
+                {POPULAR_SEARCHES.map((item) => (
                   <button
-                    key={tag}
-                    onClick={() => setQuery(tag)}
-                    className="text-xs font-medium px-3.5 py-1.5 rounded-pill bg-white border border-brand-border text-brand-charcoal hover:border-brand-charcoal hover:bg-[#141514] hover:text-white transition-all shadow-2xs"
+                    key={item}
+                    onClick={() => setQuery(item)}
+                    className="px-3.5 py-1.5 rounded-full bg-gray-50 hover:bg-orange-50 border border-gray-200 hover:border-orange-200 text-xs font-semibold text-gray-700 hover:text-[#FF4D00] transition-colors"
                   >
-                    {tag}
+                    {item}
                   </button>
                 ))}
-              </div>
-
-              {/* Curated Recommendations */}
-              <div className="mt-8 pt-6 border-t border-brand-border/60">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-muted mb-4">
-                  Curated Highlights
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {PRODUCTS.slice(0, 4).map((product) => (
-                    <Link
-                      key={product.id}
-                      href={`/product/${product.slug}`}
-                      onClick={onClose}
-                      className="group flex flex-col gap-2 p-2 rounded-xl bg-white border border-brand-border/60 hover:border-brand-charcoal transition-all"
-                    >
-                      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-background-subtle">
-                        <Image
-                          src={product.images[0]}
-                          alt={product.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <p className="text-xs font-serif font-medium text-brand-charcoal line-clamp-1 group-hover:text-brand-gold transition-colors">
-                        {product.title}
-                      </p>
-                      <p className="text-xs font-mono font-semibold text-brand-charcoal">
-                        {formatPrice(product.price)}
-                      </p>
-                    </Link>
-                  ))}
-                </div>
               </div>
             </div>
           )}
 
-          {/* Search Results */}
+          {/* Live Search Results */}
           {query && (
             <div className="mt-6">
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
-                  Results for &ldquo;{query}&rdquo; ({results.length})
+              <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+                <p className="text-xs text-gray-500">
+                  Found <strong className="text-gray-950 font-bold">{results.length}</strong> results for &ldquo;{query}&rdquo;
                 </p>
-                {results.length > 0 && (
-                  <Link
-                    href={`/shop?search=${encodeURIComponent(query)}`}
-                    onClick={onClose}
-                    className="text-xs font-semibold text-brand-charcoal hover:text-brand-gold hover:underline flex items-center gap-1 transition-colors"
-                  >
-                    <span>View all in shop</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                )}
+                <Link
+                  href={`/shop?search=${encodeURIComponent(query)}`}
+                  onClick={onClose}
+                  className="text-xs font-bold text-[#FF4D00] hover:underline flex items-center gap-1"
+                >
+                  <span>View all in shop</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
 
               {results.length === 0 ? (
-                <div className="py-12 text-center bg-white rounded-xl border border-brand-border/60 p-8">
-                  <p className="text-base font-serif text-brand-charcoal">No objects match your query</p>
-                  <p className="text-xs text-brand-muted mt-1">
-                    Try searching for &quot;lamp&quot;, &quot;tea&quot;, &quot;speaker&quot;, or &quot;leather&quot;.
-                  </p>
+                <div className="py-8 text-center text-xs text-gray-500">
+                  No products matched &ldquo;{query}&rdquo;. Try another keyword.
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {results.map((product) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  {results.slice(0, 6).map((product) => (
                     <Link
                       key={product.id}
                       href={`/product/${product.slug}`}
                       onClick={onClose}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-white border border-brand-border/70 hover:border-brand-charcoal hover:shadow-subtle transition-all group"
+                      className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-[#F6F7F9] border border-gray-100 transition-colors group"
                     >
-                      <div className="relative w-16 h-20 rounded-lg overflow-hidden bg-background-subtle shrink-0">
+                      <div className="relative w-12 h-12 rounded-xl bg-white overflow-hidden shrink-0 border border-gray-200 flex items-center justify-center p-1">
                         <Image
                           src={product.images[0]}
                           alt={product.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="object-contain p-1"
                         />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-[9px] uppercase font-semibold text-brand-gold tracking-[0.2em]">
-                          {product.categoryLabel}
-                        </span>
-                        <h4 className="text-sm font-serif font-medium text-brand-charcoal truncate group-hover:text-brand-gold transition-colors">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-xs font-bold text-gray-950 group-hover:text-[#FF4D00] transition-colors truncate">
                           {product.title}
                         </h4>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs font-mono font-semibold text-brand-charcoal">
-                            {formatPrice(product.price)}
-                          </span>
-                          {product.originalPrice && (
-                            <span className="text-[11px] font-mono text-brand-muted line-through">
-                              {formatPrice(product.originalPrice)}
-                            </span>
-                          )}
-                          <span className="text-[9px] text-brand-charcoal bg-[#FAF9F5] border border-brand-border px-1.5 py-0.5 rounded-pill font-mono ml-auto">
-                            Direct Sourced
-                          </span>
-                        </div>
+                        <p className="text-[11px] font-mono font-bold text-gray-700">
+                          {formatPrice(product.price)}
+                        </p>
                       </div>
                     </Link>
                   ))}
@@ -213,9 +170,9 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
               )}
             </div>
           )}
+
         </div>
       </div>
-      <div className="flex-1" onClick={onClose} />
     </div>
   );
 }

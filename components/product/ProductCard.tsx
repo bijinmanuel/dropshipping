@@ -39,7 +39,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
     e.stopPropagation();
     setIsAdding(true);
     addToCart(product, selectedVariant, 1);
-    setTimeout(() => setIsAdding(false), 800);
+    setTimeout(() => setIsAdding(false), 900);
   };
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
@@ -51,37 +51,37 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   return (
     <>
       <div
-        className="group relative flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 p-3 sm:p-3.5 flex-1 justify-between overflow-hidden"
+        className="group relative flex flex-col bg-white rounded-2xl transition-all duration-300 flex-1 justify-between"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Top Product Image Stage */}
-        <div className="relative aspect-square w-full bg-[#F6F6F8] rounded-xl overflow-hidden flex items-center justify-center p-3 mb-3">
+        {/* Full-Bleed Product Image Stage - NO inner padding, NO borders, full edge-to-edge photo */}
+        <div className="relative aspect-[4/5] sm:aspect-[1/1] w-full rounded-2xl overflow-hidden bg-gray-100 shadow-xs">
           <Link href={`/product/${product.slug}`} className="block w-full h-full relative">
             <Image
               src={activeImage}
               alt={product.title}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 18vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
               priority={priority}
-              className="object-contain p-2 group-hover:scale-108 transition-transform duration-500 ease-out"
+              className="object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
             />
           </Link>
 
           {/* Badges in Top Left */}
-          <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10 pointer-events-none">
+          <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
             {product.badge === 'NEW' && (
-              <span className="bg-black text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+              <span className="bg-black/90 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md tracking-wider">
                 New
               </span>
             )}
             {product.badge === 'SALE' && discountPercent > 0 && (
-              <span className="bg-[#FF4D30] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+              <span className="bg-[#FF4D00] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md tracking-wider">
                 -{discountPercent}%
               </span>
             )}
             {product.badge === 'BESTSELLER' && (
-              <span className="bg-[#F59E0B] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+              <span className="bg-[#F59E0B] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md tracking-wider">
                 Bestseller
               </span>
             )}
@@ -90,77 +90,91 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           {/* Wishlist Heart Top Right */}
           <button
             onClick={handleWishlistToggle}
-            className={`absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full flex items-center justify-center transition-colors shadow-xs ${
+            className={`absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-md backdrop-blur-xs ${
               isFavorited
-                ? 'bg-red-50 text-red-500'
-                : 'bg-white/90 text-gray-400 hover:text-red-500 hover:bg-white'
+                ? 'bg-white text-red-500 scale-110 shadow-lg'
+                : 'bg-white/90 text-gray-600 hover:text-red-500 hover:bg-white hover:scale-110'
             }`}
             aria-label={isFavorited ? 'Remove from wishlist' : 'Add to wishlist'}
           >
-            <Heart className={`w-3.5 h-3.5 ${isFavorited ? 'fill-current' : ''}`} />
+            <Heart className={`w-4 h-4 transition-transform ${isFavorited ? 'fill-current' : ''}`} />
           </button>
         </div>
 
-        {/* Product Information */}
-        <div className="flex flex-col flex-1 justify-between">
+        {/* Product Details Section Below Image */}
+        <div className="pt-3.5 pb-1 flex flex-col flex-1 justify-between">
           <div>
-            <Link href={`/product/${product.slug}`} className="block group-hover:text-[#FF4D30] transition-colors">
-              <h3 className="text-sm font-bold text-gray-950 truncate leading-snug">
+            <Link
+              href={`/product/${product.slug}`}
+              className="block group-hover:text-[#FF4D00] transition-colors"
+            >
+              <h3 className="text-sm sm:text-base font-bold text-gray-950 truncate tracking-tight">
                 {product.title}
               </h3>
             </Link>
 
-            {/* Price Line */}
-            <div className="flex items-baseline gap-1.5 mt-1">
-              <span className="text-sm font-extrabold text-gray-950">
+            {/* Price Row */}
+            <div className="flex items-baseline gap-2 mt-1.5">
+              <span className="text-base sm:text-lg font-extrabold text-gray-950 font-heading">
                 {formatPrice(activePrice)}
               </span>
               {product.originalPrice && product.originalPrice > activePrice && (
-                <span className="text-xs text-gray-400 line-through">
+                <span className="text-xs sm:text-sm text-gray-400 line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
             </div>
 
-            {/* Stars & Reviews */}
+            {/* Rating Stars & Count */}
             <div className="flex items-center gap-1.5 mt-1.5">
               <div className="flex items-center text-amber-400">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-3 h-3 ${
+                    className={`w-3.5 h-3.5 ${
                       i < Math.floor(product.rating)
-                        ? 'fill-current text-amber-400'
-                        : 'text-gray-200'
+                        ? 'fill-current'
+                        : 'text-gray-200 fill-current'
                     }`}
                   />
                 ))}
               </div>
-              <span className="text-[11px] text-gray-400 font-medium">
+              <span className="text-xs text-gray-400 font-medium">
                 ({product.reviewCount})
               </span>
             </div>
           </div>
 
-          {/* Quick Add Button in Bottom Right */}
-          <div className="flex items-center justify-end mt-2 pt-2 border-t border-gray-50">
+          {/* Bottom Quick-Add & Quick-View Action Row */}
+          <div className="mt-3.5 pt-2 flex items-center justify-between border-t border-gray-100">
+            <button
+              onClick={() => setIsQuickViewOpen(true)}
+              className="text-xs font-semibold text-gray-400 hover:text-[#FF4D00] transition-colors"
+            >
+              Quick view
+            </button>
+
             <button
               onClick={handleQuickAdd}
               disabled={isAdding}
-              className="w-8 h-8 rounded-full bg-black text-white hover:bg-[#FF4D30] transition-colors flex items-center justify-center shadow-xs shrink-0"
-              title="Add to Cart"
-              aria-label="Add to Cart"
+              className={`w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-md ${
+                isAdding
+                  ? 'bg-emerald-600 text-white scale-110'
+                  : 'bg-black hover:bg-[#FF4D00] text-white hover:scale-110'
+              }`}
+              aria-label="Quick add to cart"
             >
               {isAdding ? (
-                <Check className="w-3.5 h-3.5 text-white" />
+                <Check className="w-4 h-4" />
               ) : (
-                <ShoppingBag className="w-3.5 h-3.5" />
+                <ShoppingBag className="w-4 h-4" />
               )}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Quick View Modal */}
       {isQuickViewOpen && (
         <QuickViewModal
           product={product}

@@ -36,13 +36,13 @@ export function ValueProps() {
             return (
               <div
                 key={idx}
-                className="flex items-center gap-4 p-3.5 rounded-2xl hover:bg-[#F6F6F8] transition-colors"
+                className="flex items-center gap-4 p-3.5 rounded-2xl hover:bg-[#F6F7F9] transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-800 shrink-0 bg-white shadow-2xs">
-                  <Icon className="w-5 h-5 text-gray-800" />
+                <div className="w-12 h-12 rounded-full border border-gray-200 group-hover:border-orange-300 flex items-center justify-center text-gray-800 group-hover:text-[#FF4D00] shrink-0 bg-white shadow-2xs transition-colors">
+                  <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-extrabold text-gray-950 leading-snug">
+                  <h4 className="text-sm font-extrabold text-gray-950 leading-snug tracking-tight">
                     {pillar.title}
                   </h4>
                   <p className="text-xs text-gray-500 mt-0.5 font-normal">

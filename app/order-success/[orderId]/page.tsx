@@ -7,16 +7,10 @@ import Image from 'next/image';
 import {
   CheckCircle,
   Truck,
-  Package,
-  Calendar,
   ArrowRight,
-  ShieldCheck,
-  MapPin,
-  Clock,
-  Download,
 } from 'lucide-react';
 import { Order } from '@/types/cart';
-import { formatPrice, formatDate } from '@/lib/utils';
+import { formatPrice } from '@/lib/utils';
 
 export default function OrderSuccessPage() {
   const params = useParams();
@@ -25,171 +19,114 @@ export default function OrderSuccessPage() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('verden_latest_order');
-      if (stored) {
-        setOrder(JSON.parse(stored));
+      const orders = JSON.parse(localStorage.getItem('novatrend_orders') || '[]');
+      const found = orders.find((o: Order) => o.id === orderId);
+      if (found) {
+        setOrder(found);
+      } else {
+        const stored = localStorage.getItem('verden_latest_order');
+        if (stored) setOrder(JSON.parse(stored));
       }
     } catch (e) {
       console.error('Failed to load order:', e);
     }
-  }, []);
+  }, [orderId]);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] py-12 sm:py-20">
+    <div className="min-h-screen bg-[#FAFAFC] py-12 sm:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Success Banner */}
-        <div className="bg-white rounded-2xl border border-brand-border p-8 sm:p-12 shadow-subtle text-center">
-          <div className="w-16 h-16 rounded-full bg-[#141514] text-brand-gold border border-brand-gold/30 flex items-center justify-center mx-auto mb-5 shadow-sm animate-fadeIn">
+        <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-12 shadow-xs text-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8" />
           </div>
 
-          <span className="text-[11px] uppercase font-semibold tracking-[0.25em] text-brand-gold">
-            Order Confirmed &bull; Payment Secured
+          <span className="text-[11px] uppercase font-bold tracking-widest text-[#FF4D00]">
+            Order Confirmed &bull; Payment Received
           </span>
 
-          <h1 className="font-serif text-3xl sm:text-5xl text-brand-charcoal mt-2 font-normal">
-            Thank you for your curation.
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-950 mt-2 font-heading tracking-tight">
+            Thank you for your order!
           </h1>
 
-          <p className="text-xs sm:text-sm text-brand-muted max-w-lg mx-auto mt-3 leading-relaxed">
-            Your acquisition reference is <strong className="font-mono text-brand-charcoal font-bold tracking-wider">{orderId}</strong>. We have dispatched autonomous EDI purchase orders to our master artisan partner ateliers.
+          <p className="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto mt-2 leading-relaxed">
+            Your order number is <strong className="font-mono text-gray-950 font-bold">{orderId}</strong>. We have dispatched fulfillment requests to our partner hubs and will email your tracking link shortly.
           </p>
 
           {/* Quick Tracking Button */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href={`/track-order?id=${orderId}`}
-              className="px-7 py-3.5 rounded-pill bg-[#141514] hover:bg-black text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-subtle flex items-center gap-2"
+              href={`/track-order?tracking=${order?.trackingNumber || 'TRK-NV-892147'}`}
+              className="px-7 py-3 rounded-full bg-[#FF4D00] hover:bg-[#E04400] text-white text-xs font-bold tracking-wide transition-all shadow-md flex items-center gap-2"
             >
-              <Truck className="w-4 h-4 text-brand-gold" />
-              <span>Track Live Delivery Progress</span>
+              <Truck className="w-3.5 h-3.5" />
+              <span>Track Real-Time Dispatch</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
 
             <Link
               href="/shop"
-              className="px-7 py-3.5 rounded-pill border border-brand-border text-brand-charcoal text-xs font-semibold uppercase tracking-wider hover:border-brand-charcoal hover:bg-white transition-all"
+              className="px-7 py-3 rounded-full border border-gray-200 text-gray-800 text-xs font-bold hover:border-black transition-colors"
             >
-              Continue Curating
+              Continue Shopping
             </Link>
           </div>
         </div>
 
-        {/* Dropshipping Fulfillment Timeline */}
-        <div className="mt-8 bg-white rounded-2xl border border-brand-border p-6 sm:p-8 shadow-subtle">
-          <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal pb-4 border-b border-brand-border flex items-center justify-between">
-            <span>Direct Dropship Dispatch Timeline</span>
-            <span className="text-xs font-mono text-brand-charcoal font-medium flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-brand-gold" /> Air Transit: 3 - 5 business days
-            </span>
-          </h2>
-
-          <div className="mt-6 space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-[#141514] text-brand-gold border border-brand-gold/40 flex items-center justify-center shrink-0 text-xs font-bold font-mono">
-                ✓
-              </div>
-              <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-charcoal font-mono">
-                    Autonomous Atelier Order Transmitted
-                  </h4>
-                  <span className="text-[10px] font-mono text-brand-gold">Just Now</span>
-                </div>
-                <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
-                  Purchase order routed electronically to certified craftsman workshops in Verona and Kyoto without intermediary delays.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-[#141514] text-brand-gold border border-brand-gold/40 flex items-center justify-center shrink-0 text-xs font-bold font-mono">
-                2
-              </div>
-              <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-charcoal font-mono">
-                    7-Point Quality Inspection &amp; Shockproof Crate
-                  </h4>
-                  <span className="text-[10px] text-brand-gold font-mono">In Progress (Next 24h)</span>
-                </div>
-                <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
-                  Optical stone check, CE electrical testing, and reinforced unbleached molded packaging seal.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 opacity-70">
-              <div className="w-8 h-8 rounded-full bg-[#FAF9F5] border border-brand-border text-brand-muted flex items-center justify-center shrink-0 text-xs font-bold font-mono">
-                3
-              </div>
-              <div className="flex-1">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-charcoal font-mono">
-                  Carbon-Neutral Priority Air Cargo Dispatch
-                </h4>
-                <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
-                  International priority freight with pre-paid customs (DDP) and tracking code activation.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 opacity-70">
-              <div className="w-8 h-8 rounded-full bg-[#FAF9F5] border border-brand-border text-brand-muted flex items-center justify-center shrink-0 text-xs font-bold font-mono">
-                4
-              </div>
-              <div className="flex-1">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-charcoal font-mono">
-                  White-Glove Courier Door Delivery
-                </h4>
-                <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
-                  Room-of-choice placement and commencement of your 30-day living trial guarantee.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Order Details & Items Card */}
+        {/* Order Details Grid */}
         {order && (
-          <div className="mt-8 bg-white rounded-2xl border border-brand-border p-6 sm:p-8 shadow-subtle space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-brand-border">
+          <div className="mt-8 bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-xs space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-2">
               <div>
-                <h3 className="font-serif text-xl text-brand-charcoal">Acquisition Summary</h3>
-                <p className="text-xs text-brand-muted mt-0.5">
-                  Recipient: {order.customer.firstName} {order.customer.lastName} &bull; {order.customer.addressLine1}, {order.customer.city}
+                <p className="text-xs text-gray-400 font-semibold">Delivery Timeline</p>
+                <p className="text-sm font-bold text-gray-950 mt-0.5">
+                  Estimated Arrival: 3 - 5 Business Days
                 </p>
               </div>
-              <span className="text-sm font-mono font-semibold text-brand-charcoal">
-                Total: {formatPrice(order.total)}
-              </span>
+              <div className="text-left sm:text-right">
+                <p className="text-xs text-gray-400 font-semibold">Tracking Number</p>
+                <p className="font-mono font-bold text-sm text-[#FF4D00]">
+                  {order.trackingNumber}
+                </p>
+              </div>
             </div>
 
-            <div className="divide-y divide-brand-border/60">
+            {/* Items list */}
+            <div className="divide-y divide-gray-100">
               {order.items.map((item, idx) => (
-                <div key={idx} className="py-3.5 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3.5">
-                    <div className="relative w-12 h-15 rounded-lg overflow-hidden bg-background shrink-0 border border-brand-border/60">
-                      <Image src={item.productImage} alt={item.productTitle} fill className="object-cover" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-serif font-medium text-brand-charcoal text-sm">{item.productTitle}</h4>
-                      <p className="text-[11px] text-brand-muted">
-                        {item.variantName} &bull; Qty: {item.quantity}
-                      </p>
-                    </div>
+                <div key={idx} className="py-4 flex items-center gap-4 first:pt-0 last:pb-0">
+                  <div className="relative w-16 h-16 rounded-xl bg-[#F6F7F9] overflow-hidden shrink-0 flex items-center justify-center p-1 border border-gray-100">
+                    <Image
+                      src={item.productImage}
+                      alt={item.productTitle}
+                      fill
+                      className="object-contain p-1"
+                    />
                   </div>
-                  <span className="text-xs font-mono font-semibold text-brand-charcoal">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-bold text-gray-950 truncate">{item.productTitle}</h4>
+                    <p className="text-xs text-gray-500">
+                      {item.variantName} &bull; Qty: {item.quantity}
+                    </p>
+                  </div>
+                  <span className="text-sm font-mono font-bold text-gray-950">
                     {formatPrice(item.price * item.quantity)}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="pt-4 border-t border-brand-border flex justify-between items-center text-xs text-brand-muted">
-              <span>Carrier: {order.shipping.method}</span>
-              <span>Waybill: <strong className="font-mono text-brand-charcoal font-semibold">{order.trackingNumber}</strong></span>
+            {/* Total summary */}
+            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm">
+              <span className="font-bold text-gray-700">Total Paid</span>
+              <span className="font-mono font-extrabold text-lg text-gray-950">
+                {formatPrice(order.total)}
+              </span>
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
