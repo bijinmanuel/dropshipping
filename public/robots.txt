@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dropship-hub
+Sitemap: https://verden-design.com/sitemap.xml
+
