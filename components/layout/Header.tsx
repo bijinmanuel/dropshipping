@@ -138,9 +138,9 @@ export function Header() {
                         <Link
                           href="/shop"
                           onClick={() => setIsDepartmentsOpen(false)}
-                          className="text-[11px] font-medium text-[#21201D] hover:text-[#B88E4C] transition-colors"
+                          className="text-[11px] font-medium text-[#21201D] hover:text-[#A97B3C] transition-colors"
                         >
-                          Explore Full Catalog Archive &rarr;
+                          Explore full catalog archive
                         </Link>
                       </div>
                     </div>
@@ -178,8 +178,8 @@ export function Header() {
                 <span className="font-serif text-2xl sm:text-[30px] font-normal tracking-[0.32em] text-[#21201D] group-hover:text-[#B88E4C] transition-colors uppercase leading-none">
                   VÉRDEN
                 </span>
-                <span className="text-[7.5px] sm:text-[8px] font-sans tracking-[0.36em] uppercase text-[#8F8A7F] mt-1 font-medium">
-                  Studio &bull; Objects for Living
+                <span className="text-[7.5px] sm:text-[8px] font-sans tracking-[0.32em] uppercase text-[#8F8A7F] mt-1 font-medium">
+                  Atelier &middot; Living Objects
                 </span>
               </Link>
             </div>

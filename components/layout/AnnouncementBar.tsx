@@ -6,17 +6,17 @@ import { ChevronLeft, ChevronRight, Sparkles, ShieldCheck, Truck } from 'lucide-
 const MESSAGES = [
   {
     icon: Truck,
-    text: 'Complimentary Insured Priority Air on curations over $150',
+    text: 'Complimentary insured priority air on orders over $150',
     highlight: 'Code: FREESHIP',
   },
   {
     icon: Sparkles,
-    text: 'Inaugural collector privilege &bull; 15% off first curation',
+    text: 'Welcome invitation: 15% off your first curation',
     highlight: 'Code: VERDEN15',
   },
   {
     icon: ShieldCheck,
-    text: 'Direct atelier dispatch &bull; 30-Day Living Home Trial',
+    text: 'Direct atelier dispatch with a 30-day home living trial',
     highlight: 'Learn More',
   },
 ];
@@ -27,7 +27,7 @@ export function AnnouncementBar() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % MESSAGES.length);
-    }, 4500);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
@@ -37,7 +37,7 @@ export function AnnouncementBar() {
   return (
     <aside 
       aria-label="Promotional announcements"
-      className="bg-[#21201D] text-[#FAF9F5] text-[11px] font-medium tracking-[0.08em] py-2.5 px-4 border-b border-[#2F2E2A] relative z-40"
+      className="bg-[#21201D] text-[#FAF9F5] text-[11px] font-medium tracking-[0.04em] py-2 px-4 border-b border-[#2F2E2A] relative z-40"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <button
@@ -50,11 +50,11 @@ export function AnnouncementBar() {
 
         <div className="flex items-center gap-2 text-center overflow-hidden h-5">
           <div className="flex items-center gap-2 animate-fadeIn key={currentIndex}">
-            <Icon className="w-3.5 h-3.5 text-[#B88E4C] shrink-0" />
+            <Icon className="w-3.5 h-3.5 text-[#A97B3C] shrink-0" />
             <span className="text-[#FAF9F5]/90 text-[11px]">
               {current.text}
             </span>
-            <span className="hidden sm:inline-block text-[#B88E4C] font-semibold text-[11px] ml-1 border-b border-[#B88E4C]/40 tracking-wider">
+            <span className="hidden sm:inline-block text-[#A97B3C] font-semibold text-[11px] ml-1 border-b border-[#A97B3C]/40">
               {current.highlight}
             </span>
           </div>

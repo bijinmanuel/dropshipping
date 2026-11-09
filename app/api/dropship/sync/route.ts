@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { PRODUCTS } from '@/data/products';
 import { DROPSHIP_SUPPLIERS } from '@/data/suppliers';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const summary = {
     activeSuppliersCount: DROPSHIP_SUPPLIERS.length,
