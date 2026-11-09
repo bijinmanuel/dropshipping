@@ -46,15 +46,15 @@ const SOCIAL_POSTS = [
 
 export function SocialShowcase() {
   return (
-    <section className="py-20 sm:py-28 bg-background border-b border-brand-border/60">
+    <section className="py-20 sm:py-28 bg-[#FAF9F5] border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-4 border-b border-black/[0.06] gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-5 border-b border-brand-border gap-4">
           <div>
-            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-gold flex items-center gap-1.5">
-              <Instagram className="w-3.5 h-3.5 text-brand-gold" />
+            <span className="text-[11px] uppercase font-semibold tracking-[0.25em] text-brand-gold flex items-center gap-2 font-cinzel">
+              <Instagram className="w-4 h-4 text-brand-gold" />
               <span>In Situ &bull; #VerdenLiving</span>
             </span>
-            <h2 className="text-section-title font-serif text-brand-charcoal mt-1">
+            <h2 className="text-3xl sm:text-4xl font-serif text-brand-charcoal mt-1.5 font-normal">
               Curated Architectural Homes
             </h2>
           </div>
@@ -62,31 +62,31 @@ export function SocialShowcase() {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-charcoal hover:text-black flex items-center gap-1 group"
+            className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-charcoal hover:text-brand-gold flex items-center gap-1.5 group transition-colors"
           >
             <span>Follow @verden.studio</span>
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {SOCIAL_POSTS.map((post, idx) => (
             <Link
               key={idx}
               href={`/product/${post.slug}`}
-              className="group relative aspect-square rounded-card-lg overflow-hidden bg-background-subtle border border-black/[0.07] shadow-xs"
+              className="group relative aspect-square rounded-2xl overflow-hidden bg-background border border-brand-border shadow-subtle hover:shadow-2xl transition-all"
             >
               <Image
                 src={post.image}
                 alt={post.productTitle}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-3.5 text-white">
-                <span className="text-[10px] text-white/70 font-mono tracking-wider">{post.handle}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
+                <span className="text-[10px] text-brand-gold font-mono tracking-wider">{post.handle}</span>
                 <div>
-                  <p className="font-serif text-xs font-medium line-clamp-1">{post.productTitle}</p>
-                  <span className="text-[9px] uppercase font-bold text-brand-gold tracking-[0.16em] flex items-center gap-0.5 mt-0.5">
+                  <p className="font-serif text-xs sm:text-sm font-medium line-clamp-1 leading-snug">{post.productTitle}</p>
+                  <span className="text-[9px] uppercase font-semibold text-white/80 tracking-[0.2em] flex items-center gap-1 mt-1 font-mono">
                     Acquire Object &rarr;
                   </span>
                 </div>

@@ -59,7 +59,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-background text-brand-charcoal antialiased">
+      <body className="min-h-screen flex flex-col bg-[#FAF9F5] text-brand-charcoal antialiased selection:bg-[#B88E4C] selection:text-white">
         <AppProviders>
           <AnnouncementBar />
           <Header />
