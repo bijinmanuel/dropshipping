@@ -58,8 +58,10 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFC] py-10 sm:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50/30 via-[#FAFAFC] to-[#FAFAFC] py-10 sm:py-16 relative overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-bl from-orange-200/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Page Header */}
         <div className="mb-8 pb-4 border-b border-gray-200 flex items-baseline justify-between">

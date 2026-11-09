@@ -55,8 +55,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Full-Bleed Product Image Stage - NO inner padding, NO borders, full edge-to-edge photo */}
-        <div className="relative aspect-[4/5] sm:aspect-[1/1] w-full rounded-2xl overflow-hidden bg-gray-100 shadow-xs">
+        {/* Full-Bleed Product Image Stage - Studio Lighting Gradient */}
+        <div className="relative aspect-[4/5] sm:aspect-[1/1] w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#F7F7F9] to-[#ECECEF] shadow-xs">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.6),transparent_70%)] pointer-events-none" />
           <Link href={`/product/${product.slug}`} className="block w-full h-full relative">
             <Image
               src={activeImage}

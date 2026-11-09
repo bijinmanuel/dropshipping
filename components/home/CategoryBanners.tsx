@@ -10,8 +10,11 @@ export function CategoryBanners() {
   const displayCategories = CATEGORIES.filter((c) => c.slug !== 'all');
 
   return (
-    <section className="py-14 sm:py-18 bg-white border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-14 sm:py-18 bg-gradient-to-b from-white via-orange-50/20 to-white border-b border-gray-100 relative overflow-hidden">
+      {/* Ambient gradient accent */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-b from-orange-200/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-gray-100">
           <h2 className="text-xl sm:text-2xl font-extrabold text-gray-950 tracking-tight font-heading">

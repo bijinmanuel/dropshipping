@@ -125,9 +125,13 @@ function ShopContent() {
 
   return (
     <div className="min-h-screen bg-[#FAFAFC] pb-24">
-      {/* Shop Hero Banner */}
-      <section className="bg-white border-b border-gray-100 py-10 sm:py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Shop Hero Banner with Atmospheric Ambient Gradient */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-orange-50/50 via-[#FFFDFB] to-white border-b border-gray-100 py-10 sm:py-14">
+        {/* Soft Ambient Light Orbs */}
+        <div className="absolute -top-24 right-1/4 w-96 h-96 bg-gradient-to-bl from-orange-200/20 via-amber-200/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-10 w-80 h-80 bg-orange-100/30 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-2xl">
             <span className="text-[11px] uppercase font-bold tracking-widest text-[#FF4D00]">
               Curated Collection

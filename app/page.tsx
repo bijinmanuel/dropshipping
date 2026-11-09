@@ -49,9 +49,13 @@ export default function HomePage() {
       {/* 2. Shop by Categories (Fashion, Electronics, Beauty, Fitness, Home Decor, Accessories) */}
       <CategoryBanners />
 
-      {/* 3. New Arrivals 4-Column Spacious Grid */}
-      <section className="py-14 sm:py-20 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 3. New Arrivals 4-Column Spacious Grid with Radiant Ambient Backdrop */}
+      <section className="py-14 sm:py-20 bg-gradient-to-b from-white via-orange-50/25 to-white border-b border-gray-100 relative overflow-hidden">
+        {/* Soft Background Gradient Lights */}
+        <div className="absolute top-1/2 left-0 w-80 h-80 bg-orange-200/15 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-amber-200/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between mb-10 pb-4 border-b border-gray-100">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-950 tracking-tight font-heading">

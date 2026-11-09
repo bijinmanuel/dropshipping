@@ -12,9 +12,8 @@ export function HeroSection() {
       id: 'air-max-270',
       title: 'Air Max 270',
       price: '$129.99',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=240&auto=format&fit=crop',
-      position: '-top-5 -left-3 sm:-left-6',
-      width: 'w-28 sm:w-32',
+      image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=350&auto=format&fit=crop',
+      position: '-top-5 -left-2 sm:-left-6',
       animateY: [0, -8, 0],
       duration: 5,
       delay: 0,
@@ -23,9 +22,8 @@ export function HeroSection() {
       id: 'smart-watch-series-9',
       title: 'Smart Watch',
       price: '$99.99',
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=240&auto=format&fit=crop',
-      position: 'top-4 -right-3 sm:-right-8',
-      width: 'w-24 sm:w-28',
+      image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?q=80&w=350&auto=format&fit=crop',
+      position: 'top-3 -right-2 sm:-right-6',
       animateY: [0, -10, 0],
       duration: 6,
       delay: 0.8,
@@ -34,9 +32,8 @@ export function HeroSection() {
       id: 'wireless-headphone',
       title: 'Wireless Headphone',
       price: '$39.99',
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=240&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=350&auto=format&fit=crop',
       position: 'top-1/2 -translate-y-1/2 -left-4 sm:-left-10',
-      width: 'w-28 sm:w-32',
       animateY: [0, 8, 0],
       duration: 5.5,
       delay: 1.2,
@@ -45,9 +42,8 @@ export function HeroSection() {
       id: 'stainless-steel-bottle',
       title: 'Water Bottle',
       price: '$24.99',
-      image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=240&auto=format&fit=crop',
-      position: 'bottom-8 -right-3 sm:-right-8',
-      width: 'w-24 sm:w-28',
+      image: 'https://images.unsplash.com/photo-1589365278144-c9e705f843ba?q=80&w=350&auto=format&fit=crop',
+      position: 'bottom-6 -right-2 sm:-right-6',
       animateY: [0, -7, 0],
       duration: 5.2,
       delay: 1.8,
@@ -56,11 +52,13 @@ export function HeroSection() {
 
   return (
     <>
-      {/* Main Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#FAFAFC] via-white to-white pt-8 pb-16 lg:pt-14 lg:pb-22 border-b border-gray-100">
-        {/* Subtle Ambient Glow Background Orbs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#FF4D00]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/3 -right-32 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Main Hero Banner with Multi-Layered Atmospheric Background Gradient */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-orange-50/60 via-[#FFFDF9] to-white pt-8 pb-16 lg:pt-14 lg:pb-22 border-b border-gray-100">
+        {/* Multi-layered Atmospheric Background Gradients */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-[radial-gradient(ellipse_at_top,rgba(255,110,30,0.18),rgba(255,180,60,0.08)_45%,transparent_70%)] pointer-events-none blur-2xl" />
+        <div className="absolute top-1/4 -left-32 w-[420px] h-[420px] bg-gradient-to-tr from-[#FF4D00]/15 to-amber-300/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 -right-32 w-[480px] h-[480px] bg-gradient-to-bl from-orange-400/15 via-rose-300/10 to-amber-400/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -164,8 +162,8 @@ export function HeroSection() {
                 {/* Background Curved Red/Orange Sculptural Pod */}
                 <div className="absolute inset-0 rounded-[44px] bg-gradient-to-tr from-[#FF4D00] via-[#FF5E3A] to-[#FF8A65] shadow-[0_25px_60px_-15px_rgba(255,77,0,0.35)] overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop"
-                    alt="Trending streetwear model in white sweater sitting on orange pod"
+                    src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop"
+                    alt="Trending streetwear model in white designer outfit"
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 440px"
@@ -183,7 +181,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* 4 Floating Hotspot Product Cards with Framer Motion float animations */}
+                {/* 4 Floating Hotspot Product Cards with Perfectly Centered & Uniform Images */}
                 {floatingCards.map((card) => (
                   <motion.div
                     key={card.id}
@@ -194,24 +192,28 @@ export function HeroSection() {
                       ease: 'easeInOut',
                       delay: card.delay,
                     }}
-                    className={`absolute ${card.position} z-20 ${card.width}`}
+                    className={`absolute ${card.position} z-20 w-32 sm:w-36`}
                   >
                     <Link
                       href={`/product/${card.id}`}
-                      className="block bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-[0_16px_36px_-10px_rgba(0,0,0,0.18)] border border-gray-100 hover:border-orange-300 hover:shadow-[0_20px_40px_-10px_rgba(255,77,0,0.25)] transition-all group hover:scale-108"
+                      className="block bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-[0_16px_36px_-10px_rgba(0,0,0,0.14)] border border-gray-100 hover:border-orange-300 hover:shadow-[0_20px_45px_-10px_rgba(255,77,0,0.25)] transition-all group hover:scale-105"
                     >
-                      <div className="w-full h-12 relative flex items-center justify-center">
+                      {/* Standardized Studio Image Box - Perfectly Centered, Matching Aspect Ratio */}
+                      <div className="w-full aspect-[4/3] relative rounded-xl bg-[#F7F7F9] overflow-hidden flex items-center justify-center p-2 mb-2 group-hover:bg-orange-50/60 transition-colors">
                         <Image
                           src={card.image}
                           alt={card.title}
                           fill
-                          className="object-contain"
+                          sizes="160px"
+                          className="object-contain p-0.5 group-hover:scale-110 transition-transform duration-500 ease-out"
                         />
                       </div>
-                      <p className="text-[11px] font-bold text-gray-900 mt-1 truncate max-w-full text-center group-hover:text-[#FF4D00] transition-colors">
+                      <h4 className="text-xs font-bold text-gray-950 text-center truncate w-full group-hover:text-[#FF4D00] transition-colors tracking-tight">
                         {card.title}
+                      </h4>
+                      <p className="text-[11px] font-semibold text-gray-400 text-center mt-0.5">
+                        {card.price}
                       </p>
-                      <p className="text-[10px] font-semibold text-gray-400 text-center">{card.price}</p>
                     </Link>
                   </motion.div>
                 ))}
@@ -223,8 +225,8 @@ export function HeroSection() {
         </div>
       </section>
 
-      {/* 4-Column Minimal Trust Badges Row (Directly underneath Hero) */}
-      <section className="py-8 bg-white border-b border-gray-100">
+      {/* 4-Column Minimal Trust Badges Row with Soft Warm Gradient */}
+      <section className="py-8 bg-gradient-to-r from-orange-50/40 via-white to-amber-50/30 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             

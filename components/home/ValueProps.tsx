@@ -28,7 +28,7 @@ const PILLARS = [
 
 export function ValueProps() {
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
+    <section className="py-12 sm:py-16 bg-gradient-to-r from-orange-50/40 via-white to-amber-50/40 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {PILLARS.map((pillar, idx) => {

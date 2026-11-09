@@ -25,8 +25,11 @@ export function BestSellersSpotlight({ products }: BestSellersSpotlightProps) {
   };
 
   return (
-    <section className="py-14 sm:py-20 bg-white border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-14 sm:py-20 bg-gradient-to-b from-[#FFFDF9] via-orange-50/20 to-white border-b border-gray-100 relative overflow-hidden">
+      {/* Radiant ambient glow */}
+      <div className="absolute -top-20 right-10 w-96 h-96 bg-gradient-to-br from-[#FF4D00]/10 via-amber-300/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-gray-100">
           <h2 className="text-xl sm:text-2xl font-extrabold text-gray-950 tracking-tight font-heading">
@@ -48,10 +51,11 @@ export function BestSellersSpotlight({ products }: BestSellersSpotlightProps) {
             return (
               <div
                 key={product.id}
-                className="group relative flex flex-col sm:flex-row items-center bg-white rounded-3xl border border-gray-100 hover:border-orange-200/80 hover:shadow-[0_15px_35px_-5px_rgba(0,0,0,0.08)] transition-all duration-300 p-5 gap-5"
+                className="group relative flex flex-col sm:flex-row items-center bg-gradient-to-br from-white via-white to-orange-50/25 rounded-3xl border border-gray-100 hover:border-orange-200 hover:shadow-[0_20px_40px_-10px_rgba(255,77,0,0.12)] transition-all duration-300 p-5 gap-5"
               >
-                {/* Large Product Image Stage - NO inner padding, edge-to-edge full photo */}
-                <div className="relative aspect-square w-full sm:w-44 sm:h-44 rounded-2xl bg-gray-100 overflow-hidden shrink-0">
+                {/* Large Product Image Stage - Studio Backdrop */}
+                <div className="relative aspect-square w-full sm:w-44 sm:h-44 rounded-2xl bg-gradient-to-b from-[#F7F7F9] to-[#ECECEF] overflow-hidden shrink-0 shadow-2xs">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.5),transparent_70%)] pointer-events-none" />
                   <Image
                     src={product.images[0]}
                     alt={product.title}

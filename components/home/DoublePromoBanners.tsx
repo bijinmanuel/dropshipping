@@ -29,12 +29,16 @@ export function DoublePromoBanners() {
   const formatUnit = (num: number) => String(num).padStart(2, '0');
 
   return (
-    <section className="py-14 sm:py-18 bg-white border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-14 sm:py-18 bg-gradient-to-b from-white via-orange-50/15 to-white border-b border-gray-100 relative overflow-hidden">
+      {/* Background radiant orb */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-orange-300/10 via-amber-200/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
           {/* Banner 1: Vibrant Coral Orange Flash Sale Banner */}
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-tr from-[#FF4D00] via-[#FF5E3A] to-[#FF8A65] text-white p-8 sm:p-10 flex flex-col justify-between min-h-[340px] shadow-[0_20px_45px_-10px_rgba(255,77,0,0.35)] group">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-tr from-[#FF3D00] via-[#FF5E3A] to-[#FF8A65] text-white p-8 sm:p-10 flex flex-col justify-between min-h-[340px] shadow-[0_20px_45px_-10px_rgba(255,77,0,0.35)] group">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(255,255,255,0.22),transparent_55%)] pointer-events-none" />
             <div className="relative z-10 max-w-sm">
               <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-white/95 mb-2 px-2.5 py-0.5 rounded-full bg-black/20 backdrop-blur-xs w-max">
                 <Flame className="w-3.5 h-3.5 text-amber-300 fill-current" />
