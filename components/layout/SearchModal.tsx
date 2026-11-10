@@ -48,7 +48,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
 
     const q = query.toLowerCase().trim();
-    const filtered = PRODUCTS.filter(
+    const filtered = PRODUCTS.filter((p) => (p as any).isActive !== false).filter(
       (p) =>
         p.title.toLowerCase().includes(q) ||
         p.subtitle.toLowerCase().includes(q) ||

@@ -9,7 +9,8 @@ export async function GET(request: Request) {
   const search = searchParams.get('search');
   const tag = searchParams.get('tag');
 
-  let results = [...PRODUCTS];
+  // Filter only active products for public API
+  let results = PRODUCTS.filter((p) => (p as any).isActive !== false);
 
   if (category && category !== 'all') {
     results = results.filter((p) => p.category === category);
@@ -35,7 +36,7 @@ export async function GET(request: Request) {
     const { dropship, ...rest } = p;
     return {
       ...rest,
-      origin: dropship.countryOfOrigin,
+      origin: dropship?.countryOfOrigin || 'Global Hub',
       estimatedDelivery: p.estimatedDelivery,
     };
   });
@@ -46,4 +47,3 @@ export async function GET(request: Request) {
     products: sanitized,
   });
 }
-

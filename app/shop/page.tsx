@@ -44,7 +44,7 @@ function ShopContent() {
   );
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [columnCount, setColumnCount] = useState<3 | 4>(4);
-  const [productsList, setProductsList] = useState<Product[]>(PRODUCTS);
+  const [productsList, setProductsList] = useState<Product[]>(() => PRODUCTS.filter((p) => (p as any).isActive !== false));
 
   useEffect(() => {
     fetchProducts({ limit: 100 }).then((res) => {
@@ -109,6 +109,10 @@ function ShopContent() {
       }
 
       if (inStockOnly && !product.inStock) {
+        return false;
+      }
+
+      if (product.isActive === false) {
         return false;
       }
 

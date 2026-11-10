@@ -19,6 +19,7 @@ export interface ProductQueryParams {
 
 /**
  * Fetch products from Backend API (MongoDB) with fallback to local catalog
+ * Excludes deactivated products for the public storefront.
  */
 export async function fetchProducts(params: ProductQueryParams = {}): Promise<{
   products: Product[];
@@ -40,17 +41,21 @@ export async function fetchProducts(params: ProductQueryParams = {}): Promise<{
     if (params.page) query.set('page', params.page.toString());
     if (params.limit) query.set('limit', params.limit.toString());
 
+    // Never cache so status updates (active/deactive) appear instantly
     const res = await fetch(`${API_BASE}/products?${query.toString()}`, {
-      next: { revalidate: 30 },
+      cache: 'no-store',
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (res.ok) {
       const data = await res.json();
-      if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+      if (data.success && Array.isArray(data.products)) {
+        // Enforce active filter: only show products where isActive is not false
+        const activeProducts = data.products.filter((p: any) => p.isActive !== false);
+
         return {
-          products: data.products,
-          total: data.total || data.products.length,
+          products: activeProducts,
+          total: activeProducts.length,
           page: data.page || 1,
           totalPages: data.totalPages || 1,
           source: data.source || 'mongodb',
@@ -61,8 +66,8 @@ export async function fetchProducts(params: ProductQueryParams = {}): Promise<{
     console.warn('[API Client] Backend fetch failed, utilizing resilient local store', error);
   }
 
-  // Resilient fallback to local products
-  let filtered = [...PRODUCTS];
+  // Resilient fallback to local products (only active)
+  let filtered = PRODUCTS.filter((p) => (p as any).isActive !== false);
   if (params.category && params.category !== 'all') {
     filtered = filtered.filter((p) => p.category.toLowerCase() === params.category?.toLowerCase());
   }
@@ -85,22 +90,23 @@ export async function fetchProducts(params: ProductQueryParams = {}): Promise<{
 export async function fetchProductBySlug(slug: string): Promise<{ product: Product | null; related: Product[] }> {
   try {
     const res = await fetch(`${API_BASE}/products/${slug}`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
 
     if (res.ok) {
       const data = await res.json();
-      if (data.success && data.product) {
-        return { product: data.product, related: data.related || [] };
+      if (data.success && data.product && (data.product as any).isActive !== false) {
+        const activeRelated = (data.related || []).filter((p: any) => p.isActive !== false);
+        return { product: data.product, related: activeRelated };
       }
     }
   } catch (error) {
     console.warn('[API Client] Failed to fetch product slug from backend, using local dataset', error);
   }
 
-  const localProduct = PRODUCTS.find((p) => p.slug === slug) || null;
+  const localProduct = PRODUCTS.find((p) => p.slug === slug && (p as any).isActive !== false) || null;
   const related = localProduct
-    ? PRODUCTS.filter((p) => p.category === localProduct.category && p.id !== localProduct.id).slice(0, 4)
+    ? PRODUCTS.filter((p) => p.category === localProduct.category && p.id !== localProduct.id && (p as any).isActive !== false).slice(0, 4)
     : [];
   return { product: localProduct, related };
 }
@@ -115,16 +121,16 @@ export async function fetchFeaturedProducts(): Promise<{
 }> {
   try {
     const res = await fetch(`${API_BASE}/products/featured`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
 
     if (res.ok) {
       const data = await res.json();
       if (data.success) {
         return {
-          newArrivals: data.newArrivals || [],
-          bestSellers: data.bestSellers || [],
-          onSale: data.onSale || [],
+          newArrivals: (data.newArrivals || []).filter((p: any) => p.isActive !== false),
+          bestSellers: (data.bestSellers || []).filter((p: any) => p.isActive !== false),
+          onSale: (data.onSale || []).filter((p: any) => p.isActive !== false),
         };
       }
     }
@@ -132,10 +138,11 @@ export async function fetchFeaturedProducts(): Promise<{
     console.warn('[API Client] Failed to fetch featured products, using local fallback', error);
   }
 
+  const activeProducts = PRODUCTS.filter((p) => (p as any).isActive !== false);
   return {
-    newArrivals: PRODUCTS.filter((p) => p.badge === 'NEW').slice(0, 8),
-    bestSellers: PRODUCTS.filter((p) => p.badge === 'BESTSELLER' || p.reviewCount > 90).slice(0, 6),
-    onSale: PRODUCTS.filter((p) => p.badge === 'SALE' || (p.originalPrice && p.originalPrice > p.price)).slice(0, 6),
+    newArrivals: activeProducts.filter((p) => p.badge === 'NEW').slice(0, 8),
+    bestSellers: activeProducts.filter((p) => p.badge === 'BESTSELLER' || p.reviewCount > 90).slice(0, 6),
+    onSale: activeProducts.filter((p) => p.badge === 'SALE' || (p.originalPrice && p.originalPrice > p.price)).slice(0, 6),
   };
 }
 
@@ -236,7 +243,9 @@ export async function fetchProductReviews(productId: string): Promise<{
   totalReviews: number;
 }> {
   try {
-    const res = await fetch(`${API_BASE}/reviews/product/${productId}`);
+    const res = await fetch(`${API_BASE}/reviews/product/${productId}`, {
+      cache: 'no-store',
+    });
     if (res.ok) {
       return await res.json();
     }

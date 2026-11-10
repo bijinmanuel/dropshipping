@@ -4,6 +4,7 @@ export interface ProductVariant {
   type: 'color' | 'size' | 'material' | 'finish';
   value: string; // Color hex (e.g. #243D32) or size label (e.g. 'Standard', 'Large')
   inStock: boolean;
+  isActive?: boolean;
   priceModifier?: number;
   imageIndex?: number;
   supplierSku: string;
@@ -64,6 +65,7 @@ export interface Product {
   details: ProductDetails;
   features: string[];
   inStock: boolean;
+  isActive?: boolean;
   stockQuantity: number;
   badge?: 'NEW' | 'BESTSELLER' | 'SALE' | 'LIMITED';
   estimatedDelivery: string;
