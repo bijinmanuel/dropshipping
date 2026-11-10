@@ -2,6 +2,10 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+<<<<<<< HEAD
+=======
+import Image from 'next/image';
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 import Link from 'next/link';
 import {
   Truck,
@@ -11,6 +15,7 @@ import {
   Package,
   MapPin,
   ShieldCheck,
+<<<<<<< HEAD
   AlertCircle,
   Loader2,
 } from 'lucide-react';
@@ -63,16 +68,45 @@ function TrackOrderContent() {
       fetchTracking(initialTracking);
     }
   }, [initialTracking]);
+=======
+  ArrowRight,
+} from 'lucide-react';
+import { formatPrice } from '@/lib/utils';
+
+function TrackOrderContent() {
+  const searchParams = useSearchParams();
+  const initialTracking = searchParams?.get('tracking') || 'TRK-NV-892147';
+  const [trackingInput, setTrackingInput] = useState(initialTracking);
+  const [isSearched, setIsSearched] = useState(true);
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!trackingInput.trim()) return;
+<<<<<<< HEAD
     fetchTracking(trackingInput);
   };
 
   return (
     <div className="min-h-screen bg-[#FAFAFC] py-12 sm:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+=======
+    setIsSearched(true);
+  };
+
+  const steps = [
+    { title: 'Order Confirmed', date: 'Nov 08, 09:15 AM', location: 'NovaTrend Central Dispatch', done: true },
+    { title: 'Fulfillment Hub Packaged', date: 'Nov 08, 02:40 PM', location: 'California Sourcing Facility', done: true },
+    { title: 'In Transit & Scanned', date: 'Nov 09, 06:10 AM', location: 'JFK Air Logistics Terminal', done: true, current: true },
+    { title: 'Out for Local Delivery', date: 'Estimated Tomorrow', location: 'Local Postal Courier', done: false },
+    { title: 'Delivered', date: 'Estimated Nov 11', location: 'Your Front Door', done: false },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#FAFAFC] py-12 sm:py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-10">
           <span className="text-[11px] uppercase font-bold tracking-widest text-[#FF4D00]">
@@ -95,21 +129,33 @@ function TrackOrderContent() {
                 type="text"
                 value={trackingInput}
                 onChange={(e) => setTrackingInput(e.target.value)}
+<<<<<<< HEAD
                 placeholder="Enter tracking code (e.g. NV-TRK-8942910)"
+=======
+                placeholder="Enter tracking code (e.g. TRK-NV-892147)"
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
                 className="w-full text-xs font-mono font-bold pl-11 pr-4 py-3.5 rounded-full border border-gray-200 focus:outline-none focus:border-black uppercase"
               />
             </div>
             <button
               type="submit"
+<<<<<<< HEAD
               disabled={isLoading}
               className="px-8 py-3.5 rounded-full bg-[#FF4D00] hover:bg-[#E04400] text-white text-xs font-bold tracking-wide transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Truck className="w-4 h-4" />}
               <span>{isLoading ? 'Tracking...' : 'Track Shipment'}</span>
+=======
+              className="px-8 py-3.5 rounded-full bg-[#FF4D00] hover:bg-[#E04400] text-white text-xs font-bold tracking-wide transition-all shadow-md flex items-center justify-center gap-2"
+            >
+              <Truck className="w-4 h-4" />
+              <span>Track Shipment</span>
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
             </button>
           </form>
         </div>
 
+<<<<<<< HEAD
         {errorMsg && (
           <div className="bg-red-50 border border-red-200 text-red-700 text-xs rounded-2xl p-4 mb-6 flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
@@ -119,11 +165,16 @@ function TrackOrderContent() {
 
         {/* Results Card */}
         {trackingData && (
+=======
+        {/* Results Card */}
+        {isSearched && (
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
           <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-xs space-y-8">
             {/* Status Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gray-100 gap-4">
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-orange-50 text-[#FF4D00] border border-orange-200">
+<<<<<<< HEAD
                   {trackingData.status === 'delivered'
                     ? 'Delivered'
                     : trackingData.status === 'shipped' || trackingData.status === 'in_transit'
@@ -149,11 +200,24 @@ function TrackOrderContent() {
                 <p className="text-base font-extrabold text-gray-950 mt-0.5">
                   {trackingData.estimatedDeliveryDate || '3 - 5 Business Days'}
                 </p>
+=======
+                  In Transit — On Schedule
+                </span>
+                <h3 className="text-xl font-bold text-gray-950 mt-2 font-heading">
+                  Carrier: USPS Priority Express Air
+                </h3>
+                <p className="text-xs text-gray-500 font-mono mt-0.5">Tracking: {trackingInput}</p>
+              </div>
+              <div className="text-left sm:text-right">
+                <p className="text-xs text-gray-400">Estimated Delivery Date</p>
+                <p className="text-base font-extrabold text-gray-950 mt-0.5">Wednesday, Nov 11</p>
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
               </div>
             </div>
 
             {/* Stepper Timeline */}
             <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-200">
+<<<<<<< HEAD
               {trackingData.milestones &&
                 trackingData.milestones.map((st: any, i: number) => {
                   const isCurrent =
@@ -192,17 +256,49 @@ function TrackOrderContent() {
                     </div>
                   );
                 })}
+=======
+              {steps.map((st, i) => (
+                <div key={i} className="relative flex items-start gap-4">
+                  <div
+                    className={`absolute -left-6 sm:-left-8 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs transition-colors ${
+                      st.current
+                        ? 'bg-[#FF4D00] ring-4 ring-orange-100'
+                        : st.done
+                        ? 'bg-black'
+                        : 'bg-gray-200 text-gray-400'
+                    }`}
+                  >
+                    {st.done ? <CheckCircle2 className="w-3.5 h-3.5" /> : i + 1}
+                  </div>
+                  <div>
+                    <h4 className={`text-sm font-bold ${st.current ? 'text-[#FF4D00]' : 'text-gray-950'}`}>
+                      {st.title}
+                    </h4>
+                    <p className="text-xs text-gray-500 mt-0.5">{st.location}</p>
+                    <p className="text-[11px] text-gray-400 font-mono mt-0.5">{st.date}</p>
+                  </div>
+                </div>
+              ))}
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
             </div>
 
             {/* Support footer */}
             <div className="pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+<<<<<<< HEAD
               <span className="text-gray-500">Need assistance with your courier transit?</span>
+=======
+              <span className="text-gray-500">Need to change your shipping address?</span>
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
               <Link href="/contact" className="text-[#FF4D00] font-bold hover:underline">
                 Contact Customer Care &rarr;
               </Link>
             </div>
           </div>
         )}
+<<<<<<< HEAD
+=======
+
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
       </div>
     </div>
   );

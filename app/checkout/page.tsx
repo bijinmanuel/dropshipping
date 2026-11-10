@@ -20,7 +20,10 @@ import { useAuth } from '@/context/AuthContext';
 import { formatPrice, generateTrackingNumber } from '@/lib/utils';
 import { SHIPPING_METHODS } from '@/data/shipping';
 import { Order, OrderItem, ShippingAddress } from '@/types/cart';
+<<<<<<< HEAD
 import { createOrderApi } from '@/lib/api';
+=======
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -96,6 +99,7 @@ export default function CheckoutPage() {
     }
   };
 
+<<<<<<< HEAD
   const handlePlaceOrder = async () => {
     setIsProcessing(true);
 
@@ -215,6 +219,89 @@ export default function CheckoutPage() {
     clearCart();
     setIsProcessing(false);
     router.push(`/order-success/${orderId}?tracking=${trackingNumber}`);
+=======
+  const handlePlaceOrder = () => {
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      const orderId = `ORD-${Date.now().toString().slice(-6)}`;
+      const trackingNumber = generateTrackingNumber();
+
+      const shippingAddress: ShippingAddress = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        postalCode,
+        country,
+      };
+
+      const orderItems: OrderItem[] = items.map((i) => ({
+        productId: i.product.id,
+        productTitle: i.product.title,
+        productImage: i.product.images[i.selectedVariant.imageIndex || 0] || i.product.images[0],
+        variantId: i.selectedVariant.id,
+        variantName: i.selectedVariant.name,
+        price: i.product.price + (i.selectedVariant.priceModifier || 0),
+        quantity: i.quantity,
+        supplierSku: i.selectedVariant.supplierSku || i.product.dropship.supplierSku,
+        fulfillmentStatus: 'processing',
+        trackingNumber,
+        trackingCarrier: 'USPS Priority Air',
+      }));
+
+      const newOrder: Order = {
+        id: orderId,
+        createdAt: new Date().toISOString(),
+        customer: shippingAddress,
+        items: orderItems,
+        subtotal,
+        discount: discountAmount,
+        couponCode: appliedCoupon?.code,
+        shipping: {
+          method: selectedShipping.name,
+          cost: shippingCost,
+        },
+        tax: taxAmount,
+        total: finalTotal,
+        paymentMethod: paymentMethod === 'apple_pay' ? 'apple_pay' : paymentMethod === 'paypal' ? 'paypal' : 'card',
+        paymentStatus: 'paid',
+        fulfillmentStatus: 'processing',
+        trackingNumber,
+        trackingCarrier: 'USPS Priority Air',
+        trackingEvents: [
+          {
+            status: 'Order Placed',
+            location: 'NovaTrend Central Dispatch',
+            timestamp: new Date().toISOString(),
+            description: 'Order confirmed and payment verified.',
+            completed: true,
+          },
+        ],
+        dropshipLogistics: {
+          supplierOrderDispatched: true,
+          dispatchTimestamp: new Date().toISOString(),
+          originWarehouse: 'California Fulfillment Center',
+          destinationCountry: country,
+        },
+      };
+
+      try {
+        const existing = JSON.parse(localStorage.getItem('novatrend_orders') || '[]');
+        localStorage.setItem('novatrend_orders', JSON.stringify([newOrder, ...existing]));
+      } catch (e) {
+        console.error('Failed to store order in localStorage', e);
+      }
+
+      clearCart();
+      setIsProcessing(false);
+      router.push(`/order-success/${orderId}`);
+    }, 1200);
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
   };
 
   return (

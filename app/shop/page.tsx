@@ -18,7 +18,10 @@ import { PRODUCTS, CATEGORIES } from '@/data/products';
 import { Product } from '@/types/product';
 import { ProductCard } from '@/components/product/ProductCard';
 import { formatPrice } from '@/lib/utils';
+<<<<<<< HEAD
 import { fetchProducts } from '@/lib/api';
+=======
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -44,6 +47,7 @@ function ShopContent() {
   );
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [columnCount, setColumnCount] = useState<3 | 4>(4);
+<<<<<<< HEAD
   const [productsList, setProductsList] = useState<Product[]>(PRODUCTS);
 
   useEffect(() => {
@@ -53,6 +57,8 @@ function ShopContent() {
       }
     });
   }, []);
+=======
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
   useEffect(() => {
     const cat = searchParams?.get('category');
@@ -84,7 +90,11 @@ function ShopContent() {
     inStockOnly;
 
   const filteredProducts = useMemo(() => {
+<<<<<<< HEAD
     return productsList.filter((product) => {
+=======
+    return PRODUCTS.filter((product) => {
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
       if (selectedCategory !== 'all' && product.category !== selectedCategory) {
         return false;
       }
@@ -131,7 +141,11 @@ function ShopContent() {
           return 0;
       }
     });
+<<<<<<< HEAD
   }, [productsList, selectedCategory, searchQuery, minPrice, maxPrice, ratingFilter, inStockOnly, sortBy]);
+=======
+  }, [selectedCategory, searchQuery, minPrice, maxPrice, ratingFilter, inStockOnly, sortBy]);
+>>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
   return (
     <div className="min-h-screen bg-[#FAFAFC] pb-24">
