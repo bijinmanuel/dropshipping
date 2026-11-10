@@ -5,9 +5,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Star, Truck, ShieldCheck, RefreshCw, Headphones, Sparkles } from 'lucide-react';
+import { Product } from '@/types/product';
 
-export function HeroSection() {
-  const floatingCards = [
+interface HeroSectionProps {
+  activeProducts?: Product[];
+}
+
+export function HeroSection({ activeProducts }: HeroSectionProps = {}) {
+  const fallbackFloatingCards = [
     {
       id: 'air-max-270',
       title: 'Air Max 270',
@@ -49,6 +54,50 @@ export function HeroSection() {
       delay: 1.8,
     },
   ];
+
+  const positions = [
+    { position: '-top-5 -left-2 sm:-left-6', animateY: [0, -8, 0], duration: 5, delay: 0 },
+    { position: 'top-3 -right-2 sm:-right-6', animateY: [0, -10, 0], duration: 6, delay: 0.8 },
+    { position: 'top-1/2 -translate-y-1/2 -left-4 sm:-left-10', animateY: [0, 8, 0], duration: 5.5, delay: 1.2 },
+    { position: 'bottom-6 -right-2 sm:-right-6', animateY: [0, -7, 0], duration: 5.2, delay: 1.8 },
+  ];
+
+  const floatingCards = React.useMemo(() => {
+    if (!activeProducts || activeProducts.length === 0) {
+      return fallbackFloatingCards;
+    }
+
+    // Filter fallback cards to only keep those currently active
+    const validCards = fallbackFloatingCards.filter((card) =>
+      activeProducts.some((p) => p.slug === card.id && (p as any).isActive !== false)
+    );
+
+    // If all 4 are active, use them
+    if (validCards.length >= 4) {
+      return validCards.slice(0, 4);
+    }
+
+    // Otherwise, fill any missing slots with other active products
+    const usedSlugs = new Set(validCards.map((c) => c.id));
+    const replacements = activeProducts
+      .filter((p) => !usedSlugs.has(p.slug) && (p as any).isActive !== false)
+      .slice(0, 4 - validCards.length);
+
+    const merged = [
+      ...validCards,
+      ...replacements.map((p) => ({
+        id: p.slug,
+        title: p.title,
+        price: `$${p.price.toFixed(2)}`,
+        image: p.images[0] || '',
+      })),
+    ];
+
+    return merged.map((card, idx) => ({
+      ...card,
+      ...positions[idx % positions.length],
+    }));
+  }, [activeProducts]);
 
   return (
     <>

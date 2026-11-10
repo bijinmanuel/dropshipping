@@ -120,19 +120,22 @@ export async function fetchFeaturedProducts(): Promise<{
   onSale: Product[];
 }> {
   try {
-    const res = await fetch(`${API_BASE}/products/featured`, {
-      cache: 'no-store',
-    });
+    const res = await fetchProducts({ limit: 100 });
+    if (res.products && res.products.length > 0) {
+      const activeProducts = res.products.filter((p: any) => p.isActive !== false);
+      const newArrivals = activeProducts.filter((p) => p.badge === 'NEW');
+      const bestSellers = activeProducts.filter(
+        (p) => p.badge === 'BESTSELLER' || p.reviewCount > 90 || p.rating >= 4.7
+      );
+      const onSale = activeProducts.filter(
+        (p) => p.badge === 'SALE' || (p.originalPrice && p.originalPrice > p.price)
+      );
 
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success) {
-        return {
-          newArrivals: (data.newArrivals || []).filter((p: any) => p.isActive !== false),
-          bestSellers: (data.bestSellers || []).filter((p: any) => p.isActive !== false),
-          onSale: (data.onSale || []).filter((p: any) => p.isActive !== false),
-        };
-      }
+      return {
+        newArrivals: newArrivals.length > 0 ? newArrivals.slice(0, 8) : activeProducts.slice(0, 8),
+        bestSellers: bestSellers.length > 0 ? bestSellers.slice(0, 3) : activeProducts.slice(0, 3),
+        onSale: onSale.length > 0 ? onSale.slice(0, 8) : activeProducts.slice(0, 8),
+      };
     }
   } catch (error) {
     console.warn('[API Client] Failed to fetch featured products, using local fallback', error);
@@ -141,7 +144,7 @@ export async function fetchFeaturedProducts(): Promise<{
   const activeProducts = PRODUCTS.filter((p) => (p as any).isActive !== false);
   return {
     newArrivals: activeProducts.filter((p) => p.badge === 'NEW').slice(0, 8),
-    bestSellers: activeProducts.filter((p) => p.badge === 'BESTSELLER' || p.reviewCount > 90).slice(0, 6),
+    bestSellers: activeProducts.filter((p) => p.badge === 'BESTSELLER' || p.reviewCount > 90).slice(0, 3),
     onSale: activeProducts.filter((p) => p.badge === 'SALE' || (p.originalPrice && p.originalPrice > p.price)).slice(0, 6),
   };
 }

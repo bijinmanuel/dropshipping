@@ -1,6 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '@/data/products';
 import { HeroSection } from '@/components/home/HeroSection';
 import { CategoryBanners } from '@/components/home/CategoryBanners';
@@ -9,29 +11,51 @@ import { DoublePromoBanners } from '@/components/home/DoublePromoBanners';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { ValueProps } from '@/components/home/ValueProps';
 import { ProductCard } from '@/components/product/ProductCard';
-import { fetchFeaturedProducts } from '@/lib/api';
+import { fetchProducts } from '@/lib/api';
+import { Product } from '@/types/product';
 
-export const dynamic = 'force-dynamic';
+export default function HomePage() {
+  const [activeProducts, setActiveProducts] = useState<Product[]>(() =>
+    PRODUCTS.filter((p) => (p as any).isActive !== false)
+  );
 
-export default async function HomePage() {
-  const { newArrivals, bestSellers } = await fetchFeaturedProducts();
+  const [newArrivalsList, setNewArrivalsList] = useState<Product[]>(() =>
+    PRODUCTS.filter((p) => (p as any).isActive !== false && p.badge === 'NEW').slice(0, 8)
+  );
 
-  const activeProducts = PRODUCTS.filter((p) => (p as any).isActive !== false);
+  const [bestSellersList, setBestSellersList] = useState<Product[]>(() =>
+    PRODUCTS.filter(
+      (p) => (p as any).isActive !== false && (p.badge === 'BESTSELLER' || p.reviewCount > 90)
+    ).slice(0, 3)
+  );
 
-  const newArrivalsList =
-    newArrivals && newArrivals.length > 0
-      ? newArrivals
-      : activeProducts.filter((p) => p.badge === 'NEW').slice(0, 8);
+  useEffect(() => {
+    // Sync with backend API to strictly hide deactivated products
+    fetchProducts({ limit: 100 })
+      .then((res) => {
+        if (res.products && res.products.length > 0) {
+          // Strictly filter only active products
+          const liveActive = res.products.filter((p: any) => p.isActive !== false);
+          setActiveProducts(liveActive);
 
-  const bestSellersList =
-    bestSellers && bestSellers.length > 0
-      ? bestSellers
-      : activeProducts.filter((p) => p.badge === 'BESTSELLER' || p.reviewCount > 90).slice(0, 3);
+          const liveNew = liveActive.filter((p) => p.badge === 'NEW');
+          setNewArrivalsList(liveNew.length > 0 ? liveNew.slice(0, 8) : liveActive.slice(0, 8));
+
+          const liveBest = liveActive.filter(
+            (p) => p.badge === 'BESTSELLER' || p.reviewCount > 90 || p.rating >= 4.7
+          );
+          setBestSellersList(liveBest.length > 0 ? liveBest.slice(0, 3) : liveActive.slice(0, 3));
+        }
+      })
+      .catch((err) => {
+        console.warn('[HomePage] Background product sync skipped:', err);
+      });
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* 1. Hero Section & 4-Column Trust Row */}
-      <HeroSection />
+      <HeroSection activeProducts={activeProducts} />
 
       {/* 2. Shop by Categories (Fashion, Electronics, Beauty, Fitness, Home Decor, Accessories) */}
       <CategoryBanners />
@@ -65,9 +89,11 @@ export default async function HomePage() {
 
           {/* 4 Columns Responsive Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {newArrivalsList.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {newArrivalsList
+              .filter((product) => (product as any).isActive !== false)
+              .map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
           </div>
 
           <div className="mt-8 text-center sm:hidden">

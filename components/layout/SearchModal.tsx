@@ -7,6 +7,7 @@ import { Search, X, ArrowRight, TrendingUp } from 'lucide-react';
 import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types/product';
 import { formatPrice } from '@/lib/utils';
+import { fetchProducts } from '@/lib/api';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -25,7 +26,18 @@ const POPULAR_SEARCHES = [
 export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>(() =>
+    PRODUCTS.filter((p) => (p as any).isActive !== false)
+  );
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    fetchProducts({ limit: 100 }).then((res) => {
+      if (res.products && res.products.length > 0) {
+        setAllProducts(res.products.filter((p: any) => p.isActive !== false));
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -48,7 +60,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
 
     const q = query.toLowerCase().trim();
-    const filtered = PRODUCTS.filter((p) => (p as any).isActive !== false).filter(
+    const filtered = allProducts.filter((p) => (p as any).isActive !== false).filter(
       (p) =>
         p.title.toLowerCase().includes(q) ||
         p.subtitle.toLowerCase().includes(q) ||
@@ -56,7 +68,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         p.tags.some((t) => t.toLowerCase().includes(q))
     );
     setResults(filtered);
-  }, [query]);
+  }, [query, allProducts]);
 
   if (!isOpen) return null;
 

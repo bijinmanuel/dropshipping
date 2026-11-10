@@ -16,7 +16,9 @@ export function BestSellersSpotlight({ products }: BestSellersSpotlightProps) {
   const { addToCart } = useCart();
   const [addingId, setAddingId] = useState<string | null>(null);
 
-  const spotlightProducts = products.slice(0, 3);
+  const spotlightProducts = (products || [])
+    .filter((p) => (p as any).isActive !== false)
+    .slice(0, 3);
 
   const handleQuickAdd = (product: Product) => {
     setAddingId(product.id);
