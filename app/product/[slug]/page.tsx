@@ -1,10 +1,6 @@
 'use client';
 
-<<<<<<< HEAD
 import React, { useState, useMemo, useEffect } from 'react';
-=======
-import React, { useState, useMemo } from 'react';
->>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound, useParams, useRouter } from 'next/navigation';
@@ -34,16 +30,12 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
 import { ProductCard } from '@/components/product/ProductCard';
-<<<<<<< HEAD
 import { fetchProductBySlug } from '@/lib/api';
-=======
->>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
 export default function ProductDetailPage() {
   const params = useParams();
   const slug = params?.slug as string;
 
-<<<<<<< HEAD
   const [product, setProduct] = useState<Product | null>(
     PRODUCTS.find((p) => p.slug === slug) || null
   );
@@ -65,9 +57,6 @@ export default function ProductDetailPage() {
       </div>
     );
   }
-=======
-  const product = PRODUCTS.find((p) => p.slug === slug);
->>>>>>> a8eb551628775a27657b7de7d54701a334ac07f6
 
   if (!product) {
     notFound();
